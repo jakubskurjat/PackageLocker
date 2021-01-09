@@ -12,9 +12,9 @@ public class PackageLockerApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        scene = new Scene(loadFXML("log"), 800, 600);
+        scene = new Scene(loadFXML("launchWindow"));
         stage.setScene(scene);
-        stage.setTitle("Racket App");
+        stage.setTitle("Package Locker");
         stage.show();
     }
 
