@@ -6,12 +6,11 @@ import java.io.IOException;
 
 public class SignInAsAClientApp extends Application {
 
-    public static void main(String[] args) {
-        launch(args);
+    @Override
+    public void start(Stage primaryStage){
     }
 
-    @Override
-    public void start(Stage primaryStage) throws IOException {
-        FXMLLoader.load(getClass().getResource("SignInAsAClient"));
+    public static void main(String[] args) {
+        launch(args);
     }
 }

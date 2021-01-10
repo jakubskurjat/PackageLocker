@@ -30,7 +30,7 @@ public class LaunchWindowController {
         Parent root = FXMLLoader.load(getClass().getResource("SignInAsAClient.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle("Sign In As A Client");
+        stage.setTitle("Sign in as a client");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
@@ -41,7 +41,7 @@ public class LaunchWindowController {
         Parent root = FXMLLoader.load(getClass().getResource("SignInAsAStaffer.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle("Sign In As A Staffer");
+        stage.setTitle("Sign in as a staffer");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();

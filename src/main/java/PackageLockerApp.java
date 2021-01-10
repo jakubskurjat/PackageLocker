@@ -2,29 +2,21 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import javafx.stage.StageStyle;
 
 public class PackageLockerApp extends Application {
 
-    private static Scene scene;
-
     @Override
     public void start(Stage stage) throws Exception {
-        scene = new Scene(loadFXML("launchWindow"));
+        Parent root = FXMLLoader.load(getClass().getResource("launchWindow.fxml"));
+        Scene scene = new Scene(root);
+        stage = new Stage(StageStyle.DECORATED);
+        stage.setTitle("Sign in option");
         stage.setScene(scene);
-        stage.setTitle("Package Locker");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
-    }
-
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PackageLockerApp.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
     }
 
     public static void main(String[] args) {
