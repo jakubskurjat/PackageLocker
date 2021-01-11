@@ -47,10 +47,10 @@ public class LaunchWindowController {
         stage.show();
     }
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
+        // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert btnSignInAsAClient != null : "fx:id=\"btnSignInAsAClient\" was not injected: check your FXML file 'launchWindow.fxml'.";
         assert btnSignInAsAStaffer != null : "fx:id=\"btnSignInAsAStaffer\" was not injected: check your FXML file 'launchWindow.fxml'.";
     }
 }
-
