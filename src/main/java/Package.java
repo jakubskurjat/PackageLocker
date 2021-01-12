@@ -21,4 +21,6 @@ public class Package {
     private Client sender;
 
     private Client receiver;
+
+    private double price;
 }
