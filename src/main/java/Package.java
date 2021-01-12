@@ -16,11 +16,11 @@ public class Package {
 
     private LocalDate collectionDate;
 
+    private double price;
+
     private PackageLockers packageLocker;
 
     private Client sender;
 
     private Client receiver;
-
-    private double price;
 }
