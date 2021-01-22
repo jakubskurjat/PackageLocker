@@ -1,5 +1,8 @@
 import lombok.*;
 
+import javax.persistence.Table;
+
+@Table(name = "total_lockers")
 @Getter
 @Setter
 @NoArgsConstructor
