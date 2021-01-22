@@ -18,7 +18,7 @@ public class SignInAsAClientController {
 
     @FXML
     void initialize() {
-        assert choiceBoxSendPane != null : "fx:id=\"choiceBoxSendPane\" was not injected: check your FXML file 'SignInAsAClient.fxml'.";
+        assert choiceBoxSendPane != null : "fx:id=\"choiceBoxSendPane\" was not injected: check your FXML file 'clientView.fxml'.";
 
         choiceBoxSendPane.setItems(FXCollections.observableArrayList(
                 "Small","Medium","Big")

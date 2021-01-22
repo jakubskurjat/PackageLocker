@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="SignInAsAClientController">
+   <items>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" stylesheets="@styles.css">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SEND A PACKAGE" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Text>
+            <Label text="SENDER'S DETAILS" underline="true">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox minHeight="-Infinity">
+               <children>
+                  <TextField promptText="Name" styleClass="sendersInputs" stylesheets="@styles.css" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="3.0" right="3.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField minHeight="-Infinity" promptText="Last name" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="3.0" left="3.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox minHeight="-Infinity">
+               <children>
+                  <TextField minHeight="-Infinity" promptText="Phone number" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField minHeight="-Infinity" promptText="E-mail" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="3.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <Label layoutX="10.0" layoutY="26.0" minHeight="-Infinity" text="RECEIVER'S DETAILS" underline="true">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox minHeight="-Infinity">
+               <children>
+                  <TextField promptText="Name" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="3.0" right="3.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField promptText="Last name" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="3.0" left="3.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox minHeight="-Infinity">
+               <children>
+                  <TextField minHeight="-Infinity" promptText="Phone number" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField minHeight="-Infinity" promptText="E-mail" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="3.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <Label text="PACKAGE" underline="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Size of package:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="choiceBoxSendPane" prefWidth="150.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ChoiceBox>
+            <Button mnemonicParsing="false" text="CALCULATE PRICE">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Label text="\$" textFill="#d54b4b">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button defaultButton="true" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="55.2" prefWidth="273.6" text="SEND A PACKAGE" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="3.0" left="9.0" right="9.0" top="3.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RECEIVE A PACKAGE" />
+            <TextField promptText="Number of package" />
+            <TextField layoutX="10.0" layoutY="26.0" promptText="Phone number" />
+            <Button mnemonicParsing="false" text="RECEIVE" />
+         </children>
+      </VBox>
+   </items>
+</SplitPane>
