@@ -1,6 +1,3 @@
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import javax.swing.*;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class SignInAsAClientController {
 
@@ -53,18 +55,38 @@ public class SignInAsAClientController {
 
     @FXML
     void onSignInClientClicked(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ClientView2.fxml"));
-//        Parent root = FXMLLoader.load(getClass().getResource("ClientView2.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle("Client view");
-        stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
+        if(UserService.isClientInDatabase(inEmailClientTxt,inPasswordClientTxt)){
+            Parent root = FXMLLoader.load(getClass().getResource("ClientView2.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Client view");
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        }
+        else{
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"The user with the given e-mail \"" + inEmailClientTxt.getText() + "\" does not exist or the wrong password was given.");
+        }
     }
 
     @FXML
     void onSignUpClientClicked(ActionEvent event) {
+        if(UserService.isClientInDatabase(upEmailClientTxt,upPasswordClientTxt)){
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"The user with the given e-mail \"" + inEmailClientTxt.getText() + "\" already exist.");
+        }
+        else if(upNameClientTxt.getText().equals("") | upLastNameTxt.getText().equals("") |
+                upEmailClientTxt.getText().equals("") | upPhoneNumberClientTxt.getText().equals("") |
+                upPasswordClientTxt.getText().equals("") | upConfirmPasswordClientTxt.getText().equals("")){
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"Please complete all fields.");
+        }
+        else if(!upPasswordClientTxt.getText().equals(upConfirmPasswordClientTxt.getText())){
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"The password and confirm password fields are not the same.");
+        }
+        else{
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"Registered user. You can register now.");
+            UserService.addClient(upNameClientTxt,upLastNameTxt,upEmailClientTxt,upPhoneNumberClientTxt,upPasswordClientTxt);
+            System.out.println();
+        }
     }
 
     @FXML

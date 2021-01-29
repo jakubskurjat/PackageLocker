@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.hibernate.SessionFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,8 @@ public class LaunchWindowController {
 
     @FXML // fx:id="btnSignInAsAStaffer"
     private Button btnSignInAsAStaffer; // Value injected by FXMLLoader
+
+    private static SessionFactory factory = SessionFactoryCreator.getFactory();
 
     @FXML
     void btnSignInAsAClientAction(ActionEvent event) throws IOException {
@@ -53,5 +56,9 @@ public class LaunchWindowController {
     void initialize() {
         assert btnSignInAsAClient != null : "fx:id=\"btnSignInAsAClient\" was not injected: check your FXML file 'launchWindow.fxml'.";
         assert btnSignInAsAStaffer != null : "fx:id=\"btnSignInAsAStaffer\" was not injected: check your FXML file 'launchWindow.fxml'.";
+    }
+
+    public static SessionFactory getFactory() {
+        return factory;
     }
 }

@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.hibernate.SessionFactory;
 
 public class PackageLockerApp extends Application {
 
