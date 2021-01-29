@@ -5,6 +5,5 @@ public class SignInAsAStafferController {
         
     }
 
-    public void onSignUpStafferClicked(ActionEvent actionEvent) {
-    }
+
 }

@@ -1,10 +1,17 @@
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class SignInAsAClientController {
 
@@ -45,7 +52,15 @@ public class SignInAsAClientController {
     private PasswordField upConfirmPasswordClientTxt;
 
     @FXML
-    void onSignInClientClicked(ActionEvent event) {
+    void onSignInClientClicked(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("ClientView2.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("ClientView2.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setTitle("Client view");
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 
     @FXML
