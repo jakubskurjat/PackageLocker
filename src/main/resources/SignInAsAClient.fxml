@@ -9,7 +9,7 @@
 
 <SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SignInAsAClientController">
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
+    <AnchorPane minHeight="196.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
          <children>
             <Button fx:id="signInClientButton" layoutX="263.0" layoutY="144.0" mnemonicParsing="false" onAction="#onSignInClientClicked" text="SIGN IN">
                <padding>
@@ -19,7 +19,7 @@
             <TextField fx:id="inEmailClientTxt" layoutX="225.0" layoutY="49.0" promptText="E-mail" />
             <PasswordField fx:id="inPasswordClientTxt" layoutX="225.0" layoutY="86.0" promptText="Password" />
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="85.0" prefWidth="598.0" SplitPane.resizableWithParent="false">
+    <AnchorPane minHeight="196.0" minWidth="0.0" prefHeight="85.0" prefWidth="598.0" SplitPane.resizableWithParent="false">
          <children>
             <Button fx:id="signUpClientButton" layoutX="261.0" layoutY="144.0" mnemonicParsing="false" onAction="#onSignUpClientClicked" text="SIGN UP">
                <padding>
