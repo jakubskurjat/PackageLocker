@@ -3,8 +3,11 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.math.BigInteger;
+import java.util.List;
 
 public class UserService {
+
+    static Client activeUser;
 
     public static boolean isClientInDatabase(TextField givenEmail, TextField givenPassword){
         Session session = LaunchWindowController.getFactory().openSession();
@@ -14,7 +17,7 @@ public class UserService {
         query.setParameter("clientEmail", givenEmail.getText());
         query.setParameter("clientPassword", givenPassword.getText());
 
-        clearGivenData(givenEmail, givenPassword);
+//        clearGivenData(givenEmail, givenPassword);
 
         return (Integer.parseInt(query.getSingleResult().toString()) == 1)
                 ? true
@@ -41,6 +44,20 @@ public class UserService {
         session.getTransaction().commit();
 
         clearGivenData(givenName, givenLastName, givenEmail, givenPhoneNumber, givenPassword);
+    }
+
+    public static void setActiveUser (TextField givenEmail, TextField givenPassword){
+        Session session = LaunchWindowController.getFactory().openSession();
+
+        Query query = session.createQuery("SELECT id FROM Client WHERE email IN :clientEmail");
+
+        query.setParameter("clientEmail", givenEmail.getText());
+        List list = query.list();
+
+        int i = (int) list.get(0);
+
+        activeUser = session.get(Client.class, i );
+        clearGivenData(givenEmail, givenPassword);
     }
 
     private static void clearGivenData(TextField ... givenData){

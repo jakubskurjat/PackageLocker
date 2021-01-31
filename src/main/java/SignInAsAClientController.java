@@ -56,6 +56,7 @@ public class SignInAsAClientController {
     @FXML
     void onSignInClientClicked(ActionEvent event) throws IOException {
         if(UserService.isClientInDatabase(inEmailClientTxt,inPasswordClientTxt)){
+            UserService.setActiveUser(inEmailClientTxt, inPasswordClientTxt);
             Parent root = FXMLLoader.load(getClass().getResource("ClientView2.fxml"));
             Scene scene = new Scene(root);
             Stage stage = new Stage(StageStyle.DECORATED);
