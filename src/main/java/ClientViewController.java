@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -73,11 +74,13 @@ public class ClientViewController {
     @FXML
     private Text loggedAsView;
 
-    @FXML
-    private Button showSendViewButton;
 
     @FXML
-    private Button showReceiveViewButton;
+    private TextField receiverLockerAddressTxt;
+
+    @FXML
+    private TextField senderLockerAddressTxt;
+
 
     @FXML
     void onSmallSizeClicked(ActionEvent event) {
@@ -144,10 +147,15 @@ public class ClientViewController {
         assert dollarLabel != null : "fx:id=\"dollarLabel\" was not injected: check your FXML file 'clientView.fxml'.";
         assert receiveViewBox != null : "fx:id=\"receiveViewBox\" was not injected: check your FXML file 'clientView.fxml'.";
         assert loggedAsView != null : "fx:id=\"loggedAsView\" was not injected: check your FXML file 'clientView.fxml'.";
-        assert showSendViewButton != null : "fx:id=\"showSendViewButton\" was not injected: check your FXML file 'clientView.fxml'.";
-        assert showReceiveViewButton != null : "fx:id=\"showReceiveViewButton\" was not injected: check your FXML file 'clientView.fxml'.";
 
         loggedAsView.setText("Signed in as: "+ UserService.getActiveClient().getName() + " " +
                 UserService.getActiveClient().getLastName());
+    }
+
+    public void onShowSendPackages(MouseEvent mouseEvent) {
+
+    }
+
+    public void onShowReceivedPackages(MouseEvent mouseEvent) {
     }
 }

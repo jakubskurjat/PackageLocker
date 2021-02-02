@@ -7,8 +7,9 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -43,45 +44,19 @@
                               <Insets />
                            </VBox.margin>
                         </Text>
-                        <Label text="SENDER'S DETAILS" underline="true">
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="10.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <HBox alignment="CENTER" minHeight="-Infinity">
+                        <VBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="634.0">
                            <children>
-                              <TextField fx:id="sendersNameTxt" maxWidth="200.0" prefHeight="16.0" prefWidth="100.0" promptText="Name" styleClass="sendersInputs" stylesheets="@styles.css" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets bottom="3.0" right="3.0" />
-                                 </HBox.margin>
+                              <Label text="YOUR PACKAGE LOCKER ADDRESS" underline="true">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </VBox.margin>
                                  <font>
-                                    <Font size="10.0" />
+                                    <Font size="16.0" />
                                  </font>
-                              </TextField>
-                              <TextField fx:id="sendersLastNameTxt" maxWidth="200.0" minHeight="-Infinity" prefWidth="100.0" promptText="Last name" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets bottom="3.0" left="3.0" />
-                                 </HBox.margin>
-                              </TextField>
+                              </Label>
+                              <TextField fx:id="senderLockerAddressTxt" maxWidth="300.0" prefHeight="26.0" prefWidth="200.0" />
                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" minHeight="-Infinity">
-                           <children>
-                              <TextField fx:id="sendersPhoneNumberTxt" maxWidth="200.0" minHeight="-Infinity" prefWidth="100.0" promptText="Phone number" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets right="3.0" />
-                                 </HBox.margin>
-                              </TextField>
-                              <TextField fx:id="sendersEmailTxt" maxWidth="200.0" minHeight="-Infinity" prefWidth="100.0" promptText="E-mail" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets left="3.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children>
-                        </HBox>
+                        </VBox>
                         <Label layoutX="10.0" layoutY="26.0" minHeight="-Infinity" text="RECEIVER'S DETAILS" underline="true">
                            <VBox.margin>
                               <Insets bottom="10.0" top="10.0" />
@@ -118,6 +93,11 @@
                               </TextField>
                            </children>
                         </HBox>
+                        <TextField fx:id="receiverLockerAddressTxt" maxWidth="300.0" prefWidth="300.0" promptText="Receiver's package locker address">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </TextField>
                         <Label text="PACKAGE" underline="true">
                            <font>
                               <Font size="16.0" />
@@ -199,12 +179,48 @@
             </Tab>
             <Tab text="Show packages shipped">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <VBox alignment="TOP_CENTER">
+                        <Button alignment="CENTER" layoutX="237.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onShowSendPackages" prefHeight="39.0" prefWidth="175.0" text="Show my shipped packages" textAlignment="CENTER">
+                        <VBox.margin>
+                           <Insets bottom="15.0" top="15.0" />
+                        </VBox.margin></Button>
+                        <TableView layoutX="1.0" layoutY="91.0" prefHeight="358.0" prefWidth="650.0">
+                          <columns>
+                            <TableColumn fx:id="idColS" prefWidth="27.199982047080994" text="ID" />
+                            <TableColumn fx:id="sizeColS" prefWidth="55.19997978210449" text="SIZE" />
+                              <TableColumn fx:id="shipmentDateColS" prefWidth="81.59998321533203" text="Shipment date" />
+                              <TableColumn fx:id="collectionDateColS" prefWidth="85.5999755859375" text="Collection date" />
+                              <TableColumn fx:id="priceColS" prefWidth="73.60003662109375" text="Price" />
+                              <TableColumn fx:id="senderColS" prefWidth="84.79998779296875" text="Sender" />
+                              <TableColumn fx:id="receiverColS" prefWidth="79.20001220703125" text="Receiver" />
+                              <TableColumn fx:id="senderLockerColS" prefWidth="80.80001831054688" text="Sender locker" />
+                              <TableColumn fx:id="receiverLockerColS" prefWidth="77.60009765625" text="Receiver locker" />
+                          </columns>
+                        </TableView>
+                  </VBox>
                </content>
             </Tab>
             <Tab text="Show packages received">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <VBox alignment="TOP_CENTER">
+                  <Button layoutX="237.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onShowReceivedPackages" prefHeight="39.0" prefWidth="175.0" text="Show my received packages">
+                        <VBox.margin>
+                           <Insets bottom="15.0" top="15.0" />
+                        </VBox.margin></Button>
+                  <TableView layoutX="1.0" layoutY="91.0" prefHeight="358.0" prefWidth="650.0">
+                     <columns>
+                        <TableColumn fx:id="idColR" prefWidth="27.199982047080994" text="ID" />
+                        <TableColumn fx:id="sizeColR" prefWidth="55.19997978210449" text="SIZE" />
+                        <TableColumn fx:id="shipmentDateColR" prefWidth="81.59998321533203" text="Shipment date" />
+                        <TableColumn fx:id="collectionDateColR" prefWidth="85.5999755859375" text="Collection date" />
+                        <TableColumn fx:id="priceColR" prefWidth="73.60003662109375" text="Price" />
+                        <TableColumn fx:id="senderColR" prefWidth="84.79998779296875" text="Sender" />
+                        <TableColumn fx:id="receiverColR" prefWidth="79.20001220703125" text="Receiver" />
+                        <TableColumn fx:id="senderLockerColR" prefWidth="80.80001831054688" text="Sender locker" />
+                        <TableColumn fx:id="receiverLockerColR" prefWidth="77.60009765625" text="Receiver locker" />
+                     </columns>
+                  </TableView>
+                  </VBox>
                </content>
             </Tab>
          </tabs>
