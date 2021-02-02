@@ -123,22 +123,7 @@ public class ClientViewController {
 
     }
 
-    @FXML
-    void onShowReceiveView(ActionEvent event) {
-        receiveViewBox.setVisible(true);
-        sendViewBox.setVisible(false);
-        showReceiveViewButton.setDisable(true);
-        showSendViewButton.setDisable(false);
-    }
 
-    @FXML
-    void onShowSendView(ActionEvent event) {
-        sendViewBox.setVisible(true);
-        receiveViewBox.setVisible(false);
-
-        showReceiveViewButton.setDisable(false);
-        showSendViewButton.setDisable(true);
-    }
 
     @FXML
     void initialize() {
@@ -162,7 +147,6 @@ public class ClientViewController {
         assert showSendViewButton != null : "fx:id=\"showSendViewButton\" was not injected: check your FXML file 'clientView.fxml'.";
         assert showReceiveViewButton != null : "fx:id=\"showReceiveViewButton\" was not injected: check your FXML file 'clientView.fxml'.";
 
-        showSendViewButton.setDisable(true);
         loggedAsView.setText("Signed in as: "+ UserService.getActiveClient().getName() + " " +
                 UserService.getActiveClient().getLastName());
     }
