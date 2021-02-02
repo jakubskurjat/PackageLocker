@@ -14,6 +14,7 @@ public class Staffer
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_staffer")
     private int id;
 
     @NonNull

@@ -31,7 +31,7 @@ public class LaunchWindowController {
 
     @FXML
     void btnSignInAsAClientAction(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("SignInAsAClient.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("signInAsAClient.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.setTitle("Sign in as a client");
@@ -42,7 +42,7 @@ public class LaunchWindowController {
 
     @FXML
     void btnSignInAsAStafferAction(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("SignInAsAStaffer.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("signInAsAStaffer.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.setTitle("Sign in as a staffer");

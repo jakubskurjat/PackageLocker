@@ -56,14 +56,17 @@ public class SignInAsAClientController {
     @FXML
     void onSignInClientClicked(ActionEvent event) throws IOException {
         if(UserService.isClientInDatabase(inEmailClientTxt,inPasswordClientTxt)){
-            UserService.setActiveUser(inEmailClientTxt, inPasswordClientTxt);
-            Parent root = FXMLLoader.load(getClass().getResource("ClientView2.fxml"));
+            UserService.setActiveClient(inEmailClientTxt, inPasswordClientTxt);
+            Parent root = FXMLLoader.load(getClass().getResource("clientView.fxml"));
             Scene scene = new Scene(root);
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle("Client view");
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
+        }
+        else if(inEmailClientTxt.getText().isEmpty() | inPasswordClientTxt.getText().isEmpty()){
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"Please complete all fields.");
         }
         else{
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"The user with the given e-mail \"" + inEmailClientTxt.getText() + "\" does not exist or the wrong password was given.");
@@ -75,9 +78,9 @@ public class SignInAsAClientController {
         if(UserService.isClientInDatabase(upEmailClientTxt,upPasswordClientTxt)){
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"The user with the given e-mail \"" + inEmailClientTxt.getText() + "\" already exist.");
         }
-        else if(upNameClientTxt.getText().equals("") | upLastNameTxt.getText().equals("") |
-                upEmailClientTxt.getText().equals("") | upPhoneNumberClientTxt.getText().equals("") |
-                upPasswordClientTxt.getText().equals("") | upConfirmPasswordClientTxt.getText().equals("")){
+        else if(upNameClientTxt.getText().isEmpty() | upLastNameTxt.getText().isEmpty() |
+                upEmailClientTxt.getText().isEmpty() | upPhoneNumberClientTxt.getText().isEmpty() |
+                upPasswordClientTxt.getText().isEmpty() | upConfirmPasswordClientTxt.getText().isEmpty()){
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"Please complete all fields.");
         }
         else if(!upPasswordClientTxt.getText().equals(upConfirmPasswordClientTxt.getText())){
@@ -92,16 +95,16 @@ public class SignInAsAClientController {
 
     @FXML
     void initialize() {
-        assert signInClientButton != null : "fx:id=\"signInClientButton\" was not injected: check your FXML file 'SignInAsAClient.fxml'.";
-        assert inEmailClientTxt != null : "fx:id=\"inEmailClientTxt\" was not injected: check your FXML file 'SignInAsAClient.fxml'.";
-        assert inPasswordClientTxt != null : "fx:id=\"inPasswordClientTxt\" was not injected: check your FXML file 'SignInAsAClient.fxml'.";
-        assert signUpClientButton != null : "fx:id=\"signUpClientButton\" was not injected: check your FXML file 'SignInAsAClient.fxml'.";
-        assert upNameClientTxt != null : "fx:id=\"upNameClientTxt\" was not injected: check your FXML file 'SignInAsAClient.fxml'.";
-        assert upLastNameTxt != null : "fx:id=\"upLastNameTxt\" was not injected: check your FXML file 'SignInAsAClient.fxml'.";
-        assert upEmailClientTxt != null : "fx:id=\"upEmailClientTxt\" was not injected: check your FXML file 'SignInAsAClient.fxml'.";
-        assert upPhoneNumberClientTxt != null : "fx:id=\"upPhoneNumberClientTxt\" was not injected: check your FXML file 'SignInAsAClient.fxml'.";
-        assert upPasswordClientTxt != null : "fx:id=\"upPasswordClientTxt\" was not injected: check your FXML file 'SignInAsAClient.fxml'.";
-        assert upConfirmPasswordClientTxt != null : "fx:id=\"upConfirmPasswordClientTxt\" was not injected: check your FXML file 'SignInAsAClient.fxml'.";
+        assert signInClientButton != null : "fx:id=\"signInClientButton\" was not injected: check your FXML file 'signInAsAClient.fxml'.";
+        assert inEmailClientTxt != null : "fx:id=\"inEmailClientTxt\" was not injected: check your FXML file 'signInAsAClient.fxml'.";
+        assert inPasswordClientTxt != null : "fx:id=\"inPasswordClientTxt\" was not injected: check your FXML file 'signInAsAClient.fxml'.";
+        assert signUpClientButton != null : "fx:id=\"signUpClientButton\" was not injected: check your FXML file 'signInAsAClient.fxml'.";
+        assert upNameClientTxt != null : "fx:id=\"upNameClientTxt\" was not injected: check your FXML file 'signInAsAClient.fxml'.";
+        assert upLastNameTxt != null : "fx:id=\"upLastNameTxt\" was not injected: check your FXML file 'signInAsAClient.fxml'.";
+        assert upEmailClientTxt != null : "fx:id=\"upEmailClientTxt\" was not injected: check your FXML file 'signInAsAClient.fxml'.";
+        assert upPhoneNumberClientTxt != null : "fx:id=\"upPhoneNumberClientTxt\" was not injected: check your FXML file 'signInAsAClient.fxml'.";
+        assert upPasswordClientTxt != null : "fx:id=\"upPasswordClientTxt\" was not injected: check your FXML file 'signInAsAClient.fxml'.";
+        assert upConfirmPasswordClientTxt != null : "fx:id=\"upConfirmPasswordClientTxt\" was not injected: check your FXML file 'signInAsAClient.fxml'.";
 
     }
 }
