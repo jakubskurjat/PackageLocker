@@ -23,7 +23,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="632.0" prefWidth="800.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Show all packages">
+                              <Button mnemonicParsing="false" onAction="#showAllPackages" text="Show all packages">
                                  <VBox.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </VBox.margin>

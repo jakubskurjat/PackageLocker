@@ -6,4 +6,7 @@ public class StafferViewController {
 
     public void onShowStatsClick(ActionEvent actionEvent) {
     }
+
+    public void showAllPackages(ActionEvent actionEvent) {
+    }
 }
