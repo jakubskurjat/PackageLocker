@@ -147,13 +147,12 @@ public class ClientViewController {
 
             session.doWork(connection -> {
                 try (CallableStatement callableStatement = connection.prepareCall(
-                        "{ call sendPackage(?,?,?,?,?,?) }")) {
+                        "{ call sendPackage(?,?,?,?,?) }")) {
                     callableStatement.setString(1, sizeOfPackage.getText());
                     callableStatement.setInt(2, activeClient.getId());
                     callableStatement.setInt(3, receiverClient.getId());
                     callableStatement.setInt(4, (Integer) query1.getResultList().get(0));
                     callableStatement.setInt(5, (Integer) query2.getResultList().get(0));
-                    callableStatement.setInt(6, 211);
                     callableStatement.execute();
                 }
             });
