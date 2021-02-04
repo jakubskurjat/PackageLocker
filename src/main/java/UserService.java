@@ -34,7 +34,7 @@ public class UserService {
     }
 
     public static void addClient(TextField givenName, TextField givenLastName, TextField givenEmail,
-                                 TextField givenPhoneNumber, TextField givenPassword){
+                                 TextField givenPhoneNumber, TextField givenPassword,TextField confirmPassword){
 
         Session session = LaunchWindowController.getFactory().openSession();
 
@@ -52,7 +52,7 @@ public class UserService {
 
         session.getTransaction().commit();
 
-        clearGivenData(givenName, givenLastName, givenEmail, givenPhoneNumber, givenPassword);
+        clearGivenData(givenName, givenLastName, givenEmail, givenPhoneNumber, givenPassword, confirmPassword);
     }
 
     public static void setActiveClient(TextField givenEmail, TextField givenPassword){

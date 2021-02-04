@@ -13,6 +13,7 @@ public class PackageLockers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_package_locker")
     private int id;
 
     @NonNull
@@ -20,10 +21,12 @@ public class PackageLockers {
     private String addressLocker;
 
     @NonNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = TotalLockers.class)
+    @JoinColumn(name = "id_locker_total_lockers")
     private TotalLockers totalLockers;
 
     @NonNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = FullLockers.class)
+    @JoinColumn(name = "id_locker_full_lockers")
     private FullLockers fullLockers;
 }

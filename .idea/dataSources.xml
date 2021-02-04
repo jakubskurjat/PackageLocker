@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="package_lockerdb@localhost" uuid="18f2250d-5150-4b89-bf6c-bc1499932e68">
+    <data-source source="LOCAL" name="package_lockerdb@localhost" uuid="3b0e8034-3eeb-4b2d-b38c-24c41d1bb133">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/package_lockerdb</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
       <driver-properties>
         <property name="serverTimezone" value="UTC" />
       </driver-properties>

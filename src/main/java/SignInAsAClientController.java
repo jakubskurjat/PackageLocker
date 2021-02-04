@@ -88,8 +88,7 @@ public class SignInAsAClientController {
         }
         else{
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"Registered user. You can register now.");
-            UserService.addClient(upNameClientTxt,upLastNameTxt,upEmailClientTxt,upPhoneNumberClientTxt,upPasswordClientTxt);
-            System.out.println();
+            UserService.addClient(upNameClientTxt,upLastNameTxt,upEmailClientTxt,upPhoneNumberClientTxt,upPasswordClientTxt,upConfirmPasswordClientTxt);
         }
     }
 

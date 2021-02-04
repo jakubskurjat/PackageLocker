@@ -156,7 +156,7 @@
                         <VBox.margin>
                            <Insets bottom="20.0" top="50.0" />
                         </VBox.margin></Text>
-                     <TextField maxWidth="250.0" prefWidth="200.0" promptText="Number of package">
+                     <TextField fx:id="receiveNumberOfPackageTxt" maxWidth="250.0" prefWidth="200.0" promptText="Number of package">
                         <font>
                            <Font size="15.0" />
                         </font>
@@ -170,7 +170,7 @@
                         <VBox.margin>
                            <Insets bottom="30.0" />
                         </VBox.margin></TextField>
-                     <Button mnemonicParsing="false" text="RECEIVE">
+                     <Button mnemonicParsing="false" onAction="#onReceivePackage" text="RECEIVE">
                         <font>
                            <Font size="25.0" />
                         </font></Button>

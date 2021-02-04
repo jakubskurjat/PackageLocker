@@ -13,6 +13,7 @@ public class FullLockers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_locker")
     private int id;
 
     @NonNull
@@ -24,6 +25,7 @@ public class FullLockers {
     private int numberMediumFullLockers;
 
     @NonNull
-    @Column(name = "number_big_full_lockers")
-    private int numberBigFullLockers;
+    @OneToOne(targetEntity = PackageLockers.class)
+    @JoinColumn(name = "id_package_lockers")
+    private PackageLockers packageLockers;
 }

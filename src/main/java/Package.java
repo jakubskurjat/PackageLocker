@@ -2,6 +2,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "packages")
@@ -32,14 +33,27 @@ public class Package {
     private double price;
 
     @NonNull
-    @OneToOne
-    private PackageLockers packageLocker;
+    @OneToOne(cascade = CascadeType.ALL)
+    @Column(name = "id_package_locker_sender")
+    private PackageLockers packageLockerSender;
 
     @NonNull
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_package_locker_receiver")
+    private PackageLockers packageLockerReceiver;
+
+    @NonNull
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_client_sender_packages")
     private Client sender;
 
     @NonNull
     @ManyToOne
+    @JoinColumn(name = "id_client_receiver_packages")
     private Client receiver;
+
+    @NonNull
+    @OneToOne
+    @JoinColumn(name = "id_locker")
+    private Locker locker;
 }
