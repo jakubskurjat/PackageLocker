@@ -23,7 +23,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="632.0" prefWidth="800.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#showAllPackages" text="Show all packages">
+                              <Button mnemonicParsing="false" onAction="#onShowAllPackagesClicked" text="Show all packages">
                                  <VBox.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </VBox.margin>
@@ -54,7 +54,7 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <DatePicker fx:id="profitDatePicker" layoutX="313.0" layoutY="87.0" />
-                        <Button layoutX="329.0" layoutY="132.0" mnemonicParsing="false" onAction="#onShowProfitClick" text="Show profit">
+                        <Button layoutX="329.0" layoutY="132.0" mnemonicParsing="false" onAction="#onShowProfitClicked" text="Show profit">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -73,7 +73,7 @@
                      <children>
                         <TextField fx:id="statsPackageLockerTxt" layoutX="326.0" layoutY="76.0" promptText="Package locker address" />
                         <DatePicker fx:id="statsDatePicker" layoutX="314.0" layoutY="136.0" />
-                        <Button layoutX="353.0" layoutY="192.0" mnemonicParsing="false" onAction="#onShowStatsClick" text="Show statistics" />
+                        <Button layoutX="353.0" layoutY="192.0" mnemonicParsing="false" onAction="#onShowStatsClicked" text="Show statistics" />
                      </children></AnchorPane>
               </content>
             </Tab>

@@ -43,6 +43,8 @@ public class SignInAsAStafferController {
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
+            Stage stage1 = (Stage) signInStafferButton.getScene().getWindow();
+            stage1.close();
         }
         else if(inEmailStafferTxt.getText().isEmpty() | inPasswordStafferTxt.getText().isEmpty()){
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"Please complete all fields.");

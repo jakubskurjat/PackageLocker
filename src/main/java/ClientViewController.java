@@ -103,7 +103,7 @@ public class ClientViewController {
     }
 
     @FXML
-    void calculatePackagePrice(ActionEvent event) {
+    void onCalculatePackagePriceClicked(ActionEvent event) {
         if (sizeOfPackage.getText().isEmpty()) {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please select size of the package.");
         } else {
@@ -126,7 +126,7 @@ public class ClientViewController {
     }
 
     @FXML
-    void onSendPackageClick(ActionEvent event) {
+    void onSendPackageClicked(ActionEvent event) {
         Session session = SessionFactoryCreator.getFactory().openSession();
         Client activeClient = UserService.getActiveClient();
 
@@ -155,7 +155,7 @@ public class ClientViewController {
         } else if (activeClient.equals(clientFromDB)) {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Unable to send the package to yourself.");
         } else {
-            Query query2 = session.createQuery("SELECT id FROM PackageLockers WHERE addressLocker = '" + receiverPackageLocker.get().getAddressLocker() + "'");
+            Query query1 = session.createQuery("SELECT id FROM PackageLockers WHERE addressLocker = '" + receiverPackageLocker.get().getAddressLocker() + "'");
 
             session.doWork(connection -> {
                 try (CallableStatement callableStatement = connection.prepareCall(
@@ -164,7 +164,7 @@ public class ClientViewController {
                     callableStatement.setInt(2, activeClient.getId());
                     callableStatement.setInt(3, clientFromDB.get().getId());
                     callableStatement.setInt(4, senderPackageLocker.get().getId());
-                    callableStatement.setInt(5, (Integer) query2.getResultList().get(0));
+                    callableStatement.setInt(5, (Integer) query1.getResultList().get(0));
                     callableStatement.execute();
                 }
             });
@@ -172,7 +172,7 @@ public class ClientViewController {
     }
 
     @FXML
-    void onReceivePackageClick(ActionEvent actionEvent) {
+    void onReceivePackageClicked(ActionEvent actionEvent) {
         Session session = SessionFactoryCreator.getFactory().openSession();
         Client activeClient = UserService.getActiveClient();
 
@@ -193,9 +193,9 @@ public class ClientViewController {
                 Zabezpieczenia nie działają, poniważ są źle zrobione mapowania relacji dla klasy Package.
              */
 
-            System.out.println(activeClient.getId());
-            System.out.println((Integer) query.getResultList().get(0));
-            System.out.println(activeClient.getId() == (Integer) query.getResultList().get(0));
+//            System.out.println(activeClient.getId());
+//            System.out.println((Integer) query.getResultList().get(0));
+//            System.out.println(activeClient.getId() == (Integer) query.getResultList().get(0));
 
             session.doWork(connection -> {
                 try (CallableStatement callableStatement = connection.prepareCall(
@@ -209,12 +209,11 @@ public class ClientViewController {
     }
 
     @FXML
-    void onShowSendPackagesClick(MouseEvent mouseEvent) {
-
+    void onShowSendPackagesClicked(MouseEvent mouseEvent) {
     }
 
     @FXML
-    void onShowReceivedPackagesClick(MouseEvent mouseEvent) {
+    void onShowReceivedPackagesClicked(MouseEvent mouseEvent) {
     }
 
     @FXML

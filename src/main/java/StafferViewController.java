@@ -68,7 +68,7 @@ public class StafferViewController {
     private DatePicker statsDatePicker;
 
     @FXML
-    void onShowProfitClick(ActionEvent event) {
+    void onShowProfitClicked(ActionEvent event) {
         if (profitDatePicker.getValue() == null) {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please select a date.");
         } else {
@@ -91,12 +91,12 @@ public class StafferViewController {
     }
 
     @FXML
-    void onShowStatsClick(ActionEvent event) {
+    void onShowStatsClicked(ActionEvent event) {
 
     }
 
     @FXML
-    void showAllPackages(ActionEvent event) {
+    void onShowAllPackagesClicked(ActionEvent event) {
 
     }
 
