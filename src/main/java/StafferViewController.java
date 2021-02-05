@@ -1,9 +1,11 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 
 import javax.swing.*;
@@ -68,6 +70,12 @@ public class StafferViewController {
     private DatePicker statsDatePicker;
 
     @FXML
+    private Text loggedAsStafferView;
+
+    @FXML
+    private Button signOutStafferButton;
+
+    @FXML
     void onShowProfitClicked(ActionEvent event) {
         if (profitDatePicker.getValue() == null) {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please select a date.");
@@ -98,6 +106,13 @@ public class StafferViewController {
     @FXML
     void onShowAllPackagesClicked(ActionEvent event) {
 
+
+    }
+
+    @FXML
+    public void onSignOut(ActionEvent actionEvent) {
+        Stage stage1 = (Stage) signOutStafferButton.getScene().getWindow();
+        stage1.close();
     }
 
     @FXML
@@ -118,5 +133,8 @@ public class StafferViewController {
         assert statsPackageLockerTxt != null : "fx:id=\"statsPackageLockerTxt\" was not injected: check your FXML file 'stafferView.fxml'.";
         assert statsDatePicker != null : "fx:id=\"statsDatePicker\" was not injected: check your FXML file 'stafferView.fxml'.";
 
+        loggedAsStafferView.setText("Signed in as: " + UserService.getActiveStaffer().getName() + " " +
+                UserService.getActiveStaffer().getLastName());
     }
+
 }

@@ -1,13 +1,11 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 
 import javax.persistence.Query;
@@ -86,6 +84,9 @@ public class ClientViewController {
 
     @FXML
     private TextField receiveNumberOfPackageTxt;
+
+    @FXML
+    private Button signOutClientButton;
 
     @FXML
     void onSmallSizeClicked(ActionEvent event) {
@@ -216,6 +217,11 @@ public class ClientViewController {
     void onShowReceivedPackagesClicked(MouseEvent mouseEvent) {
     }
 
+    public void signOutClick(ActionEvent actionEvent) {
+        Stage stage1 = (Stage) signOutClientButton.getScene().getWindow();
+        stage1.close();
+    }
+
     @FXML
     void initialize() {
         assert senderOrReceiveView != null : "fx:id=\"senderOrReceiveView\" was not injected: check your FXML file 'clientView.fxml'.";
@@ -240,4 +246,6 @@ public class ClientViewController {
         loggedAsView.setText("Signed in as: " + UserService.getActiveClient().getName() + " " +
                 UserService.getActiveClient().getLastName());
     }
+
+
 }
