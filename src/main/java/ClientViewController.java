@@ -12,10 +12,10 @@ import org.hibernate.Session;
 
 import javax.persistence.Query;
 import javax.swing.*;
-import java.math.BigInteger;
 import java.net.URL;
 import java.sql.CallableStatement;
 import java.sql.Types;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -105,7 +105,7 @@ public class ClientViewController {
     @FXML
     void calculatePackagePrice(ActionEvent event) {
         if (sizeOfPackage.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Select size of package.");
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please select size of the package.");
         } else {
             Session session = LaunchWindowController.getFactory().openSession();
 
@@ -127,31 +127,43 @@ public class ClientViewController {
 
     @FXML
     void onSendPackage(ActionEvent event) {
-        if(senderLockerAddressTxt.getText().isEmpty() | receiverLockerAddressTxt.getText().isEmpty()){
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"Please give an address.");
-        }
-        else if(receiverNameTxt.getText().isEmpty() | receiverLastNameTxt.getText().isEmpty() | receiverEmailTxt.getText().isEmpty()
-        |receiverPhoneNumberTxt.getText().isEmpty()){
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"Please complete all fields.");
-        }else {
-            Session session = SessionFactoryCreator.getFactory().openSession();
+        Session session = SessionFactoryCreator.getFactory().openSession();
+        Client activeClient = UserService.getActiveClient();
 
-            Client activeClient = UserService.getActiveClient();
+        String query = "FROM Client WHERE name = '" + receiverNameTxt.getText() +
+                "' AND lastName = '" + receiverLastNameTxt.getText() + "' AND email = '" + receiverEmailTxt.getText() +
+                "' AND phoneNumber = '" + receiverPhoneNumberTxt.getText() + "'";
 
-            Query query = session.createQuery("FROM Client WHERE phoneNumber IN :phone");
-            query.setParameter("phone", BigInteger.valueOf(Long.parseLong(receiverPhoneNumberTxt.getText())));
-            Client receiverClient = (Client) query.getResultList().get(0);
+        Optional<Client> clientFromDB = session.createQuery(query).uniqueResultOptional();
 
-            Query query1 = session.createQuery("SELECT id FROM PackageLockers WHERE addressLocker = '" + senderLockerAddressTxt.getText() + "'");
-            Query query2 = session.createQuery("SELECT id FROM PackageLockers WHERE addressLocker = '" + receiverLockerAddressTxt.getText() + "'");
+        String querySender = "FROM PackageLockers WHERE addressLocker = '" + senderLockerAddressTxt.getText() + "'";
+        String queryReceiver = "FROM PackageLockers WHERE addressLocker = '" + receiverLockerAddressTxt.getText() + "'";
+
+        Optional<PackageLockers> senderPackageLocker = session.createQuery(querySender).uniqueResultOptional();
+        Optional<PackageLockers> receiverPackageLocker = session.createQuery(queryReceiver).uniqueResultOptional();
+
+        if (clientFromDB.isEmpty()) {
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "The client with the given data does not exist.");
+        } else if (senderPackageLocker.isEmpty()) {
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "There is no sender's package locker with the given address.");
+        } else if (receiverPackageLocker.isEmpty()) {
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "There is no receiver's package locker with the given address.");
+        } else if (sizeOfPackage.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please select size of the package.");
+        } else if (senderPackageLocker.get().getAddressLocker().equals(receiverPackageLocker.get().getAddressLocker())) {
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Package locker addresses have to be different.");
+        } else if (activeClient.equals(clientFromDB)) {
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Unable to send the package to yourself.");
+        } else {
+            Query query2 = session.createQuery("SELECT id FROM PackageLockers WHERE addressLocker = '" + receiverPackageLocker.get().getAddressLocker() + "'");
 
             session.doWork(connection -> {
                 try (CallableStatement callableStatement = connection.prepareCall(
                         "{ call sendPackage(?,?,?,?,?) }")) {
                     callableStatement.setString(1, sizeOfPackage.getText());
                     callableStatement.setInt(2, activeClient.getId());
-                    callableStatement.setInt(3, receiverClient.getId());
-                    callableStatement.setInt(4, (Integer) query1.getResultList().get(0));
+                    callableStatement.setInt(3, clientFromDB.get().getId());
+                    callableStatement.setInt(4, senderPackageLocker.get().getId());
                     callableStatement.setInt(5, (Integer) query2.getResultList().get(0));
                     callableStatement.execute();
                 }
@@ -164,17 +176,36 @@ public class ClientViewController {
         Session session = SessionFactoryCreator.getFactory().openSession();
         Client activeClient = UserService.getActiveClient();
 
-        System.out.println(Integer.parseInt(receiveNumberOfPackageTxt.getText()));
-        System.out.println(activeClient.getId());
+//        String queryPackage = "FROM Package WHERE id = " + receiveNumberOfPackageTxt.getText();
 
-        session.doWork(connection -> {
-            try (CallableStatement callableStatement = connection.prepareCall(
-                    "{ call receivePackage(?,?) }")) {
-                callableStatement.setString(1, receiveNumberOfPackageTxt.getText());
-                callableStatement.setInt(2, activeClient.getId());
-                callableStatement.execute();
-            }
-        });
+//        Optional<Package> receivePackage = session.createQuery(queryPackage).uniqueResultOptional();
+
+//        if(receivePackage.isEmpty()){
+//            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"You do not have a package with this number to receive.");
+//        } else {
+
+            Query query = session.createQuery("SELECT id FROM Client WHERE name = '" + activeClient.getName() + "'");
+
+            /*
+                O co z tym kurwa chodzi??????
+                Ten sam błąd jest w metodzie onSendpackage.
+                Chujowo to jest napisane, ale działa.
+                Zabezpieczenia nie działają, poniważ są źle zrobione mapowania relacji dla klasy Package.
+             */
+
+            System.out.println(activeClient.getId());
+            System.out.println((Integer) query.getResultList().get(0));
+            System.out.println(activeClient.getId() == (Integer) query.getResultList().get(0));
+
+            session.doWork(connection -> {
+                try (CallableStatement callableStatement = connection.prepareCall(
+                        "{ call receivePackage(?,?) }")) {
+                    callableStatement.setInt(1, Integer.parseInt(receiveNumberOfPackageTxt.getText()));
+                    callableStatement.setInt(2, (Integer) query.getResultList().get(0));
+                    callableStatement.execute();
+                }
+            });
+//        }
     }
 
     @FXML

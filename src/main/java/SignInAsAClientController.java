@@ -64,6 +64,8 @@ public class SignInAsAClientController {
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
+            Stage stage1 = (Stage) signInClientButton.getScene().getWindow();
+            stage1.close();
         }
         else if(inEmailClientTxt.getText().isEmpty() | inPasswordClientTxt.getText().isEmpty()){
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"Please complete all fields.");

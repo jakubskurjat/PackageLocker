@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="package_lockerdb@localhost" uuid="3b0e8034-3eeb-4b2d-b38c-24c41d1bb133">
+    <data-source source="LOCAL" name="package_lockerdb@localhost" uuid="3171453c-9e12-4ef5-92c7-f844d6782451">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
