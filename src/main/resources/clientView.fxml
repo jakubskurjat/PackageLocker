@@ -131,7 +131,7 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Button defaultButton="true" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendPackage" prefHeight="50.0" prefWidth="250.0" text="SEND A PACKAGE" VBox.vgrow="ALWAYS">
+                        <Button defaultButton="true" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendPackageClick" prefHeight="50.0" prefWidth="250.0" text="SEND A PACKAGE" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
@@ -170,7 +170,7 @@
                         <VBox.margin>
                            <Insets bottom="30.0" />
                         </VBox.margin></TextField>
-                     <Button mnemonicParsing="false" onAction="#onReceivePackage" text="RECEIVE">
+                     <Button mnemonicParsing="false" onAction="#onReceivePackageClick" text="RECEIVE">
                         <font>
                            <Font size="25.0" />
                         </font></Button>
@@ -180,7 +180,7 @@
             <Tab text="Show packages shipped">
                <content>
                   <VBox alignment="TOP_CENTER">
-                        <Button alignment="CENTER" layoutX="237.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onShowSendPackages" prefHeight="39.0" prefWidth="175.0" text="Show my shipped packages" textAlignment="CENTER">
+                        <Button alignment="CENTER" layoutX="237.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onShowSendPackagesClick" prefHeight="39.0" prefWidth="175.0" text="Show my shipped packages" textAlignment="CENTER">
                         <VBox.margin>
                            <Insets bottom="15.0" top="15.0" />
                         </VBox.margin></Button>
@@ -203,7 +203,7 @@
             <Tab text="Show packages received">
                <content>
                   <VBox alignment="TOP_CENTER">
-                  <Button layoutX="237.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onShowReceivedPackages" prefHeight="39.0" prefWidth="175.0" text="Show my received packages">
+                  <Button layoutX="237.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onShowReceivedPackagesClick" prefHeight="39.0" prefWidth="175.0" text="Show my received packages">
                         <VBox.margin>
                            <Insets bottom="15.0" top="15.0" />
                         </VBox.margin></Button>

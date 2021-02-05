@@ -126,7 +126,7 @@ public class ClientViewController {
     }
 
     @FXML
-    void onSendPackage(ActionEvent event) {
+    void onSendPackageClick(ActionEvent event) {
         Session session = SessionFactoryCreator.getFactory().openSession();
         Client activeClient = UserService.getActiveClient();
 
@@ -172,7 +172,7 @@ public class ClientViewController {
     }
 
     @FXML
-    void onReceivePackage(ActionEvent actionEvent) {
+    void onReceivePackageClick(ActionEvent actionEvent) {
         Session session = SessionFactoryCreator.getFactory().openSession();
         Client activeClient = UserService.getActiveClient();
 
@@ -209,12 +209,12 @@ public class ClientViewController {
     }
 
     @FXML
-    void onShowSendPackages(MouseEvent mouseEvent) {
+    void onShowSendPackagesClick(MouseEvent mouseEvent) {
 
     }
 
     @FXML
-    void onShowReceivedPackages(MouseEvent mouseEvent) {
+    void onShowReceivedPackagesClick(MouseEvent mouseEvent) {
     }
 
     @FXML

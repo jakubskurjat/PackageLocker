@@ -59,7 +59,7 @@
                               <Font size="22.0" />
                            </font>
                         </Button>
-                        <Text fx:id="profitResultText" layoutX="364.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profit">
+                        <Text fx:id="profitResultText" layoutX="235.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profit:" textAlignment="CENTER" wrappingWidth="330.0">
                            <font>
                               <Font size="30.0" />
                            </font>

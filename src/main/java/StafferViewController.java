@@ -80,7 +80,7 @@ public class StafferViewController {
                 try (CallableStatement callableStatement = connection.prepareCall(
                         "{ ? = call profitCalculator(?) }")) {
                     callableStatement.registerOutParameter(1, Types.DECIMAL);
-                    callableStatement.setDate(2, Date.valueOf(profitDatePicker.getValue()));
+                    callableStatement.setString(2, profitDatePicker.getValue().toString());
                     callableStatement.execute();
                     profit.set(callableStatement.getDouble(1));
                 }
