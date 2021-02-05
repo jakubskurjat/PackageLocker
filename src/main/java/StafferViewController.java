@@ -76,6 +76,12 @@ public class StafferViewController {
     private Button signOutStafferButton;
 
     @FXML
+    private TableColumn<?, ?> idLocker;
+
+    @FXML
+    private TableColumn<?, ?> isEmptyLocker;
+
+    @FXML
     void onShowProfitClicked(ActionEvent event) {
         if (profitDatePicker.getValue() == null) {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please select a date.");
@@ -105,7 +111,6 @@ public class StafferViewController {
 
     @FXML
     void onShowAllPackagesClicked(ActionEvent event) {
-
 
     }
 

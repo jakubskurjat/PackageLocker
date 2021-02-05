@@ -93,9 +93,31 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="statsPackageLockerTxt" layoutX="326.0" layoutY="76.0" promptText="Package locker address" />
-                        <DatePicker fx:id="statsDatePicker" layoutX="314.0" layoutY="136.0" />
-                        <Button layoutX="353.0" layoutY="192.0" mnemonicParsing="false" onAction="#onShowStatsClicked" text="Show statistics" />
+                           <VBox alignment="TOP_CENTER" prefHeight="620.0" prefWidth="800.0">
+                              <children>
+                                 <TextField fx:id="statsPackageLockerTxt" maxWidth="300.0" prefWidth="300.0" promptText="Package locker address">
+                                    <VBox.margin>
+                                       <Insets bottom="20.0" top="30.0" />
+                                    </VBox.margin>
+                                 </TextField>
+                                 <DatePicker fx:id="statsDatePicker">
+                                    <VBox.margin>
+                                       <Insets bottom="20.0" />
+                                    </VBox.margin>
+                                 </DatePicker>
+                                 <Button mnemonicParsing="false" onAction="#onShowStatsClicked" text="Show statistics">
+                                    <VBox.margin>
+                                       <Insets bottom="20.0" />
+                                    </VBox.margin>
+                                 </Button>
+                                 <TableView prefHeight="200.0" prefWidth="200.0">
+                                   <columns>
+                                     <TableColumn fx:id="idLocker" prefWidth="75.0" text="ID locker" />
+                                     <TableColumn fx:id="isEmptyLocker" prefWidth="75.0" text="isEmpty" />
+                                   </columns>
+                                 </TableView>
+                              </children>
+                           </VBox>
                      </children></AnchorPane>
               </content>
             </Tab>
