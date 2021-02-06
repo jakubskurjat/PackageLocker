@@ -1,6 +1,7 @@
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "package_lockers")
@@ -29,4 +30,8 @@ public class PackageLockers {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = FullLockers.class)
     @JoinColumn(name = "id_locker_full_lockers")
     private FullLockers fullLockers;
+
+//    @OneToMany
+//    @JoinColumn(name = "id_package_locker_lockers")
+//    private Set<Locker> lockers;
 }

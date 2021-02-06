@@ -25,6 +25,7 @@ public class Locker {
     private boolean isEmpty;
 
     @NonNull
-    @OneToOne(cascade = CascadeType.ALL)
-    private PackageLockers packageLockers;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_package_lockers")
+    private Package packageLockers;
 }

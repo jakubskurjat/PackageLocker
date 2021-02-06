@@ -15,6 +15,7 @@ public class Package {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_pack")
     private int id;
 
     @NonNull
@@ -22,35 +23,12 @@ public class Package {
     private Size size;
 
     @NonNull
-    @Column(name = "shipment_date")
-    private LocalDate shipmentDate;
-
-    @Column(name = "collection_date")
-    private LocalDate collectionDate;
-
-    @NonNull
     @Column(name = "price")
     private double price;
 
-    @NonNull
-    @OneToOne(cascade = CascadeType.ALL)
-    @Column(name = "id_package_locker_sender")
-    private PackageLockers packageLockerSender;
-
-    @NonNull
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_package_locker_receiver")
-    private PackageLockers packageLockerReceiver;
-
-    @NonNull
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_client_sender_packages")
-    private Client sender;
-
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "id_client_receiver_packages")
-    private Client receiver;
+//    @OneToOne
+//    @JoinColumn(name = "id_shipment")
+//    private Shipment shipment;
 
     @NonNull
     @OneToOne

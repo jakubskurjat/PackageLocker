@@ -1,4 +1,5 @@
 import lombok.*;
+import java.util.Set;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -36,4 +37,12 @@ public class Client
     @NonNull
     @Column(name = "password_client")
     private String password;
+//
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id_shipment_sent")
+//    private Set<Shipment> sentShipment;
+//
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id_shipment_received")
+//    private Set<Shipment> receivedShipment;
 }

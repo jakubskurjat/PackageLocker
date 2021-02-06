@@ -22,13 +22,15 @@ public class PackageArchive {
     private Size size;
 
     @NonNull
-    @Column(name = "shipment_date")
-    private LocalDate shipmentDate;
-
-    @Column(name = "collection_date")
-    private LocalDate collectionDate;
-
-    @NonNull
     @Column(name = "price")
     private double price;
+
+    @NonNull
+    @OneToOne
+    @JoinColumn(name = "id_locker")
+    private Locker locker;
+
+//    @OneToOne
+//    @JoinColumn(name = "id_shipment")
+//    private Shipment shipment;
 }
