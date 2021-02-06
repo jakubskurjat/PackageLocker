@@ -1,6 +1,3 @@
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import org.hibernate.annotations.Immutable;
 
 import javax.persistence.Column;
@@ -15,40 +12,41 @@ import java.time.LocalDate;
 public class ClientReceivedPackagesView {
     @Id
     @Column(name = "id_pack")
-   private int idPackage;
+   private int id;
 
     @Column(name = "size")
-   private Size size;
+   private String size;
 
     @Column(name = "shipment_date")
     private LocalDate shipmentDate;
+
     @Column(name = "collection_date")
    private LocalDate collectionDate;
 
     @Column(name = "price")
    private  double price;
 
-    @Column(name = "sender name")
+    @Column(name = "sender_name")
    private String senderName;
 
-    @Column(name = "sender last name")
+    @Column(name = "sender_last_name")
     private String senderLastName;
 
-    @Column(name = "receiver name")
+    @Column(name = "receiver_name")
     private String receiverName;
 
-    @Column(name = "receiver last name")
+    @Column(name = "receiver_last_name")
     private String receiverLastName;
 
-    @Column(name = "receiver locker address")
+    @Column(name = "receiver_locker_address")
    private String packageLockerAddress;
 
 
-    public int getIdPackage() {
-        return idPackage;
+    public int getId() {
+        return id;
     }
 
-    public Size getSize() {
+    public String getSize() {
         return size;
     }
 

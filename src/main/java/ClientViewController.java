@@ -1,7 +1,9 @@
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -120,10 +122,10 @@ public class ClientViewController {
     private TableColumn<ClientReceivedPackagesView, String> receiverColR;
 
     @FXML
-    private TableColumn<ClientReceivedPackagesView, Integer> senderLockerColR;
+    private TableColumn<ClientReceivedPackagesView, String> senderLockerColR;
 
     @FXML
-    private TableColumn<ClientReceivedPackagesView, Integer> receiverLockerColR;
+    private TableColumn<ClientReceivedPackagesView, String> receiverLockerColR;
 
     @FXML
     void onSmallSizeClicked(ActionEvent event) {
@@ -254,16 +256,46 @@ public class ClientViewController {
     void onShowReceivedPackagesClicked(MouseEvent mouseEvent) {
 
         Session session = SessionFactoryCreator.getFactory().openSession();
+
         EntityManagerFactory emf = session.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
+        Query query = em.createNativeQuery("SELECT * FROM receivedpackagesview", ClientReceivedPackagesView.class);
 
-        em.getTransaction().begin();
-        List<ClientReceivedPackagesView> list = em.createQuery("SELECT x FROM ClientReceivedPackagesView x", ClientReceivedPackagesView.class).getResultList();
+        List<ClientReceivedPackagesView> list = query.getResultList();
 
-        System.out.println(list.size());
-        em.getTransaction().commit();
+        ObservableList<ClientReceivedPackagesView> packageslist = FXCollections.observableArrayList(list);
 
-        em.close();
+        packagesReceivedTable.setItems(packageslist);
+
+        idColR.setCellValueFactory(
+                new PropertyValueFactory<ClientReceivedPackagesView,Integer>("id")
+        );
+        sizeColR.setCellValueFactory(
+                new PropertyValueFactory<ClientReceivedPackagesView, String>("size")
+        );
+        shipmentDateColR.setCellValueFactory(
+                new PropertyValueFactory<ClientReceivedPackagesView, LocalDate>("shipmentDate")
+        );
+        collectionDateColR.setCellValueFactory(
+                new PropertyValueFactory<ClientReceivedPackagesView, LocalDate>("collectionDate")
+        );
+        priceColR.setCellValueFactory(
+                new PropertyValueFactory<ClientReceivedPackagesView, Double>("price")
+        );
+        senderColR.setCellValueFactory(
+                new PropertyValueFactory<ClientReceivedPackagesView, String>("senderName")
+        );
+        receiverColR.setCellValueFactory(
+                new PropertyValueFactory<ClientReceivedPackagesView, String>("receiverName")
+        );
+        senderLockerColR.setCellValueFactory(
+                new PropertyValueFactory<ClientReceivedPackagesView, String>("size")
+        );
+        receiverLockerColR.setCellValueFactory(
+                new PropertyValueFactory<ClientReceivedPackagesView, String>("packageLockerAddress")
+        );
+
+
     }
 
     public void signOutClick(ActionEvent actionEvent) {
