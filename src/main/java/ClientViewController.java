@@ -1,3 +1,4 @@
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -8,11 +9,17 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.swing.*;
 import java.net.URL;
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Types;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
@@ -89,6 +96,36 @@ public class ClientViewController {
     private Button signOutClientButton;
 
     @FXML
+    private TableView<ClientReceivedPackagesView> packagesReceivedTable;
+
+    @FXML
+    private TableColumn<ClientReceivedPackagesView, Integer> idColR;
+
+    @FXML
+    private TableColumn<ClientReceivedPackagesView, String> sizeColR;
+
+    @FXML
+    private TableColumn<ClientReceivedPackagesView, LocalDate> shipmentDateColR;
+
+    @FXML
+    private TableColumn<ClientReceivedPackagesView, LocalDate> collectionDateColR;
+
+    @FXML
+    private TableColumn<ClientReceivedPackagesView, Double> priceColR;
+
+    @FXML
+    private TableColumn<ClientReceivedPackagesView, String> senderColR;
+
+    @FXML
+    private TableColumn<ClientReceivedPackagesView, String> receiverColR;
+
+    @FXML
+    private TableColumn<ClientReceivedPackagesView, Integer> senderLockerColR;
+
+    @FXML
+    private TableColumn<ClientReceivedPackagesView, Integer> receiverLockerColR;
+
+    @FXML
     void onSmallSizeClicked(ActionEvent event) {
         sizeOfPackage.setText(smallSize.getText());
     }
@@ -157,7 +194,6 @@ public class ClientViewController {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Unable to send the package to yourself.");
         } else {
             Query query1 = session.createQuery("SELECT id FROM PackageLockers WHERE addressLocker = '" + receiverPackageLocker.get().getAddressLocker() + "'");
-
             session.doWork(connection -> {
                 try (CallableStatement callableStatement = connection.prepareCall(
                         "{ call sendPackage(?,?,?,?,?) }")) {
@@ -166,6 +202,7 @@ public class ClientViewController {
                     callableStatement.setInt(3, clientFromDB.get().getId());
                     callableStatement.setInt(4, senderPackageLocker.get().getId());
                     callableStatement.setInt(5, (Integer) query1.getResultList().get(0));
+//                    callableStatement.setInt(5, receiverPackageLocker.get().getId());
                     callableStatement.execute();
                 }
             });
@@ -177,14 +214,14 @@ public class ClientViewController {
         Session session = SessionFactoryCreator.getFactory().openSession();
         Client activeClient = UserService.getActiveClient();
 
-//        String queryPackage = "FROM Package WHERE id = " + receiveNumberOfPackageTxt.getText();
+        String queryPackage = "FROM Shipment WHERE id = " + receiveNumberOfPackageTxt.getText();
 
-//        Optional<Package> receivePackage = session.createQuery(queryPackage).uniqueResultOptional();
+//        Optional<Shipment> receivePackage = session.createQuery(queryPackage).uniqueResultOptional();
 
 //        if(receivePackage.isEmpty()){
 //            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"You do not have a package with this number to receive.");
 //        } else {
-
+//
             Query query = session.createQuery("SELECT id FROM Client WHERE name = '" + activeClient.getName() + "'");
 
             /*
@@ -215,6 +252,18 @@ public class ClientViewController {
 
     @FXML
     void onShowReceivedPackagesClicked(MouseEvent mouseEvent) {
+
+        Session session = SessionFactoryCreator.getFactory().openSession();
+        EntityManagerFactory emf = session.getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+        List<ClientReceivedPackagesView> list = em.createQuery("SELECT x FROM ClientReceivedPackagesView x", ClientReceivedPackagesView.class).getResultList();
+
+        System.out.println(list.size());
+        em.getTransaction().commit();
+
+        em.close();
     }
 
     public void signOutClick(ActionEvent actionEvent) {

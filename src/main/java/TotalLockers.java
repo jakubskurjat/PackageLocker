@@ -30,5 +30,6 @@ public class TotalLockers {
 
     @NonNull
     @OneToOne(targetEntity = PackageLockers.class)
+    @JoinColumn(name = "id_package_lockers")
     private PackageLockers packageLockers;
 }
