@@ -1,0 +1,50 @@
+.pane {
+    -fx-background-color: white;
+}
+
+/*#305AA5     #6F81FD     #00DCE5*/
+
+.signInInputs{
+    -fx-background-color: #6f81fd;
+    -fx-prompt-text-fill: #ddd;
+    -fx-text-fill: white;
+}
+
+.signInBtn {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+
+    -fx-border-color: #6f81fd;
+    -fx-text-fill: #6f81fd;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+}
+
+.signInBtn:hover {
+    -fx-background-color: #6f81fd;
+    -fx-text-fill: white;
+
+}
+
+.signUpInputs {
+
+    -fx-background-color: #305AA5;
+    -fx-prompt-text-fill: #ddd;
+    -fx-text-fill: white;
+}
+
+.signUpBtn{
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+
+    -fx-border-color: #305AA5;
+    -fx-text-fill: #305AA5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-font-weight: bold;
+}
+
+.signUpBtn:hover {
+    -fx-background-color: #305AA5;
+    -fx-text-fill: white;
+}
