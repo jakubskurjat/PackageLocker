@@ -4,35 +4,36 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="SignInAsAStafferController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="pane" stylesheets="@signInAsAStafferStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SignInAsAStafferController">
     <children>
-        <AnchorPane layoutY="3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="196.0"
-                    minWidth="598.0" prefHeight="400.0" prefWidth="608.0">
-            <children>
-                <Button fx:id="signInStafferButton" layoutX="261.0" layoutY="219.0" mnemonicParsing="false"
-                        onAction="#onSignInStafferClicked" text="SIGN IN">
+
+                <Button fx:id="signInStafferButton" layoutX="245.0" layoutY="250.0" mnemonicParsing="false" onAction="#onSignInStafferClicked" styleClass="signInBtn" stylesheets="@signInAsAStafferStyles.css" text="SIGN IN">
                     <padding>
-                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0"/>
+                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                     </padding>
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Button>
-                <TextField fx:id="inEmailStafferTxt" layoutX="211.0" layoutY="115.0" promptText="E-mail">
+                <TextField fx:id="inEmailStafferTxt" layoutX="207.0" layoutY="146.0" promptText="E-mail" styleClass="signInInputs" stylesheets="@signInAsAStafferStyles.css">
                     <font>
-                        <Font size="15.0"/>
+                        <Font size="15.0" />
                     </font>
                 </TextField>
-                <PasswordField fx:id="inPasswordStafferTxt" layoutX="211.0" layoutY="152.0" promptText="Password">
+                <PasswordField fx:id="inPasswordStafferTxt" layoutX="207.0" layoutY="183.0" promptText="Password" styleClass="signInInputs" stylesheets="@signInAsAStafferStyles.css">
                     <font>
-                        <Font size="15.0"/>
+                        <Font size="15.0" />
                     </font>
                 </PasswordField>
+      <ImageView fitHeight="72.0" fitWidth="103.0" layoutX="264.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@manager.jpeg" />
+         </image>
+      </ImageView>
             </children>
         </AnchorPane>
-    </children>
-</AnchorPane>
