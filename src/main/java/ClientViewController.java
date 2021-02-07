@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -17,17 +16,13 @@ import javax.persistence.Query;
 import javax.swing.*;
 import java.net.URL;
 import java.sql.CallableStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ClientViewController {
-
     @FXML
     private ResourceBundle resources;
 
@@ -35,22 +30,16 @@ public class ClientViewController {
     private URL location;
 
     @FXML
-    private AnchorPane senderOrReceiveView;
+    private Text loggedAsView;
+
+    @FXML
+    private Button signOutClientButton;
 
     @FXML
     private VBox sendViewBox;
 
     @FXML
-    private TextField sendersNameTxt;
-
-    @FXML
-    private TextField sendersLastNameTxt;
-
-    @FXML
-    private TextField sendersPhoneNumberTxt;
-
-    @FXML
-    private TextField sendersEmailTxt;
+    private TextField senderLockerAddressTxt;
 
     @FXML
     private TextField receiverNameTxt;
@@ -63,6 +52,9 @@ public class ClientViewController {
 
     @FXML
     private TextField receiverEmailTxt;
+
+    @FXML
+    private TextField receiverLockerAddressTxt;
 
     @FXML
     private MenuButton sizeOfPackage;
@@ -83,49 +75,67 @@ public class ClientViewController {
     private VBox receiveViewBox;
 
     @FXML
-    private Text loggedAsView;
-
-    @FXML
-    private TextField receiverLockerAddressTxt;
-
-    @FXML
-    private TextField senderLockerAddressTxt;
-
-    @FXML
     private TextField receiveNumberOfPackageTxt;
 
     @FXML
-    private Button signOutClientButton;
+    private TableView<PackagesView> packagesShippedTable;
 
     @FXML
-    private TableView<ClientReceivedPackagesView> packagesReceivedTable;
+    private TableColumn<?, ?> idColS;
 
     @FXML
-    private TableColumn<ClientReceivedPackagesView, Integer> idColR;
+    private TableColumn<?, ?> sizeColS;
 
     @FXML
-    private TableColumn<ClientReceivedPackagesView, String> sizeColR;
+    private TableColumn<?, ?> shipmentDateColS;
 
     @FXML
-    private TableColumn<ClientReceivedPackagesView, LocalDate> shipmentDateColR;
+    private TableColumn<?, ?> collectionDateColS;
 
     @FXML
-    private TableColumn<ClientReceivedPackagesView, LocalDate> collectionDateColR;
+    private TableColumn<?, ?> priceColS;
 
     @FXML
-    private TableColumn<ClientReceivedPackagesView, Double> priceColR;
+    private TableColumn<?, ?> senderColS;
 
     @FXML
-    private TableColumn<ClientReceivedPackagesView, String> senderColR;
+    private TableColumn<?, ?> receiverColS;
 
     @FXML
-    private TableColumn<ClientReceivedPackagesView, String> receiverColR;
+    private TableColumn<?, ?> senderLockerColS;
 
     @FXML
-    private TableColumn<ClientReceivedPackagesView, String> senderLockerColR;
+    private TableColumn<?, ?> receiverLockerColS;
 
     @FXML
-    private TableColumn<ClientReceivedPackagesView, String> receiverLockerColR;
+    private TableView<PackagesView> packagesReceivedTable;
+
+    @FXML
+    private TableColumn<?, ?> idColR;
+
+    @FXML
+    private TableColumn<?, ?> sizeColR;
+
+    @FXML
+    private TableColumn<?, ?> shipmentDateColR;
+
+    @FXML
+    private TableColumn<?, ?> collectionDateColR;
+
+    @FXML
+    private TableColumn<?, ?> priceColR;
+
+    @FXML
+    private TableColumn<?, ?> senderColR;
+
+    @FXML
+    private TableColumn<?, ?> receiverColR;
+
+    @FXML
+    private TableColumn<?, ?> senderLockerColR;
+
+    @FXML
+    private TableColumn<?, ?> receiverLockerColR;
 
     @FXML
     void onSmallSizeClicked(ActionEvent event) {
@@ -192,7 +202,7 @@ public class ClientViewController {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please select size of the package.");
         } else if (senderPackageLocker.get().getAddressLocker().equals(receiverPackageLocker.get().getAddressLocker())) {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Package locker addresses have to be different.");
-        } else if (activeClient.equals(clientFromDB)) {
+        } else if (activeClient.getId() == clientFromDB.get().getId()) {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Unable to send the package to yourself.");
         } else {
             Query query1 = session.createQuery("SELECT id FROM PackageLockers WHERE addressLocker = '" + receiverPackageLocker.get().getAddressLocker() + "'");
@@ -204,7 +214,6 @@ public class ClientViewController {
                     callableStatement.setInt(3, clientFromDB.get().getId());
                     callableStatement.setInt(4, senderPackageLocker.get().getId());
                     callableStatement.setInt(5, (Integer) query1.getResultList().get(0));
-//                    callableStatement.setInt(5, receiverPackageLocker.get().getId());
                     callableStatement.execute();
                 }
             });
@@ -216,26 +225,16 @@ public class ClientViewController {
         Session session = SessionFactoryCreator.getFactory().openSession();
         Client activeClient = UserService.getActiveClient();
 
-        String queryPackage = "FROM Shipment WHERE id = " + receiveNumberOfPackageTxt.getText();
+        String queryPackage = "FROM PackagesView WHERE id = '" + receiveNumberOfPackageTxt.getText()
+                + "' AND receiver = '" + activeClient.getName() + " " + activeClient.getLastName() + "'";
 
-//        Optional<Shipment> receivePackage = session.createQuery(queryPackage).uniqueResultOptional();
+        Optional<Shipment> receivePackage = session.createQuery(queryPackage).uniqueResultOptional();
 
-//        if(receivePackage.isEmpty()){
-//            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"You do not have a package with this number to receive.");
-//        } else {
-//
+        if (receivePackage.isEmpty()) {
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "You do not have a package with this number to receive.");
+        } else {
+
             Query query = session.createQuery("SELECT id FROM Client WHERE name = '" + activeClient.getName() + "'");
-
-            /*
-                O co z tym kurwa chodzi??????
-                Ten sam błąd jest w metodzie onSendpackage.
-                Chujowo to jest napisane, ale działa.
-                Zabezpieczenia nie działają, poniważ są źle zrobione mapowania relacji dla klasy Package.
-             */
-
-//            System.out.println(activeClient.getId());
-//            System.out.println((Integer) query.getResultList().get(0));
-//            System.out.println(activeClient.getId() == (Integer) query.getResultList().get(0));
 
             session.doWork(connection -> {
                 try (CallableStatement callableStatement = connection.prepareCall(
@@ -245,57 +244,71 @@ public class ClientViewController {
                     callableStatement.execute();
                 }
             });
-//        }
+        }
     }
 
     @FXML
     void onShowSendPackagesClicked(MouseEvent mouseEvent) {
+        Client activeClient = UserService.getActiveClient();
+
+        String queryReceivedView = "SELECT * FROM packagesview WHERE sender = '" +
+                activeClient.getName() + " " + activeClient.getLastName() + "'";
+
+        preparingTableView(queryReceivedView, packagesShippedTable, idColS, sizeColS, shipmentDateColS, collectionDateColS, priceColS, senderColS, receiverColS, senderLockerColS, receiverLockerColS);
     }
 
-    @FXML
-    void onShowReceivedPackagesClicked(MouseEvent mouseEvent) {
-
+    private void preparingTableView(String queryReceivedView, TableView<PackagesView> packagesTable, TableColumn<?, ?> idCol, TableColumn<?, ?> sizeCol, TableColumn<?, ?> shipmentDateCol, TableColumn<?, ?> collectionDateCol, TableColumn<?, ?> priceCol, TableColumn<?, ?> senderCol, TableColumn<?, ?> receiverCol, TableColumn<?, ?> senderLockerCol, TableColumn<?, ?> receiverLockerCol) {
         Session session = SessionFactoryCreator.getFactory().openSession();
 
         EntityManagerFactory emf = session.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
-        Query query = em.createNativeQuery("SELECT * FROM receivedpackagesview", ClientReceivedPackagesView.class);
 
-        List<ClientReceivedPackagesView> list = query.getResultList();
+        Query query = em.createNativeQuery(queryReceivedView, PackagesView.class);
 
-        ObservableList<ClientReceivedPackagesView> packageslist = FXCollections.observableArrayList(list);
+        List<PackagesView> list = query.getResultList();
 
-        packagesReceivedTable.setItems(packageslist);
+        ObservableList<PackagesView> packagesList = FXCollections.observableArrayList(list);
 
-        idColR.setCellValueFactory(
-                new PropertyValueFactory<ClientReceivedPackagesView,Integer>("id")
-        );
-        sizeColR.setCellValueFactory(
-                new PropertyValueFactory<ClientReceivedPackagesView, String>("size")
-        );
-        shipmentDateColR.setCellValueFactory(
-                new PropertyValueFactory<ClientReceivedPackagesView, LocalDate>("shipmentDate")
-        );
-        collectionDateColR.setCellValueFactory(
-                new PropertyValueFactory<ClientReceivedPackagesView, LocalDate>("collectionDate")
-        );
-        priceColR.setCellValueFactory(
-                new PropertyValueFactory<ClientReceivedPackagesView, Double>("price")
-        );
-        senderColR.setCellValueFactory(
-                new PropertyValueFactory<ClientReceivedPackagesView, String>("senderName")
-        );
-        receiverColR.setCellValueFactory(
-                new PropertyValueFactory<ClientReceivedPackagesView, String>("receiverName")
-        );
-        senderLockerColR.setCellValueFactory(
-                new PropertyValueFactory<ClientReceivedPackagesView, String>("size")
-        );
-        receiverLockerColR.setCellValueFactory(
-                new PropertyValueFactory<ClientReceivedPackagesView, String>("packageLockerAddress")
-        );
+        packagesTable.setItems(packagesList);
 
 
+        idCol.setCellValueFactory(
+                new PropertyValueFactory<>("id")
+        );
+        sizeCol.setCellValueFactory(
+                new PropertyValueFactory<>("size")
+        );
+        shipmentDateCol.setCellValueFactory(
+                new PropertyValueFactory<>("shipmentDate")
+        );
+        collectionDateCol.setCellValueFactory(
+                new PropertyValueFactory<>("collectionDate")
+        );
+        priceCol.setCellValueFactory(
+                new PropertyValueFactory<>("price")
+        );
+        senderCol.setCellValueFactory(
+                new PropertyValueFactory<>("sender")
+        );
+        receiverCol.setCellValueFactory(
+                new PropertyValueFactory<>("receiver")
+        );
+        senderLockerCol.setCellValueFactory(
+                new PropertyValueFactory<>("packageLockerAddressSender")
+        );
+        receiverLockerCol.setCellValueFactory(
+                new PropertyValueFactory<>("packageLockerAddressReceiver")
+        );
+    }
+
+    @FXML
+    void onShowReceivedPackagesClicked(MouseEvent mouseEvent) {
+        Client activeClient = UserService.getActiveClient();
+
+        String queryReceivedView = "SELECT * FROM packagesview WHERE receiver = '" +
+                activeClient.getName() + " " + activeClient.getLastName() + "'";
+
+        preparingTableView(queryReceivedView, packagesReceivedTable, idColR, sizeColR, shipmentDateColR, collectionDateColR, priceColR, senderColR, receiverColR, senderLockerColR, receiverLockerColR);
     }
 
     public void signOutClick(ActionEvent actionEvent) {
@@ -305,28 +318,44 @@ public class ClientViewController {
 
     @FXML
     void initialize() {
-        assert senderOrReceiveView != null : "fx:id=\"senderOrReceiveView\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert loggedAsView != null : "fx:id=\"loggedAsView\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert signOutClientButton != null : "fx:id=\"signOutClientButton\" was not injected: check your FXML file 'clientView.fxml'.";
         assert sendViewBox != null : "fx:id=\"sendViewBox\" was not injected: check your FXML file 'clientView.fxml'.";
-        assert sendersNameTxt != null : "fx:id=\"sendersNameTxt\" was not injected: check your FXML file 'clientView.fxml'.";
-        assert sendersLastNameTxt != null : "fx:id=\"sendersLastNameTxt\" was not injected: check your FXML file 'clientView.fxml'.";
-        assert sendersPhoneNumberTxt != null : "fx:id=\"sendersPhoneNumberTxt\" was not injected: check your FXML file 'clientView.fxml'.";
-        assert sendersEmailTxt != null : "fx:id=\"sendersEmailTxt\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert senderLockerAddressTxt != null : "fx:id=\"senderLockerAddressTxt\" was not injected: check your FXML file 'clientView.fxml'.";
         assert receiverNameTxt != null : "fx:id=\"receiverNameTxt\" was not injected: check your FXML file 'clientView.fxml'.";
         assert receiverLastNameTxt != null : "fx:id=\"receiverLastNameTxt\" was not injected: check your FXML file 'clientView.fxml'.";
         assert receiverPhoneNumberTxt != null : "fx:id=\"receiverPhoneNumberTxt\" was not injected: check your FXML file 'clientView.fxml'.";
         assert receiverEmailTxt != null : "fx:id=\"receiverEmailTxt\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert receiverLockerAddressTxt != null : "fx:id=\"receiverLockerAddressTxt\" was not injected: check your FXML file 'clientView.fxml'.";
         assert sizeOfPackage != null : "fx:id=\"sizeOfPackage\" was not injected: check your FXML file 'clientView.fxml'.";
         assert smallSize != null : "fx:id=\"smallSize\" was not injected: check your FXML file 'clientView.fxml'.";
         assert mediumSize != null : "fx:id=\"mediumSize\" was not injected: check your FXML file 'clientView.fxml'.";
         assert bigSize != null : "fx:id=\"bigSize\" was not injected: check your FXML file 'clientView.fxml'.";
         assert dollarLabel != null : "fx:id=\"dollarLabel\" was not injected: check your FXML file 'clientView.fxml'.";
         assert receiveViewBox != null : "fx:id=\"receiveViewBox\" was not injected: check your FXML file 'clientView.fxml'.";
-        assert loggedAsView != null : "fx:id=\"loggedAsView\" was not injected: check your FXML file 'clientView.fxml'.";
         assert receiveNumberOfPackageTxt != null : "fx:id=\"receiveNumberOfPackageTxt\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert packagesShippedTable != null : "fx:id=\"packagesShippedTable\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert idColS != null : "fx:id=\"idColS\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert sizeColS != null : "fx:id=\"sizeColS\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert shipmentDateColS != null : "fx:id=\"shipmentDateColS\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert collectionDateColS != null : "fx:id=\"collectionDateColS\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert priceColS != null : "fx:id=\"priceColS\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert senderColS != null : "fx:id=\"senderColS\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert receiverColS != null : "fx:id=\"receiverColS\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert senderLockerColS != null : "fx:id=\"senderLockerColS\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert receiverLockerColS != null : "fx:id=\"receiverLockerColS\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert packagesReceivedTable != null : "fx:id=\"packagesReceivedTable\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert idColR != null : "fx:id=\"idColR\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert sizeColR != null : "fx:id=\"sizeColR\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert shipmentDateColR != null : "fx:id=\"shipmentDateColR\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert collectionDateColR != null : "fx:id=\"collectionDateColR\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert priceColR != null : "fx:id=\"priceColR\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert senderColR != null : "fx:id=\"senderColR\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert receiverColR != null : "fx:id=\"receiverColR\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert senderLockerColR != null : "fx:id=\"senderLockerColR\" was not injected: check your FXML file 'clientView.fxml'.";
+        assert receiverLockerColR != null : "fx:id=\"receiverLockerColR\" was not injected: check your FXML file 'clientView.fxml'.";
 
         loggedAsView.setText("Signed in as: " + UserService.getActiveClient().getName() + " " +
                 UserService.getActiveClient().getLastName());
     }
-
-
 }

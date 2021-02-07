@@ -11,7 +11,7 @@ public class UserService {
     private static Client activeClient;
     private static Staffer activeStaffer;
 
-    public static boolean isClientInDatabase(TextField givenEmail, TextField givenPassword){
+    public static boolean isClientInDatabase(TextField givenEmail, TextField givenPassword) {
         Session session = LaunchWindowController.getFactory().openSession();
 
         String query = "FROM Client WHERE email = '" + givenEmail.getText() +
@@ -22,7 +22,7 @@ public class UserService {
         return clientFromDB.isPresent();
     }
 
-    public static boolean isStafferInDatabase(TextField givenEmail, TextField givenPassword){
+    public static boolean isStafferInDatabase(TextField givenEmail, TextField givenPassword) {
         Session session = LaunchWindowController.getFactory().openSession();
 
         String query = "FROM Staffer WHERE email = '" + givenEmail.getText() +
@@ -34,7 +34,7 @@ public class UserService {
     }
 
     public static void addClient(TextField givenName, TextField givenLastName, TextField givenEmail,
-                                 TextField givenPhoneNumber, TextField givenPassword,TextField confirmPassword){
+                                 TextField givenPhoneNumber, TextField givenPassword, TextField confirmPassword) {
 
         Session session = LaunchWindowController.getFactory().openSession();
 
@@ -55,7 +55,7 @@ public class UserService {
         clearGivenData(givenName, givenLastName, givenEmail, givenPhoneNumber, givenPassword, confirmPassword);
     }
 
-    public static void setActiveClient(TextField givenEmail, TextField givenPassword){
+    public static void setActiveClient(TextField givenEmail, TextField givenPassword) {
         Session session = LaunchWindowController.getFactory().openSession();
 
         Query query = session.createQuery("SELECT id FROM Client WHERE email IN :clientEmail");
@@ -65,11 +65,11 @@ public class UserService {
 
         int i = (int) list.get(0);
 
-        activeClient = session.get(Client.class, i );
+        activeClient = session.get(Client.class, i);
         clearGivenData(givenEmail, givenPassword);
     }
 
-    public static void setActiveStaffer(TextField givenEmail, TextField givenPassword){
+    public static void setActiveStaffer(TextField givenEmail, TextField givenPassword) {
         Session session = LaunchWindowController.getFactory().openSession();
 
         Query query = session.createQuery("SELECT id FROM Staffer WHERE email IN :stafferEmail");
@@ -79,12 +79,12 @@ public class UserService {
 
         int i = (int) list.get(0);
 
-        activeStaffer = session.get(Staffer.class, i );
+        activeStaffer = session.get(Staffer.class, i);
         clearGivenData(givenEmail, givenPassword);
     }
 
-    private static void clearGivenData(TextField ... givenData){
-        for(TextField data : givenData)
+    private static void clearGivenData(TextField... givenData) {
+        for (TextField data : givenData)
             data.clear();
     }
 

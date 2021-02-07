@@ -1,5 +1,4 @@
 import lombok.*;
-import java.util.Set;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -11,8 +10,7 @@ import java.math.BigInteger;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Client
-{
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_client")

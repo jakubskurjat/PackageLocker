@@ -1,242 +1,279 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0"
+            prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ClientViewController">
+    <top>
+        <HBox alignment="CENTER" spacing="650.0">
+            <Text fx:id="loggedAsView" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as" textAlignment="CENTER"
+                  BorderPane.alignment="CENTER">
+                <font>
+                    <Font size="16.0"/>
+                </font>
+                <BorderPane.margin>
+                    <Insets bottom="10.0" top="10.0"/>
+                </BorderPane.margin>
+                <HBox.margin>
+                    <Insets left="0.0"/>
+                </HBox.margin>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientViewController">
-   <top>
-      <HBox alignment="CENTER" spacing="300.0">
-      <Text fx:id="loggedAsView" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as" textAlignment="CENTER" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="16.0" />
-         </font>
-         <BorderPane.margin>
-            <Insets bottom="10.0" top="10.0" />
-         </BorderPane.margin>
-            <HBox.margin>
-               <Insets left="20.0" />
-            </HBox.margin>
+            </Text>
+            <Button fx:id="signOutClientButton" mnemonicParsing="false" onAction="#signOutClick" prefWidth="100.0"
+                    text="SIGN OUT">
+                <HBox.margin>
+                    <Insets/>
+                </HBox.margin>
+            </Button>
+            <padding>
+                <Insets right="0.0"/>
+            </padding>
+        </HBox>
+    </top>
 
-      </Text>
-         <Button fx:id="signOutClientButton" mnemonicParsing="false" onAction="#signOutClick" prefWidth="100.0" text="SIGN OUT">
-            <HBox.margin>
-               <Insets />
-            </HBox.margin>
-         </Button>
-         <padding>
-            <Insets right="30.0" />
-         </padding>
-      </HBox>
-   </top>
-
-   <center>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-         <tabs>
-            <Tab text="Send package">
-               <content>
-                  <VBox fx:id="sendViewBox" alignment="CENTER" layoutY="20.0" prefHeight="466.0" prefWidth="700.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SEND A PACKAGE" textAlignment="CENTER">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </Text>
-                        <VBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="634.0">
-                           <children>
-                              <Label text="YOUR PACKAGE LOCKER ADDRESS" underline="true">
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="senderLockerAddressTxt" maxWidth="300.0" prefHeight="26.0" prefWidth="200.0" />
-                           </children>
+    <center>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab text="Send package">
+                    <content>
+                        <VBox fx:id="sendViewBox" alignment="CENTER" layoutY="20.0" prefHeight="466.0"
+                              prefWidth="700.0">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SEND A PACKAGE"
+                                      textAlignment="CENTER">
+                                    <font>
+                                        <Font size="20.0"/>
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets/>
+                                    </VBox.margin>
+                                </Text>
+                                <VBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="634.0">
+                                    <children>
+                                        <Label text="YOUR PACKAGE LOCKER ADDRESS" underline="true">
+                                            <VBox.margin>
+                                                <Insets bottom="10.0" top="10.0"/>
+                                            </VBox.margin>
+                                            <font>
+                                                <Font size="16.0"/>
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="senderLockerAddressTxt" maxWidth="300.0" prefHeight="26.0"
+                                                   prefWidth="200.0"/>
+                                    </children>
+                                </VBox>
+                                <Label layoutX="10.0" layoutY="26.0" minHeight="-Infinity" text="RECEIVER'S DETAILS"
+                                       underline="true">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" top="10.0"/>
+                                    </VBox.margin>
+                                    <font>
+                                        <Font size="16.0"/>
+                                    </font>
+                                </Label>
+                                <HBox alignment="CENTER" minHeight="-Infinity">
+                                    <children>
+                                        <TextField fx:id="receiverNameTxt" maxWidth="200.0" prefWidth="100.0"
+                                                   promptText="Name" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
+                                            <HBox.margin>
+                                                <Insets bottom="3.0" right="3.0"/>
+                                            </HBox.margin>
+                                        </TextField>
+                                        <TextField fx:id="receiverLastNameTxt" maxWidth="200.0" prefWidth="100.0"
+                                                   promptText="Last name" styleClass="sendersInputs"
+                                                   HBox.hgrow="ALWAYS">
+                                            <HBox.margin>
+                                                <Insets bottom="3.0" left="3.0"/>
+                                            </HBox.margin>
+                                        </TextField>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" minHeight="-Infinity">
+                                    <children>
+                                        <TextField fx:id="receiverPhoneNumberTxt" maxWidth="200.0" minHeight="-Infinity"
+                                                   prefWidth="100.0" promptText="Phone number"
+                                                   styleClass="sendersInputs" HBox.hgrow="ALWAYS">
+                                            <HBox.margin>
+                                                <Insets right="3.0"/>
+                                            </HBox.margin>
+                                        </TextField>
+                                        <TextField fx:id="receiverEmailTxt" maxWidth="200.0" minHeight="-Infinity"
+                                                   prefWidth="100.0" promptText="E-mail" styleClass="sendersInputs"
+                                                   HBox.hgrow="ALWAYS">
+                                            <HBox.margin>
+                                                <Insets left="3.0"/>
+                                            </HBox.margin>
+                                        </TextField>
+                                    </children>
+                                </HBox>
+                                <TextField fx:id="receiverLockerAddressTxt" maxWidth="300.0" prefWidth="300.0"
+                                           promptText="Receiver's package locker address">
+                                    <VBox.margin>
+                                        <Insets top="10.0"/>
+                                    </VBox.margin>
+                                </TextField>
+                                <Label text="PACKAGE" underline="true">
+                                    <font>
+                                        <Font size="16.0"/>
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets bottom="2.0" top="10.0"/>
+                                    </VBox.margin>
+                                </Label>
+                                <Label text="Size of package:">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Label>
+                                <MenuButton fx:id="sizeOfPackage" alignment="CENTER" contentDisplay="CENTER"
+                                            mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0"
+                                            textAlignment="CENTER">
+                                    <items>
+                                        <MenuItem fx:id="smallSize" mnemonicParsing="false"
+                                                  onAction="#onSmallSizeClicked" text="small"/>
+                                        <MenuItem fx:id="mediumSize" mnemonicParsing="false"
+                                                  onAction="#onMediumSizeClicked" text="medium"/>
+                                        <MenuItem fx:id="bigSize" mnemonicParsing="false" onAction="#onBigSizeClicked"
+                                                  text="big"/>
+                                    </items>
+                                </MenuButton>
+                                <Button mnemonicParsing="false" onAction="#onCalculatePackagePriceClicked"
+                                        text="CALCULATE PRICE">
+                                    <VBox.margin>
+                                        <Insets top="5.0"/>
+                                    </VBox.margin>
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Button>
+                                <Label fx:id="dollarLabel" text="\$" textFill="#d54b4b">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Label>
+                                <Button defaultButton="true" minHeight="-Infinity" minWidth="-Infinity"
+                                        mnemonicParsing="false" onAction="#onSendPackageClicked" prefHeight="50.0"
+                                        prefWidth="250.0" text="SEND A PACKAGE" VBox.vgrow="ALWAYS">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0"/>
+                                    </VBox.margin>
+                                    <font>
+                                        <Font name="System Bold" size="25.0"/>
+                                    </font>
+                                </Button>
+                            </children>
+                            <padding>
+                                <Insets left="9.0" right="9.0"/>
+                            </padding>
                         </VBox>
-                        <Label layoutX="10.0" layoutY="26.0" minHeight="-Infinity" text="RECEIVER'S DETAILS" underline="true">
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="10.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <HBox alignment="CENTER" minHeight="-Infinity">
-                           <children>
-                              <TextField fx:id="receiverNameTxt" maxWidth="200.0" prefWidth="100.0" promptText="Name" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets bottom="3.0" right="3.0" />
-                                 </HBox.margin>
-                              </TextField>
-                              <TextField fx:id="receiverLastNameTxt" maxWidth="200.0" prefWidth="100.0" promptText="Last name" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets bottom="3.0" left="3.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" minHeight="-Infinity">
-                           <children>
-                              <TextField fx:id="receiverPhoneNumberTxt" maxWidth="200.0" minHeight="-Infinity" prefWidth="100.0" promptText="Phone number" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets right="3.0" />
-                                 </HBox.margin>
-                              </TextField>
-                              <TextField fx:id="receiverEmailTxt" maxWidth="200.0" minHeight="-Infinity" prefWidth="100.0" promptText="E-mail" styleClass="sendersInputs" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets left="3.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children>
-                        </HBox>
-                        <TextField fx:id="receiverLockerAddressTxt" maxWidth="300.0" prefWidth="300.0" promptText="Receiver's package locker address">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <Label text="PACKAGE" underline="true">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="2.0" top="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label text="Size of package:">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <MenuButton fx:id="sizeOfPackage" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0" textAlignment="CENTER">
-                           <items>
-                              <MenuItem fx:id="smallSize" mnemonicParsing="false" onAction="#onSmallSizeClicked" text="small" />
-                              <MenuItem fx:id="mediumSize" mnemonicParsing="false" onAction="#onMediumSizeClicked" text="medium" />
-                              <MenuItem fx:id="bigSize" mnemonicParsing="false" onAction="#onBigSizeClicked" text="big" />
-                           </items>
-                        </MenuButton>
-                        <Button mnemonicParsing="false" onAction="#onCalculatePackagePriceClicked" text="CALCULATE PRICE">
-                           <VBox.margin>
-                              <Insets top="5.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <Label fx:id="dollarLabel" text="\$" textFill="#d54b4b">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <Button defaultButton="true" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendPackageClicked" prefHeight="50.0" prefWidth="250.0" text="SEND A PACKAGE" VBox.vgrow="ALWAYS">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="System Bold" size="25.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <padding>
-                        <Insets left="9.0" right="9.0" />
-                     </padding>
-                  </VBox>
-               </content>
-            </Tab>
-            <Tab text="Receive package">
-               <content>
-                  <VBox fx:id="receiveViewBox" alignment="TOP_CENTER" prefHeight="474.0" prefWidth="700.0" visible="true">
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RECEIVE A PACKAGE">
-                        <font>
-                           <Font size="25.0" />
-                        </font>
-                        <VBox.margin>
-                           <Insets bottom="20.0" top="50.0" />
-                        </VBox.margin></Text>
-                     <TextField fx:id="receiveNumberOfPackageTxt" maxWidth="250.0" prefWidth="200.0" promptText="Number of package">
-                        <font>
-                           <Font size="15.0" />
-                        </font>
-                        <VBox.margin>
-                           <Insets bottom="15.0" top="5.0" />
-                        </VBox.margin></TextField>
-                     <TextField layoutX="10.0" layoutY="26.0" maxWidth="250.0" prefWidth="200.0" promptText="Phone number">
-                        <font>
-                           <Font size="15.0" />
-                        </font>
-                        <VBox.margin>
-                           <Insets bottom="30.0" />
-                        </VBox.margin></TextField>
-                     <Button mnemonicParsing="false" onAction="#onReceivePackageClicked" text="RECEIVE">
-                        <font>
-                           <Font size="25.0" />
-                        </font></Button>
-                  </VBox>
-               </content>
-            </Tab>
-            <Tab text="Show packages shipped">
-               <content>
-                  <VBox alignment="TOP_CENTER">
-                        <Button alignment="CENTER" layoutX="237.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onShowSendPackagesClicked" prefHeight="39.0" prefWidth="175.0" text="Show my shipped packages" textAlignment="CENTER">
-                        <VBox.margin>
-                           <Insets bottom="15.0" top="15.0" />
-                        </VBox.margin></Button>
-                        <TableView layoutX="1.0" layoutY="91.0" prefHeight="358.0" prefWidth="650.0">
-                          <columns>
-                            <TableColumn fx:id="idColS" prefWidth="27.199982047080994" text="ID" />
-                            <TableColumn fx:id="sizeColS" prefWidth="55.19997978210449" text="SIZE" />
-                              <TableColumn fx:id="shipmentDateColS" prefWidth="81.59998321533203" text="Shipment date" />
-                              <TableColumn fx:id="collectionDateColS" prefWidth="85.5999755859375" text="Collection date" />
-                              <TableColumn fx:id="priceColS" prefWidth="73.60003662109375" text="Price" />
-                              <TableColumn fx:id="senderColS" prefWidth="84.79998779296875" text="Sender" />
-                              <TableColumn fx:id="receiverColS" prefWidth="79.20001220703125" text="Receiver" />
-                              <TableColumn fx:id="senderLockerColS" prefWidth="80.80001831054688" text="Sender locker" />
-                              <TableColumn fx:id="receiverLockerColS" prefWidth="77.60009765625" text="Receiver locker" />
-                          </columns>
-                        </TableView>
-                  </VBox>
-               </content>
-            </Tab>
-            <Tab text="Show packages received">
-               <content>
-                  <VBox alignment="TOP_CENTER">
-                  <Button layoutX="237.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onShowReceivedPackagesClicked" prefHeight="39.0" prefWidth="175.0" text="Show my received packages">
-                        <VBox.margin>
-                           <Insets bottom="15.0" top="15.0" />
-                        </VBox.margin></Button>
-                  <TableView layoutX="1.0" layoutY="91.0" prefHeight="358.0" prefWidth="650.0">
-                     <columns>
-                        <TableColumn fx:id="idColR" prefWidth="27.199982047080994" text="ID" />
-                        <TableColumn fx:id="sizeColR" prefWidth="55.19997978210449" text="SIZE" />
-                        <TableColumn fx:id="shipmentDateColR" prefWidth="81.59998321533203" text="Shipment date" />
-                        <TableColumn fx:id="collectionDateColR" prefWidth="85.5999755859375" text="Collection date" />
-                        <TableColumn fx:id="priceColR" prefWidth="73.60003662109375" text="Price" />
-                        <TableColumn fx:id="senderColR" prefWidth="84.79998779296875" text="Sender" />
-                        <TableColumn fx:id="receiverColR" prefWidth="79.20001220703125" text="Receiver" />
-                        <TableColumn fx:id="senderLockerColR" prefWidth="80.80001831054688" text="Sender locker" />
-                        <TableColumn fx:id="receiverLockerColR" prefWidth="77.60009765625" text="Receiver locker" />
-                     </columns>
-                  </TableView>
-                  </VBox>
-               </content>
-            </Tab>
-         </tabs>
-      </TabPane>
-   </center>
+                    </content>
+                </Tab>
+                <Tab text="Receive package">
+                    <content>
+                        <VBox fx:id="receiveViewBox" alignment="TOP_CENTER" prefHeight="474.0" prefWidth="700.0"
+                              visible="true">
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RECEIVE A PACKAGE">
+                                <font>
+                                    <Font size="25.0"/>
+                                </font>
+                                <VBox.margin>
+                                    <Insets bottom="20.0" top="50.0"/>
+                                </VBox.margin>
+                            </Text>
+                            <TextField fx:id="receiveNumberOfPackageTxt" maxWidth="250.0" prefWidth="200.0"
+                                       promptText="Number of package">
+                                <font>
+                                    <Font size="15.0"/>
+                                </font>
+                                <VBox.margin>
+                                    <Insets bottom="15.0" top="5.0"/>
+                                </VBox.margin>
+                            </TextField>
+                            <TextField layoutX="10.0" layoutY="26.0" maxWidth="250.0" prefWidth="200.0"
+                                       promptText="Phone number">
+                                <font>
+                                    <Font size="15.0"/>
+                                </font>
+                                <VBox.margin>
+                                    <Insets bottom="30.0"/>
+                                </VBox.margin>
+                            </TextField>
+                            <Button mnemonicParsing="false" onAction="#onReceivePackageClicked" text="RECEIVE">
+                                <font>
+                                    <Font size="25.0"/>
+                                </font>
+                            </Button>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Show packages shipped">
+                    <content>
+                        <VBox alignment="TOP_CENTER">
+                            <Button alignment="CENTER" layoutX="237.0" layoutY="30.0" mnemonicParsing="false"
+                                    onMouseClicked="#onShowSendPackagesClicked" prefHeight="39.0" prefWidth="175.0"
+                                    text="Show my shipped packages" textAlignment="CENTER">
+                                <VBox.margin>
+                                    <Insets bottom="15.0" top="15.0"/>
+                                </VBox.margin>
+                            </Button>
+                            <TableView fx:id="packagesShippedTable" layoutX="1.0" layoutY="91.0" prefHeight="358.0"
+                                       prefWidth="650.0">
+                                <columns>
+                                    <TableColumn fx:id="idColS" prefWidth="25.0" resizable="false" text="ID"/>
+                                    <TableColumn fx:id="sizeColS" prefWidth="55.0" resizable="false" text="SIZE"/>
+                                    <TableColumn fx:id="shipmentDateColS" prefWidth="90.0" resizable="false"
+                                                 text="Shipment date"/>
+                                    <TableColumn fx:id="collectionDateColS" prefWidth="90.0" resizable="false"
+                                                 text="Collection date"/>
+                                    <TableColumn fx:id="priceColS" prefWidth="60.0" resizable="false" text="Price"/>
+                                    <TableColumn fx:id="senderColS" prefWidth="120.0" resizable="false" text="Sender"/>
+                                    <TableColumn fx:id="receiverColS" prefWidth="120.0" resizable="false"
+                                                 text="Receiver"/>
+                                    <TableColumn fx:id="senderLockerColS" prefWidth="200.0" resizable="false"
+                                                 text="Sender locker"/>
+                                    <TableColumn fx:id="receiverLockerColS" prefWidth="200.0" resizable="false"
+                                                 text="Receiver locker"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Show packages received">
+                    <content>
+                        <VBox alignment="TOP_CENTER">
+                            <Button layoutX="237.0" layoutY="30.0" mnemonicParsing="false"
+                                    onMouseClicked="#onShowReceivedPackagesClicked" prefHeight="39.0" prefWidth="175.0"
+                                    text="Show my received packages">
+                                <VBox.margin>
+                                    <Insets bottom="15.0" top="15.0"/>
+                                </VBox.margin>
+                            </Button>
+                            <TableView fx:id="packagesReceivedTable" layoutX="1.0" layoutY="91.0" prefHeight="358.0"
+                                       prefWidth="650.0">
+                                <columns>
+                                    <TableColumn fx:id="idColR" prefWidth="25.0" resizable="false" text="ID"/>
+                                    <TableColumn fx:id="sizeColR" prefWidth="55.0" resizable="false" text="SIZE"/>
+                                    <TableColumn fx:id="shipmentDateColR" prefWidth="90.0" resizable="false"
+                                                 text="Shipment date"/>
+                                    <TableColumn fx:id="collectionDateColR" prefWidth="90.0" resizable="false"
+                                                 text="Collection date"/>
+                                    <TableColumn fx:id="priceColR" prefWidth="60.0" resizable="false" text="Price"/>
+                                    <TableColumn fx:id="senderColR" prefWidth="120.0" resizable="false" text="Sender"/>
+                                    <TableColumn fx:id="receiverColR" prefWidth="120.0" resizable="false"
+                                                 text="Receiver"/>
+                                    <TableColumn fx:id="senderLockerColR" prefWidth="200.0" resizable="false"
+                                                 text="Sender locker"/>
+                                    <TableColumn fx:id="receiverLockerColR" prefWidth="200.0" resizable="false"
+                                                 text="Receiver locker"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
 </BorderPane>

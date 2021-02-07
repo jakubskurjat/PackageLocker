@@ -1,6 +1,3 @@
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +11,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class SignInAsAStafferController {
 
@@ -34,7 +34,7 @@ public class SignInAsAStafferController {
 
     @FXML
     void onSignInStafferClicked(ActionEvent event) throws IOException {
-        if(UserService.isStafferInDatabase(inEmailStafferTxt,inPasswordStafferTxt)){
+        if (UserService.isStafferInDatabase(inEmailStafferTxt, inPasswordStafferTxt)) {
             UserService.setActiveStaffer(inEmailStafferTxt, inPasswordStafferTxt);
             Parent root = FXMLLoader.load(getClass().getResource("stafferView.fxml"));
             Scene scene = new Scene(root);
@@ -45,12 +45,10 @@ public class SignInAsAStafferController {
             stage.show();
             Stage stage1 = (Stage) signInStafferButton.getScene().getWindow();
             stage1.close();
-        }
-        else if(inEmailStafferTxt.getText().isEmpty() | inPasswordStafferTxt.getText().isEmpty()){
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"Please complete all fields.");
-        }
-        else{
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"The user with the given e-mail \"" + inEmailStafferTxt.getText() + "\" does not exist or the wrong password was given.");
+        } else if (inEmailStafferTxt.getText().isEmpty() | inPasswordStafferTxt.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please complete all fields.");
+        } else {
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "The user with the given e-mail \"" + inEmailStafferTxt.getText() + "\" does not exist or the wrong password was given.");
         }
     }
 

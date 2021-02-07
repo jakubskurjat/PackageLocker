@@ -2,9 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="250.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LaunchWindowController">
-   <children>
-      <Button fx:id="btnSignInAsAClient" layoutX="75.0" layoutY="60.0" mnemonicParsing="false" onAction="#btnSignInAsAClientAction" prefHeight="130.0" prefWidth="150.0" text="SIGN IN AS A CLIENT" />
-      <Button fx:id="btnSignInAsAStaffer" layoutX="280.0" layoutY="60.0" mnemonicParsing="false" onAction="#btnSignInAsAStafferAction" prefHeight="130.0" prefWidth="150.0" text="SIGN IN AS A STAFFER" />
-   </children>
+<AnchorPane prefHeight="250.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="LaunchWindowController">
+    <children>
+        <Button fx:id="btnSignInAsAClient" layoutX="75.0" layoutY="60.0" mnemonicParsing="false"
+                onAction="#btnSignInAsAClientAction" prefHeight="130.0" prefWidth="150.0" text="SIGN IN AS A CLIENT"/>
+        <Button fx:id="btnSignInAsAStaffer" layoutX="280.0" layoutY="60.0" mnemonicParsing="false"
+                onAction="#btnSignInAsAStafferAction" prefHeight="130.0" prefWidth="150.0" text="SIGN IN AS A STAFFER"/>
+    </children>
 </AnchorPane>

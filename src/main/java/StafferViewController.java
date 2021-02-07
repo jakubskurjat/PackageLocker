@@ -11,7 +11,6 @@ import org.hibernate.Session;
 import javax.swing.*;
 import java.net.URL;
 import java.sql.CallableStatement;
-import java.sql.Date;
 import java.sql.Types;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;

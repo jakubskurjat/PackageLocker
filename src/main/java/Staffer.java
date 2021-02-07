@@ -10,8 +10,7 @@ import java.math.BigInteger;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Staffer
-{
+public class Staffer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_staffer")
