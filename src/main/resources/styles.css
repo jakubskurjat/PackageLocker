@@ -1,4 +1,125 @@
+/**{*/
+/*    -fx-font-family: "Roboto Light";*/
+/*}*/
+
+.transparent{
+    -fx-background-color: transparent;
+}
+
 .sendersInputs {
     -fx-stroke-width: 2px;
     -fx-font-size: 12px;
 }
+
+.logBar{
+    -fx-background-color: #6F81FD;
+    /*-fx-opacity: .8;*/
+}
+
+
+.tab-pane {
+    /*-fx-background-color: #6F81FD;*/
+    -fx-background-color: linear-gradient(to bottom, #6F81FD, #0083B0);
+}
+
+.tabs {
+    -fx-padding: 5px;
+    -fx-background-color: #eee;
+    -fx-border-color: #abc;
+    -fx-border-style: none none none none;
+    -fx-border-width: 2px;
+    -fx-font-size: 15px;
+    -fx-background-radius: 2px;
+    -fx-border-radius: 2px;
+}
+
+.tabs:selected {
+    -fx-border-color: #00DCE5;
+    -fx-background-color: white;
+
+}
+
+.signOutBtn{
+    -fx-background-color: white;
+    -fx-border-color: #305AA5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+}
+
+.signOutBtn:hover {
+    -fx-border-color: white;
+    -fx-background-color: #305AA5;
+    -fx-text-fill: white;
+}
+
+
+
+
+/*.tab-pane *{*/
+/*    -fx-font-family: "Roboto Light";*/
+
+/*}*/
+
+.inputs {
+    /*-fx-font-size: 14px;*/
+    -fx-background-color: white;
+}
+
+
+.calculatePriceBtn {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-color: #305AA5;
+    -fx-border-radius: 10px;
+    -fx-border-width: 3px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+
+
+}
+
+.calculatePriceBtn:hover {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+}
+
+
+.sendPackageBtn {
+
+    -fx-background-color: transparent;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-text-fill: white;
+    -fx-border-radius: 10px;
+
+}
+
+.sendPackageBtn:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #0083B0;
+    -fx-background-radius: 10px;
+    -fx-border-color: #00DCE5;
+    -fx-border-width: 2px;
+}
+
+
+.showViewBtns {
+    -fx-background-color: white;
+    -fx-text-fill: #0083B0;
+    -fx-background-radius: 10px;
+    -fx-border-color: #00DCE5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-font-size: 14px;
+}
+
+.showViewBtns:hover {
+    -fx-background-color: #0083B0;
+    -fx-text-fill: white;
+}
+
+
