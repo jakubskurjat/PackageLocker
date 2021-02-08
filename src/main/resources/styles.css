@@ -1,7 +1,3 @@
-/**{*/
-/*    -fx-font-family: "Roboto Light";*/
-/*}*/
-
 .transparent{
     -fx-background-color: transparent;
 }
@@ -13,7 +9,6 @@
 
 .logBar{
     -fx-background-color: #6F81FD;
-    /*-fx-opacity: .8;*/
 }
 
 

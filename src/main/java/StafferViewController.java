@@ -24,37 +24,32 @@ public class StafferViewController {
     private URL location;
 
     @FXML
-    private TableColumn<?, ?> idPackColS;
+    private TableColumn<?, ?> idColS;
 
     @FXML
     private TableColumn<?, ?> sizeColS;
 
     @FXML
-    private TableColumn<?, ?> shipDateColS;
+    private TableColumn<?, ?> shipmentDateColS;
 
     @FXML
-    private TableColumn<?, ?> colDateColS;
+    private TableColumn<?, ?> collectionDateColS;
 
     @FXML
     private TableColumn<?, ?> priceColS;
 
     @FXML
-    private TableColumn<?, ?> senderIdColS;
-
-    @FXML
-    private TableColumn<?, ?> senderPlColS;
-
-    @FXML
-    private TableColumn<?, ?> senderNameColS;
-
-    @FXML
-    private TableColumn<?, ?> receiverIdColS;
-
-    @FXML
-    private TableColumn<?, ?> receiverPlColS;
+    private TableColumn<?, ?> senderColS;
 
     @FXML
     private TableColumn<?, ?> receiverColS;
+
+    @FXML
+    private TableColumn<?, ?> senderLockerColS;
+
+    @FXML
+    private TableColumn<?, ?> receiverLockerColS;
+
 
     @FXML
     private DatePicker profitDatePicker;
@@ -121,17 +116,15 @@ public class StafferViewController {
 
     @FXML
     void initialize() {
-        assert idPackColS != null : "fx:id=\"idPackColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert idColS != null : "fx:id=\"idPackColS\" was not injected: check your FXML file 'stafferView.fxml'.";
         assert sizeColS != null : "fx:id=\"sizeColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert shipDateColS != null : "fx:id=\"shipDateColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert colDateColS != null : "fx:id=\"colDateColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert shipmentDateColS != null : "fx:id=\"shipDateColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert collectionDateColS != null : "fx:id=\"colDateColS\" was not injected: check your FXML file 'stafferView.fxml'.";
         assert priceColS != null : "fx:id=\"priceColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert senderIdColS != null : "fx:id=\"senderIdColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert senderPlColS != null : "fx:id=\"senderPlColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert senderNameColS != null : "fx:id=\"senderNameColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert receiverIdColS != null : "fx:id=\"receiverIdColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert receiverPlColS != null : "fx:id=\"receiverPlColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert receiverColS != null : "fx:id=\"receiverColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert senderColS != null : "fx:id=\"senderIdColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert receiverColS != null : "fx:id=\"senderPlColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert senderLockerColS != null : "fx:id=\"senderNameColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert receiverLockerColS != null : "fx:id=\"receiverIdColS\" was not injected: check your FXML file 'stafferView.fxml'.";
         assert profitDatePicker != null : "fx:id=\"profitDatePicker\" was not injected: check your FXML file 'stafferView.fxml'.";
         assert profitResultText != null : "fx:id=\"profitResultText\" was not injected: check your FXML file 'stafferView.fxml'.";
         assert statsPackageLockerTxt != null : "fx:id=\"statsPackageLockerTxt\" was not injected: check your FXML file 'stafferView.fxml'.";

@@ -1,72 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<AnchorPane prefHeight="520.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="StafferViewController">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="520.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StafferViewController">
     <children>
         <VBox>
-            <HBox alignment="CENTER" spacing="600.0">
-                <Text fx:id="loggedAsStafferView" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as"
-                      textAlignment="CENTER">
+            <HBox alignment="CENTER" spacing="600.0" styleClass="logBar" stylesheets="@stafferViewStyles.css">
+                <Text fx:id="loggedAsStafferView" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as" textAlignment="CENTER">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
 
                     <HBox.margin>
-                        <Insets left="20.0"/>
+                        <Insets bottom="10.0" top="10.0" />
                     </HBox.margin>
 
                 </Text>
-                <Button fx:id="signOutStafferButton" mnemonicParsing="false" onAction="#onSignOut" prefWidth="100.0"
-                        text="SIGN OUT">
+                <Button fx:id="signOutStafferButton" mnemonicParsing="false" onAction="#onSignOut" prefWidth="100.0" styleClass="signOutBtn" stylesheets="@stafferViewStyles.css" text="SIGN OUT">
                     <HBox.margin>
-                        <Insets/>
+                        <Insets bottom="10.0" top="10.0" />
                     </HBox.margin>
                 </Button>
                 <padding>
-                    <Insets right="30.0"/>
+                    <Insets right="30.0" />
                 </padding>
             </HBox>
-            <TabPane prefHeight="520.0" prefWidth="960.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane prefHeight="520.0" prefWidth="960.0" stylesheets="@stafferViewStyles.css" tabClosingPolicy="UNAVAILABLE">
                 <tabs>
-                    <Tab text="Packages view">
+                    <Tab styleClass="tabs" text="Packages view">
                         <content>
                             <VBox prefHeight="200.0" prefWidth="100.0">
                                 <children>
                                     <VBox alignment="TOP_CENTER" prefHeight="632.0" prefWidth="800.0">
                                         <children>
-                                            <Button mnemonicParsing="false" onAction="#onShowAllPackagesClicked"
-                                                    text="Show all packages">
+                                            <Button mnemonicParsing="false" onAction="#onShowAllPackagesClicked" styleClass="showViewBtns" stylesheets="@stafferViewStyles.css" text="Show all packages">
                                                 <VBox.margin>
-                                                    <Insets bottom="10.0" top="10.0"/>
+                                                    <Insets bottom="10.0" top="10.0" />
                                                 </VBox.margin>
                                             </Button>
                                             <TableView prefHeight="597.0" prefWidth="800.0">
                                                 <columns>
-                                                    <TableColumn fx:id="idPackColS" prefWidth="34.4000244140625"
-                                                                 text="ID"/>
-                                                    <TableColumn fx:id="sizeColS" prefWidth="48.000003814697266"
-                                                                 text="Size"/>
-                                                    <TableColumn fx:id="shipDateColS" text="Ship date"/>
-                                                    <TableColumn fx:id="colDateColS" prefWidth="73.5999755859375"
-                                                                 text="Col. date"/>
-                                                    <TableColumn fx:id="priceColS" prefWidth="69.60002136230469"
-                                                                 text="Price"/>
-                                                    <TableColumn fx:id="senderIdColS" prefWidth="66.4000244140625"
-                                                                 text="Sender ID"/>
-                                                    <TableColumn fx:id="senderPlColS" prefWidth="75.20001220703125"
-                                                                 text="Sender PL"/>
-                                                    <TableColumn fx:id="senderNameColS" prefWidth="55.99993896484375"
-                                                                 text="Sender"/>
-                                                    <TableColumn fx:id="receiverIdColS" prefWidth="94.39996337890625"
-                                                                 text="Receiver ID"/>
-                                                    <TableColumn fx:id="receiverPlColS" prefWidth="85.60003662109375"
-                                                                 text="Receiver PL"/>
-                                                    <TableColumn fx:id="receiverColS" prefWidth="112.800048828125"
-                                                                 text="Receiver"/>
+                                                    <TableColumn fx:id="idColS" prefWidth="25.0" resizable="false" styleClass="cols" text="ID" />
+                                                    <TableColumn fx:id="sizeColS" prefWidth="55.0" resizable="false" styleClass="cols" text="Size" />
+                                                    <TableColumn fx:id="shipmentDateColS" prefWidth="96.0" resizable="false" styleClass="cols" text="Shipment date" />
+                                                    <TableColumn fx:id="collectionDateColS" prefWidth="96.79997253417969" resizable="false" styleClass="cols" text="Collection date" />
+                                                    <TableColumn fx:id="priceColS" prefWidth="49.60003662109375" resizable="false" styleClass="cols" text="Price" />
+                                                    <TableColumn fx:id="senderColS" prefWidth="130.0" resizable="false" styleClass="cols" text="Sender" />
+                                                    <TableColumn fx:id="receiverColS" prefWidth="130.0" resizable="false" styleClass="cols" text="Receiver" />
+                                                    <TableColumn fx:id="senderLockerColS" prefWidth="200.0" resizable="false" styleClass="cols" text="Sender locker" />
+                                                    <TableColumn fx:id="receiverLockerColS" prefWidth="200.0" resizable="false" styleClass="cols" text="Receiver locker" />
+
                                                 </columns>
                                             </TableView>
                                         </children>
@@ -75,54 +70,50 @@
                             </VBox>
                         </content>
                     </Tab>
-                    <Tab text="Profit preview">
+                    <Tab styleClass="tabs" text="Profit preview">
                         <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                 <children>
-                                    <DatePicker fx:id="profitDatePicker" layoutX="313.0" layoutY="87.0"/>
-                                    <Button layoutX="329.0" layoutY="132.0" mnemonicParsing="false"
-                                            onAction="#onShowProfitClicked" text="Show profit">
+                                    <DatePicker fx:id="profitDatePicker" layoutX="371.0" layoutY="86.0" styleClass="datePicker" stylesheets="@stafferViewStyles.css" />
+                                    <Button layoutX="406.0" layoutY="138.0" mnemonicParsing="false" onAction="#onShowProfitClicked" styleClass="calcProfitBtn" text="Show profit">
                                         <font>
-                                            <Font size="22.0"/>
+                                            <Font size="22.0" />
                                         </font>
                                     </Button>
-                                    <Text fx:id="profitResultText" layoutX="235.0" layoutY="322.0" strokeType="OUTSIDE"
-                                          strokeWidth="0.0" text="Profit:" textAlignment="CENTER" wrappingWidth="330.0">
+                                    <Text fx:id="profitResultText" fill="WHITE" layoutX="315.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profit:" textAlignment="CENTER" wrappingWidth="330.0">
                                         <font>
-                                            <Font size="30.0"/>
+                                            <Font name="Century" size="30.0" />
                                         </font>
                                     </Text>
                                 </children>
                             </AnchorPane>
                         </content>
                     </Tab>
-                    <Tab text="Packages statistics">
+                    <Tab styleClass="tabs" text="Packages statistics">
                         <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                 <children>
-                                    <VBox alignment="TOP_CENTER" prefHeight="620.0" prefWidth="800.0">
+                                    <VBox alignment="TOP_CENTER" prefHeight="477.0" prefWidth="960.0">
                                         <children>
-                                            <TextField fx:id="statsPackageLockerTxt" maxWidth="300.0" prefWidth="300.0"
-                                                       promptText="Package locker address">
+                                            <TextField fx:id="statsPackageLockerTxt" maxWidth="300.0" prefWidth="300.0" promptText="Package locker address">
                                                 <VBox.margin>
-                                                    <Insets bottom="20.0" top="30.0"/>
+                                                    <Insets bottom="20.0" top="30.0" />
                                                 </VBox.margin>
                                             </TextField>
                                             <DatePicker fx:id="statsDatePicker">
                                                 <VBox.margin>
-                                                    <Insets bottom="20.0"/>
+                                                    <Insets bottom="20.0" />
                                                 </VBox.margin>
                                             </DatePicker>
-                                            <Button mnemonicParsing="false" onAction="#onShowStatsClicked"
-                                                    text="Show statistics">
+                                            <Button mnemonicParsing="false" onAction="#onShowStatsClicked" styleClass="showViewBtns" stylesheets="@stafferViewStyles.css" text="Show statistics">
                                                 <VBox.margin>
-                                                    <Insets bottom="20.0"/>
+                                                    <Insets bottom="20.0" />
                                                 </VBox.margin>
                                             </Button>
-                                            <TableView prefHeight="200.0" prefWidth="200.0">
+                                            <TableView maxWidth="200.0" prefHeight="286.0" prefWidth="200.0">
                                                 <columns>
-                                                    <TableColumn fx:id="idLocker" prefWidth="75.0" text="ID locker"/>
-                                                    <TableColumn fx:id="isEmptyLocker" prefWidth="75.0" text="isEmpty"/>
+                                                    <TableColumn fx:id="idLocker" prefWidth="84.79998779296875" text="ID locker" />
+                                                    <TableColumn fx:id="isEmptyLocker" prefWidth="114.4000244140625" text="isEmpty" />
                                                 </columns>
                                             </TableView>
                                         </children>
