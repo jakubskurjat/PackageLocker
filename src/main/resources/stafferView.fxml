@@ -14,9 +14,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="520.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StafferViewController">
+<AnchorPane prefHeight="520.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StafferViewController">
     <children>
-        <VBox>
+        <VBox minWidth="1000.0">
             <HBox alignment="CENTER" spacing="600.0" styleClass="logBar" stylesheets="@stafferViewStyles.css">
                 <Text fx:id="loggedAsStafferView" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as" textAlignment="CENTER">
                     <font>
@@ -57,11 +57,11 @@
                                                     <TableColumn fx:id="shipmentDateColS" prefWidth="96.0" resizable="false" styleClass="cols" text="Shipment date" />
                                                     <TableColumn fx:id="collectionDateColS" prefWidth="96.79997253417969" resizable="false" styleClass="cols" text="Collection date" />
                                                     <TableColumn fx:id="priceColS" prefWidth="49.60003662109375" resizable="false" styleClass="cols" text="Price" />
-                                                    <TableColumn fx:id="senderColS" prefWidth="130.0" resizable="false" styleClass="cols" text="Sender" />
-                                                    <TableColumn fx:id="receiverColS" prefWidth="130.0" resizable="false" styleClass="cols" text="Receiver" />
-                                                    <TableColumn fx:id="senderLockerColS" prefWidth="200.0" resizable="false" styleClass="cols" text="Sender locker" />
-                                                    <TableColumn fx:id="receiverLockerColS" prefWidth="200.0" resizable="false" styleClass="cols" text="Receiver locker" />
-
+                                                    <TableColumn fx:id="senderColS" prefWidth="115.39996337890625" resizable="false" styleClass="cols" text="Sender" />
+                                                    <TableColumn fx:id="receiverColS" prefWidth="115.79998779296875" resizable="false" styleClass="cols" text="Receiver" />
+                                                    <TableColumn fx:id="senderLockerColS" prefWidth="192.0" resizable="false" styleClass="cols" text="Sender locker" />
+                                                    <TableColumn fx:id="receiverLockerColS" prefWidth="181.60003662109375" resizable="false" styleClass="cols" text="Receiver locker" />
+                                                    <TableColumn fx:id="idLockerColS" prefWidth="73.5999755859375" resizable="false" styleClass="cols" text="ID locker" />
                                                 </columns>
                                             </TableView>
                                         </children>
@@ -112,8 +112,8 @@
                                             </Button>
                                             <TableView maxWidth="200.0" prefHeight="286.0" prefWidth="200.0">
                                                 <columns>
-                                                    <TableColumn fx:id="idLocker" prefWidth="84.79998779296875" text="ID locker" />
-                                                    <TableColumn fx:id="isEmptyLocker" prefWidth="114.4000244140625" text="isEmpty" />
+                                                    <TableColumn fx:id="idLockerCol" prefWidth="84.79998779296875" text="ID locker" />
+                                                    <TableColumn fx:id="isEmptyLockerCol" prefWidth="114.4000244140625" text="isEmpty" />
                                                 </columns>
                                             </TableView>
                                         </children>
