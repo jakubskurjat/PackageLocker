@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
@@ -17,6 +18,7 @@ import javax.swing.*;
 import java.net.URL;
 import java.sql.CallableStatement;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -316,6 +318,22 @@ public class ClientViewController {
         stage1.close();
     }
 
+
+    private List<String> getAddresses(){
+        Session session = SessionFactoryCreator.getFactory().openSession();
+
+
+        Query query = session.createQuery("FROM PackageLockers");
+
+        List<PackageLockers> lockers = query.getResultList();
+        List<String> addresses = new ArrayList<>();
+        for (PackageLockers l : lockers){
+            addresses.add(l.getAddressLocker());
+        }
+
+        return addresses;
+    }
+
     @FXML
     void initialize() {
         assert loggedAsView != null : "fx:id=\"loggedAsView\" was not injected: check your FXML file 'clientView.fxml'.";
@@ -357,5 +375,10 @@ public class ClientViewController {
 
         loggedAsView.setText("Signed in as: " + UserService.getActiveClient().getName() + " " +
                 UserService.getActiveClient().getLastName());
+
+
+        TextFields.bindAutoCompletion(senderLockerAddressTxt, getAddresses());
+        TextFields.bindAutoCompletion(receiverLockerAddressTxt, getAddresses());
+
     }
 }
