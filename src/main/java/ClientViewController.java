@@ -146,6 +146,10 @@ public class ClientViewController {
 
     private Alert alert;
 
+    private Session session = LaunchWindowController.getFactory().openSession();
+
+    private Client activeClient = UserService.getActiveClient();
+
     @FXML
     void onSmallSizeClicked(ActionEvent event) {
         sizeOfPackage.setText(smallSize.getText());
@@ -167,7 +171,6 @@ public class ClientViewController {
             alert.setContentText("Please select size of the package.");
             alert.show();
         } else {
-            Session session = LaunchWindowController.getFactory().openSession();
 
             AtomicReference<Double> price = new AtomicReference<>(0d);
 
@@ -187,9 +190,6 @@ public class ClientViewController {
 
     @FXML
     void onSendPackageClicked(ActionEvent event) {
-        Session session = SessionFactoryCreator.getFactory().openSession();
-        Client activeClient = UserService.getActiveClient();
-
         String query = "FROM Client WHERE name = '" + receiverNameTxt.getText() +
                 "' AND lastName = '" + receiverLastNameTxt.getText() + "' AND email = '" + receiverEmailTxt.getText() +
                 "' AND phoneNumber = '" + receiverPhoneNumberTxt.getText() + "'";
@@ -238,9 +238,6 @@ public class ClientViewController {
 
     @FXML
     void onReceivePackageClicked(ActionEvent actionEvent) {
-        Session session = SessionFactoryCreator.getFactory().openSession();
-        Client activeClient = UserService.getActiveClient();
-
         String queryPackage = "FROM PackagesView WHERE id = '" + receiveNumberOfPackageTxt.getText()
                 + "' AND receiver = '" + activeClient.getName() + " " + activeClient.getLastName() + "'";
 
@@ -266,66 +263,60 @@ public class ClientViewController {
 
     @FXML
     void onShowSendPackagesClicked(MouseEvent mouseEvent) {
-        Client activeClient = UserService.getActiveClient();
-
-        String queryReceivedView = "SELECT * FROM packagesview WHERE sender = '" +
+        String queryReceivedView = "SELECT * FROM PackagesView WHERE sender = '" +
                 activeClient.getName() + " " + activeClient.getLastName() + "'";
 
-        preparingTableView(queryReceivedView, packagesShippedTable, idColS, sizeColS, shipmentDateColS, collectionDateColS, priceColS, senderColS, receiverColS, senderLockerColS, receiverLockerColS);
+        ViewService.preparingTableViewForClients(queryReceivedView, packagesShippedTable, idColS, sizeColS, shipmentDateColS, collectionDateColS, priceColS, senderColS, receiverColS, senderLockerColS, receiverLockerColS);
     }
 
-    private void preparingTableView(String queryReceivedView, TableView<PackagesView> packagesTable, TableColumn<?, ?> idCol, TableColumn<?, ?> sizeCol, TableColumn<?, ?> shipmentDateCol, TableColumn<?, ?> collectionDateCol, TableColumn<?, ?> priceCol, TableColumn<?, ?> senderCol, TableColumn<?, ?> receiverCol, TableColumn<?, ?> senderLockerCol, TableColumn<?, ?> receiverLockerCol) {
-        Session session = SessionFactoryCreator.getFactory().openSession();
-
-        EntityManagerFactory emf = session.getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-
-        Query query = em.createNativeQuery(queryReceivedView, PackagesView.class);
-
-        List<PackagesView> list = query.getResultList();
-
-        ObservableList<PackagesView> packagesList = FXCollections.observableArrayList(list);
-
-        packagesTable.setItems(packagesList);
-
-
-        idCol.setCellValueFactory(
-                new PropertyValueFactory<>("id")
-        );
-        sizeCol.setCellValueFactory(
-                new PropertyValueFactory<>("size")
-        );
-        shipmentDateCol.setCellValueFactory(
-                new PropertyValueFactory<>("shipmentDate")
-        );
-        collectionDateCol.setCellValueFactory(
-                new PropertyValueFactory<>("collectionDate")
-        );
-        priceCol.setCellValueFactory(
-                new PropertyValueFactory<>("price")
-        );
-        senderCol.setCellValueFactory(
-                new PropertyValueFactory<>("sender")
-        );
-        receiverCol.setCellValueFactory(
-                new PropertyValueFactory<>("receiver")
-        );
-        senderLockerCol.setCellValueFactory(
-                new PropertyValueFactory<>("packageLockerAddressSender")
-        );
-        receiverLockerCol.setCellValueFactory(
-                new PropertyValueFactory<>("packageLockerAddressReceiver")
-        );
-    }
+//    public void preparingTableView(String queryReceivedView, TableView<PackagesView> packagesTable, TableColumn<?, ?> idCol, TableColumn<?, ?> sizeCol, TableColumn<?, ?> shipmentDateCol, TableColumn<?, ?> collectionDateCol, TableColumn<?, ?> priceCol, TableColumn<?, ?> senderCol, TableColumn<?, ?> receiverCol, TableColumn<?, ?> senderLockerCol, TableColumn<?, ?> receiverLockerCol) {
+//        EntityManagerFactory emf = session.getEntityManagerFactory();
+//        EntityManager em = emf.createEntityManager();
+//
+//        Query query = em.createNativeQuery(queryReceivedView, PackagesView.class);
+//
+//        List<PackagesView> list = query.getResultList();
+//
+//        ObservableList<PackagesView> packagesList = FXCollections.observableArrayList(list);
+//
+//        packagesTable.setItems(packagesList);
+//
+//
+//        idCol.setCellValueFactory(
+//                new PropertyValueFactory<>("id")
+//        );
+//        sizeCol.setCellValueFactory(
+//                new PropertyValueFactory<>("size")
+//        );
+//        shipmentDateCol.setCellValueFactory(
+//                new PropertyValueFactory<>("shipmentDate")
+//        );
+//        collectionDateCol.setCellValueFactory(
+//                new PropertyValueFactory<>("collectionDate")
+//        );
+//        priceCol.setCellValueFactory(
+//                new PropertyValueFactory<>("price")
+//        );
+//        senderCol.setCellValueFactory(
+//                new PropertyValueFactory<>("sender")
+//        );
+//        receiverCol.setCellValueFactory(
+//                new PropertyValueFactory<>("receiver")
+//        );
+//        senderLockerCol.setCellValueFactory(
+//                new PropertyValueFactory<>("packageLockerAddressSender")
+//        );
+//        receiverLockerCol.setCellValueFactory(
+//                new PropertyValueFactory<>("packageLockerAddressReceiver")
+//        );
+//    }
 
     @FXML
     void onShowReceivedPackagesClicked(MouseEvent mouseEvent) {
-        Client activeClient = UserService.getActiveClient();
-
-        String queryReceivedView = "SELECT * FROM packagesview WHERE receiver = '" +
+        String queryReceivedView = "SELECT * FROM PackagesView WHERE receiver = '" +
                 activeClient.getName() + " " + activeClient.getLastName() + "'";
 
-        preparingTableView(queryReceivedView, packagesReceivedTable, idColR, sizeColR, shipmentDateColR, collectionDateColR, priceColR, senderColR, receiverColR, senderLockerColR, receiverLockerColR);
+        ViewService.preparingTableViewForClients(queryReceivedView, packagesReceivedTable, idColR, sizeColR, shipmentDateColR, collectionDateColR, priceColR, senderColR, receiverColR, senderLockerColR, receiverLockerColR);
     }
 
     public void signOutClick(ActionEvent actionEvent) {
@@ -335,9 +326,6 @@ public class ClientViewController {
 
 
     private List<String> getAddresses(){
-        Session session = SessionFactoryCreator.getFactory().openSession();
-
-
         Query query = session.createQuery("FROM PackageLockers");
 
         List<PackageLockers> lockers = query.getResultList();

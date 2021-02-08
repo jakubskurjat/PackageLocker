@@ -5,7 +5,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 
-import javax.swing.*;
 import java.net.URL;
 import java.sql.CallableStatement;
 import java.sql.Types;
@@ -19,6 +18,15 @@ public class StafferViewController {
 
     @FXML
     private URL location;
+
+    @FXML
+    private Text loggedAsStafferView;
+
+    @FXML
+    private Button signOutStafferButton;
+
+    @FXML
+    private TableView<PackagesView> companyPackagesView;
 
     @FXML
     private TableColumn<?, ?> idColS;
@@ -47,6 +55,8 @@ public class StafferViewController {
     @FXML
     private TableColumn<?, ?> receiverLockerColS;
 
+    @FXML
+    private TableColumn<?, ?> idLockerColS;
 
     @FXML
     private DatePicker profitDatePicker;
@@ -61,16 +71,13 @@ public class StafferViewController {
     private DatePicker statsDatePicker;
 
     @FXML
-    private Text loggedAsStafferView;
+    private TableView<PackagesView> packageLockerView;
 
     @FXML
-    private Button signOutStafferButton;
+    private TableColumn<?, ?> idLockerCol;
 
     @FXML
-    private TableColumn<?, ?> idLocker;
-
-    @FXML
-    private TableColumn<?, ?> isEmptyLocker;
+    private TableColumn<?, ?> isEmptyLockerCol;
 
     private Alert alert;
 
@@ -100,12 +107,17 @@ public class StafferViewController {
 
     @FXML
     void onShowStatsClicked(ActionEvent event) {
+        String queryLockers = "SELECT * FROM PackageLockerView WHERE id_package_lockers = " + statsPackageLockerTxt.getText()
+                + " AND shipment_date = '" + statsDatePicker.getValue().toString() + "'";
 
+        ViewService.preparingTableViewForPackageLocker(queryLockers,packageLockerView,idLockerCol,isEmptyLockerCol);
     }
 
     @FXML
     void onShowAllPackagesClicked(ActionEvent event) {
+        String queryAllPackageView = "SELECT * FROM CompanyView";
 
+        ViewService.preparingTableViewForStaffers(queryAllPackageView,companyPackagesView,idColS,sizeColS,shipmentDateColS,collectionDateColS,priceColS,senderColS,receiverColS,senderLockerColS,receiverLockerColS,idLockerColS);
     }
 
     @FXML
@@ -116,19 +128,27 @@ public class StafferViewController {
 
     @FXML
     void initialize() {
-        assert idColS != null : "fx:id=\"idPackColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert loggedAsStafferView != null : "fx:id=\"loggedAsStafferView\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert signOutStafferButton != null : "fx:id=\"signOutStafferButton\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert companyPackagesView != null : "fx:id=\"companyPackagesView\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert idColS != null : "fx:id=\"idColS\" was not injected: check your FXML file 'stafferView.fxml'.";
         assert sizeColS != null : "fx:id=\"sizeColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert shipmentDateColS != null : "fx:id=\"shipDateColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert collectionDateColS != null : "fx:id=\"colDateColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert shipmentDateColS != null : "fx:id=\"shipmentDateColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert collectionDateColS != null : "fx:id=\"collectionDateColS\" was not injected: check your FXML file 'stafferView.fxml'.";
         assert priceColS != null : "fx:id=\"priceColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert senderColS != null : "fx:id=\"senderIdColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert receiverColS != null : "fx:id=\"senderPlColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert senderLockerColS != null : "fx:id=\"senderNameColS\" was not injected: check your FXML file 'stafferView.fxml'.";
-        assert receiverLockerColS != null : "fx:id=\"receiverIdColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert senderColS != null : "fx:id=\"senderColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert receiverColS != null : "fx:id=\"receiverColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert senderLockerColS != null : "fx:id=\"senderLockerColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert receiverLockerColS != null : "fx:id=\"receiverLockerColS\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert idLockerColS != null : "fx:id=\"idLockerColS\" was not injected: check your FXML file 'stafferView.fxml'.";
         assert profitDatePicker != null : "fx:id=\"profitDatePicker\" was not injected: check your FXML file 'stafferView.fxml'.";
         assert profitResultText != null : "fx:id=\"profitResultText\" was not injected: check your FXML file 'stafferView.fxml'.";
         assert statsPackageLockerTxt != null : "fx:id=\"statsPackageLockerTxt\" was not injected: check your FXML file 'stafferView.fxml'.";
         assert statsDatePicker != null : "fx:id=\"statsDatePicker\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert packageLockerView != null : "fx:id=\"packageLockerView\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert idLockerCol != null : "fx:id=\"idLockerCol\" was not injected: check your FXML file 'stafferView.fxml'.";
+        assert isEmptyLockerCol != null : "fx:id=\"isEmptyLockerCol\" was not injected: check your FXML file 'stafferView.fxml'.";
+
 
         loggedAsStafferView.setText("Signed in as: " + UserService.getActiveStaffer().getName() + " " +
                 UserService.getActiveStaffer().getLastName());

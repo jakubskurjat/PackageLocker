@@ -50,7 +50,7 @@
                                                     <Insets bottom="10.0" top="10.0" />
                                                 </VBox.margin>
                                             </Button>
-                                            <TableView prefHeight="597.0" prefWidth="800.0">
+                                            <TableView fx:id="companyPackagesView" prefHeight="597.0" prefWidth="800.0">
                                                 <columns>
                                                     <TableColumn fx:id="idColS" prefWidth="25.0" resizable="false" styleClass="cols" text="ID" />
                                                     <TableColumn fx:id="sizeColS" prefWidth="55.0" resizable="false" styleClass="cols" text="Size" />
@@ -110,7 +110,7 @@
                                                     <Insets bottom="20.0" />
                                                 </VBox.margin>
                                             </Button>
-                                            <TableView maxWidth="200.0" prefHeight="286.0" prefWidth="200.0">
+                                            <TableView fx:id="packageLockerView" maxWidth="200.0" prefHeight="286.0" prefWidth="200.0">
                                                 <columns>
                                                     <TableColumn fx:id="idLockerCol" prefWidth="84.79998779296875" text="ID locker" />
                                                     <TableColumn fx:id="isEmptyLockerCol" prefWidth="114.4000244140625" text="isEmpty" />
