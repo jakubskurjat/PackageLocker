@@ -1,9 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.hibernate.Session;
@@ -75,10 +72,13 @@ public class StafferViewController {
     @FXML
     private TableColumn<?, ?> isEmptyLocker;
 
+    private Alert alert;
+
     @FXML
     void onShowProfitClicked(ActionEvent event) {
         if (profitDatePicker.getValue() == null) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please select a date.");
+            alert.setContentText("Please select a date.");
+            alert.show();
         } else {
             Session session = SessionFactoryCreator.getFactory().openSession();
 
@@ -132,6 +132,14 @@ public class StafferViewController {
 
         loggedAsStafferView.setText("Signed in as: " + UserService.getActiveStaffer().getName() + " " +
                 UserService.getActiveStaffer().getLastName());
+
+        alert = new Alert(Alert.AlertType.ERROR);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setHeaderText("Error");
+        dialogPane.getStylesheets().add(
+                getClass().getResource("myDialog.css").toExternalForm());
+        dialogPane.getStyleClass().add("myDialog");
+
     }
 
 }

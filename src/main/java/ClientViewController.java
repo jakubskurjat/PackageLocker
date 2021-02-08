@@ -3,6 +3,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -15,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
 import java.sql.CallableStatement;
 import java.sql.Types;
@@ -139,6 +144,8 @@ public class ClientViewController {
     @FXML
     private TableColumn<?, ?> receiverLockerColR;
 
+    private Alert alert;
+
     @FXML
     void onSmallSizeClicked(ActionEvent event) {
         sizeOfPackage.setText(smallSize.getText());
@@ -156,8 +163,9 @@ public class ClientViewController {
 
     @FXML
     void onCalculatePackagePriceClicked(ActionEvent event) {
-        if (sizeOfPackage.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please select size of the package.");
+       if (sizeOfPackage.getText().isEmpty()) {
+            alert.setContentText("Please select size of the package.");
+            alert.show();
         } else {
             Session session = LaunchWindowController.getFactory().openSession();
 
@@ -195,17 +203,23 @@ public class ClientViewController {
         Optional<PackageLockers> receiverPackageLocker = session.createQuery(queryReceiver).uniqueResultOptional();
 
         if (clientFromDB.isEmpty()) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "The client with the given data does not exist.");
+            alert.setContentText("The client with the given data does not exist.");
+            alert.show();
         } else if (senderPackageLocker.isEmpty()) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "There is no sender's package locker with the given address.");
+            alert.setContentText("There is no sender's package locker with the given address.");
+            alert.show();
         } else if (receiverPackageLocker.isEmpty()) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "There is no receiver's package locker with the given address.");
+            alert.setContentText("There is no receiver's package locker with the given address.");
+            alert.show();
         } else if (sizeOfPackage.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please select size of the package.");
+            alert.setContentText("Please select size of the package.");
+            alert.show();
         } else if (senderPackageLocker.get().getAddressLocker().equals(receiverPackageLocker.get().getAddressLocker())) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Package locker addresses have to be different.");
+            alert.setContentText("Package locker addresses have to be different.");
+            alert.show();
         } else if (activeClient.getId() == clientFromDB.get().getId()) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Unable to send the package to yourself.");
+            alert.setContentText("Unable to send the package to yourself.");
+            alert.show();
         } else {
             Query query1 = session.createQuery("SELECT id FROM PackageLockers WHERE addressLocker = '" + receiverPackageLocker.get().getAddressLocker() + "'");
             session.doWork(connection -> {
@@ -233,7 +247,8 @@ public class ClientViewController {
         Optional<Shipment> receivePackage = session.createQuery(queryPackage).uniqueResultOptional();
 
         if (receivePackage.isEmpty()) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "You do not have a package with this number to receive.");
+            alert.setContentText("You do not have a package with this number to receive.");
+            alert.show();
         } else {
 
             Query query = session.createQuery("SELECT id FROM Client WHERE name = '" + activeClient.getName() + "'");
@@ -380,5 +395,11 @@ public class ClientViewController {
         TextFields.bindAutoCompletion(senderLockerAddressTxt, getAddresses());
         TextFields.bindAutoCompletion(receiverLockerAddressTxt, getAddresses());
 
+        alert = new Alert(Alert.AlertType.ERROR);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setHeaderText("Error");
+        dialogPane.getStylesheets().add(
+                getClass().getResource("myDialog.css").toExternalForm());
+        dialogPane.getStyleClass().add("myDialog");
     }
 }

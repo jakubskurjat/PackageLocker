@@ -1,0 +1,40 @@
+.myDialog{
+    -fx-background-color: #6F81FD;
+    -fx-text-fill: red;
+    -fx-font-size: 14px;
+
+}
+/*.myDialog > *.button-bar > *.container{*/
+/*    -fx-text-fill: white;*/
+/*    -fx-font-size: 14px;*/
+/*}*/
+.myDialog > *.label.content{
+    -fx-background-color: #6F81FD;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+
+}
+
+.myDialog > *.header-panel{
+    -fx-background-color: linear-gradient(to bottom, #58BDC2, transparent );
+    -fx-text-fill: red;
+}
+.myDialog > *.header-panel *.label{
+    -fx-font-size: 22px;
+    -fx-text-fill: #444;
+}
+
+/**Costumization of Buttons**/
+.myDialog > .button{
+    -fx-background-color:black;
+    -fx-text-fill:white;
+    -fx-wrap-text: true;
+    -fx-effect: dropshadow( three-pass-box, yellow, 10.0, 0.0, 0.0, 0.0);
+    -fx-cursor:hand;
+}
+
+.myDialog > .button:hover{
+    -fx-background-color:white;
+    -fx-text-fill:black;
+    -fx-font-weight:bold;
+}

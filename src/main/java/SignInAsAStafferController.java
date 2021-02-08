@@ -3,9 +3,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -32,6 +30,8 @@ public class SignInAsAStafferController {
     @FXML
     private PasswordField inPasswordStafferTxt;
 
+    private Alert alert;
+
     @FXML
     void onSignInStafferClicked(ActionEvent event) throws IOException {
         if (UserService.isStafferInDatabase(inEmailStafferTxt, inPasswordStafferTxt)) {
@@ -46,9 +46,11 @@ public class SignInAsAStafferController {
             Stage stage1 = (Stage) signInStafferButton.getScene().getWindow();
             stage1.close();
         } else if (inEmailStafferTxt.getText().isEmpty() | inPasswordStafferTxt.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please complete all fields.");
+            alert.setContentText("Please complete all fields.");
+            alert.show();
         } else {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "The user with the given e-mail \"" + inEmailStafferTxt.getText() + "\" does not exist or the wrong password was given.");
+            alert.setContentText("The user with the given e-mail \"" + inEmailStafferTxt.getText() + "\" does not exist or the wrong password was given.");
+            alert.show();
         }
     }
 
@@ -57,6 +59,13 @@ public class SignInAsAStafferController {
         assert signInStafferButton != null : "fx:id=\"signInStafferButton\" was not injected: check your FXML file 'signInAsAStaffer.fxml'.";
         assert inEmailStafferTxt != null : "fx:id=\"inEmailStafferTxt\" was not injected: check your FXML file 'signInAsAStaffer.fxml'.";
         assert inPasswordStafferTxt != null : "fx:id=\"inPasswordStafferTxt\" was not injected: check your FXML file 'signInAsAStaffer.fxml'.";
+
+        alert = new Alert(Alert.AlertType.ERROR);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setHeaderText("Error");
+        dialogPane.getStylesheets().add(
+                getClass().getResource("myDialog.css").toExternalForm());
+        dialogPane.getStyleClass().add("myDialog");
 
     }
 }
