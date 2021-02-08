@@ -79,6 +79,15 @@ public class StafferViewController {
     @FXML
     private TableColumn<?, ?> isEmptyLockerCol;
 
+    @FXML
+    private TableView<?> addressesTable;
+
+    @FXML
+    private TableColumn<?, ?> idPackageLockerCol;
+
+    @FXML
+    private TableColumn<?, ?> addressPackageLockerCol;
+
     private Alert alert;
 
     @FXML

@@ -92,10 +92,20 @@
                     <Tab styleClass="tabs" text="Packages statistics">
                         <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
                                 <children>
-                                    <VBox alignment="TOP_CENTER" prefHeight="477.0" prefWidth="960.0">
+                                    <HBox alignment="CENTER" prefHeight="478.0" prefWidth="1000.0">
+                                        <TableView fx:id="addressesTable" maxHeight="300.0" prefHeight="308.0" prefWidth="248.0">
+                                 <HBox.margin>
+                                    <Insets right="100.0" />
+                                 </HBox.margin>
+                                 <columns>
+                                    <TableColumn fx:id="idPackageLockerCol" prefWidth="32.799957275390625" resizable="false" text="ID" />
+                                    <TableColumn fx:id="addressPackageLockerCol" prefWidth="214.40003967285156" resizable="false" text="Address" />
+                                 </columns></TableView>
+                                    <VBox alignment="TOP_CENTER" prefHeight="478.0" prefWidth="315.0">
                                         <children>
-                                            <TextField fx:id="statsPackageLockerTxt" maxWidth="300.0" prefWidth="300.0" promptText="Package locker address">
+                                            <TextField fx:id="statsPackageLockerTxt" alignment="CENTER" maxWidth="112.0" prefHeight="26.0" prefWidth="221.0" promptText="ID Package Locker">
                                                 <VBox.margin>
                                                     <Insets bottom="20.0" top="30.0" />
                                                 </VBox.margin>
@@ -112,13 +122,15 @@
                                             </Button>
                                             <TableView fx:id="packageLockerView" maxWidth="200.0" prefHeight="286.0" prefWidth="200.0">
                                                 <columns>
-                                                    <TableColumn fx:id="idLockerCol" prefWidth="84.79998779296875" text="ID locker" />
-                                                    <TableColumn fx:id="isEmptyLockerCol" prefWidth="114.4000244140625" text="isEmpty" />
+                                                    <TableColumn fx:id="idLockerCol" prefWidth="84.79998779296875" resizable="false" text="ID locker" />
+                                                    <TableColumn fx:id="isEmptyLockerCol" prefWidth="114.4000244140625" resizable="false" text="isEmpty" />
                                                 </columns>
                                             </TableView>
                                         </children>
                                     </VBox>
+                                    </HBox>
                                 </children>
+
                             </AnchorPane>
                         </content>
                     </Tab>
