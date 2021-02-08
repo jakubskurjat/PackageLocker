@@ -30,7 +30,8 @@
 
 .tabs:selected {
     -fx-border-color: #00DCE5;
-    -fx-background-color: white;
+    -fx-background-color: #4f95d0;
+
 
 }
 

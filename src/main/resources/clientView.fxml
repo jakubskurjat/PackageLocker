@@ -170,8 +170,8 @@
                                 <columns>
                                     <TableColumn fx:id="idColS" prefWidth="25.0" resizable="false" styleClass="cols" text="ID" />
                                     <TableColumn fx:id="sizeColS" prefWidth="55.0" resizable="false" styleClass="cols" text="Size" />
-                                    <TableColumn fx:id="shipmentDateColS" prefWidth="96.0" resizable="false" styleClass="cols" text="Shipment date" />
-                                    <TableColumn fx:id="collectionDateColS" prefWidth="96.79997253417969" resizable="false" styleClass="cols" text="Collection date" />
+                                    <TableColumn fx:id="shipmentDateColS" prefWidth="93.0" resizable="false" styleClass="cols" text="Shipment date" />
+                                    <TableColumn fx:id="collectionDateColS" prefWidth="93" resizable="false" styleClass="cols" text="Collection date" />
                                     <TableColumn fx:id="priceColS" prefWidth="49.60003662109375" resizable="false" styleClass="cols" text="Price" />
                                     <TableColumn fx:id="senderColS" prefWidth="120.0" resizable="false" styleClass="cols" text="Sender" />
                                     <TableColumn fx:id="receiverColS" prefWidth="120.0" resizable="false" styleClass="cols" text="Receiver" />
@@ -194,8 +194,8 @@
                                 <columns>
                                     <TableColumn fx:id="idColR" prefWidth="25.0" resizable="false" text="ID" />
                                     <TableColumn fx:id="sizeColR" prefWidth="55.0" resizable="false" text="Size" />
-                                    <TableColumn fx:id="shipmentDateColR" prefWidth="96.79998779296875" resizable="false" text="Shipment date" />
-                                    <TableColumn fx:id="collectionDateColR" prefWidth="96.80000305175781" resizable="false" text="Collection date" />
+                                    <TableColumn fx:id="shipmentDateColR" prefWidth="93.79998779296875" resizable="false" text="Shipment date" />
+                                    <TableColumn fx:id="collectionDateColR" prefWidth="93.80000305175781" resizable="false" text="Collection date" />
                                     <TableColumn fx:id="priceColR" prefWidth="48.0" resizable="false" text="Price" />
                                     <TableColumn fx:id="senderColR" prefWidth="120.0" resizable="false" text="Sender" />
                                     <TableColumn fx:id="receiverColR" prefWidth="120.0" resizable="false" text="Receiver" />

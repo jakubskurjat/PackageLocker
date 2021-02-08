@@ -59,9 +59,9 @@
                                                     <TableColumn fx:id="priceColS" prefWidth="49.60003662109375" resizable="false" styleClass="cols" text="Price" />
                                                     <TableColumn fx:id="senderColS" prefWidth="115.39996337890625" resizable="false" styleClass="cols" text="Sender" />
                                                     <TableColumn fx:id="receiverColS" prefWidth="115.79998779296875" resizable="false" styleClass="cols" text="Receiver" />
-                                                    <TableColumn fx:id="senderLockerColS" prefWidth="192.0" resizable="false" styleClass="cols" text="Sender locker" />
-                                                    <TableColumn fx:id="receiverLockerColS" prefWidth="181.60003662109375" resizable="false" styleClass="cols" text="Receiver locker" />
-                                                    <TableColumn fx:id="idLockerColS" prefWidth="73.5999755859375" resizable="false" styleClass="cols" text="ID locker" />
+                                                    <TableColumn fx:id="senderLockerColS" prefWidth="185.0" resizable="false" styleClass="cols" text="Sender locker" />
+                                                    <TableColumn fx:id="receiverLockerColS" prefWidth="185.60003662109375" resizable="false" styleClass="cols" text="Receiver locker" />
+                                                    <TableColumn fx:id="idLockerColS" prefWidth="68.5999755859375" resizable="false" styleClass="cols" text="ID locker" />
                                                 </columns>
                                             </TableView>
                                         </children>
