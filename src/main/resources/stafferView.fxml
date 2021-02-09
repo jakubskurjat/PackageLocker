@@ -95,13 +95,13 @@
 
                                 <children>
                                     <HBox alignment="CENTER" prefHeight="478.0" prefWidth="1000.0">
-                                        <TableView fx:id="addressesTable" maxHeight="300.0" prefHeight="308.0" prefWidth="248.0">
+                                        <TableView fx:id="addressesTable" maxHeight="267.0" prefHeight="267.0" prefWidth="237.0">
                                  <HBox.margin>
                                     <Insets right="100.0" />
                                  </HBox.margin>
                                  <columns>
-                                    <TableColumn fx:id="idPackageLockerCol" prefWidth="32.799957275390625" resizable="false" text="ID" />
-                                    <TableColumn fx:id="addressPackageLockerCol" prefWidth="214.40003967285156" resizable="false" text="Address" />
+                                    <TableColumn fx:id="idPackageLockerCol" prefWidth="35.0" resizable="false" text="ID" />
+                                    <TableColumn fx:id="addressPackageLockerCol" prefWidth="200.0" resizable="false" text="Address" />
                                  </columns></TableView>
                                     <VBox alignment="TOP_CENTER" prefHeight="478.0" prefWidth="315.0">
                                         <children>
@@ -120,7 +120,7 @@
                                                     <Insets bottom="20.0" />
                                                 </VBox.margin>
                                             </Button>
-                                            <TableView fx:id="packageLockerView" maxWidth="200.0" prefHeight="286.0" prefWidth="200.0">
+                                            <TableView fx:id="packageLockerView" maxWidth="201.0" prefHeight="286.0" prefWidth="200.0">
                                                 <columns>
                                                     <TableColumn fx:id="idLockerCol" prefWidth="84.79998779296875" resizable="false" text="ID locker" />
                                                     <TableColumn fx:id="isEmptyLockerCol" prefWidth="114.4000244140625" resizable="false" text="isEmpty" />

@@ -16,16 +16,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 public class PackageLockerView {
-    @Id
-    @Column(name = "id_package_lockers")
-    private int idPackageLockers;
 
+    @Id
     @Column(name = "id_locker")
     private int idLocker;
 
+    @Column(name = "isEmpty")
+    private String isEmpty;
+
+    @Column(name = "id_package_lockers")
+    private int idPackageLockers;
+
     @Column(name = "shipment_date")
     private LocalDate shipmentDate;
-
-    @Column(name = "isEmpty")
-    private int isEmpty;
 }

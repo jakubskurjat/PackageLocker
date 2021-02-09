@@ -65,28 +65,28 @@ public class StafferViewController {
     private Text profitResultText;
 
     @FXML
-    private TextField statsPackageLockerTxt;
-
-    @FXML
-    private DatePicker statsDatePicker;
-
-    @FXML
-    private TableView<PackagesView> packageLockerView;
-
-    @FXML
-    private TableColumn<?, ?> idLockerCol;
-
-    @FXML
-    private TableColumn<?, ?> isEmptyLockerCol;
-
-    @FXML
-    private TableView<?> addressesTable;
+    private TableView<AddressesView> addressesTable;
 
     @FXML
     private TableColumn<?, ?> idPackageLockerCol;
 
     @FXML
     private TableColumn<?, ?> addressPackageLockerCol;
+
+    @FXML
+    private TextField statsPackageLockerTxt;
+
+    @FXML
+    private DatePicker statsDatePicker;
+
+    @FXML
+    private TableView<PackageLockerView> packageLockerView;
+
+    @FXML
+    private TableColumn<?, ?> idLockerCol;
+
+    @FXML
+    private TableColumn<?, ?> isEmptyLockerCol;
 
     private Alert alert;
 
@@ -116,17 +116,17 @@ public class StafferViewController {
 
     @FXML
     void onShowStatsClicked(ActionEvent event) {
-        String queryLockers = "SELECT * FROM PackageLockerView WHERE id_package_lockers = " + statsPackageLockerTxt.getText()
+        String queryLockers = "SELECT * FROM packageLockerView WHERE id_package_lockers = " + statsPackageLockerTxt.getText()
                 + " AND shipment_date = '" + statsDatePicker.getValue().toString() + "'";
 
-        ViewService.preparingTableViewForPackageLocker(queryLockers,packageLockerView,idLockerCol,isEmptyLockerCol);
+        ViewService.preparingTableViewForPackageLocker(queryLockers, packageLockerView, idLockerCol, isEmptyLockerCol);
     }
 
     @FXML
     void onShowAllPackagesClicked(ActionEvent event) {
         String queryAllPackageView = "SELECT * FROM CompanyView";
 
-        ViewService.preparingTableViewForStaffers(queryAllPackageView,companyPackagesView,idColS,sizeColS,shipmentDateColS,collectionDateColS,priceColS,senderColS,receiverColS,senderLockerColS,receiverLockerColS,idLockerColS);
+        ViewService.preparingTableViewForStaffers(queryAllPackageView, companyPackagesView, idColS, sizeColS, shipmentDateColS, collectionDateColS, priceColS, senderColS, receiverColS, senderLockerColS, receiverLockerColS, idLockerColS);
     }
 
     @FXML
@@ -169,6 +169,6 @@ public class StafferViewController {
                 getClass().getResource("myDialog.css").toExternalForm());
         dialogPane.getStyleClass().add("myDialog");
 
+        ViewService.preparingTableViewForAddressesOfPackageLockers(addressesTable,idPackageLockerCol,addressPackageLockerCol);
     }
-
 }

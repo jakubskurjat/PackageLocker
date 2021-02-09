@@ -1,13 +1,6 @@
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -15,11 +8,7 @@ import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 import org.hibernate.Session;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
-import javax.swing.*;
-import java.awt.*;
 import java.net.URL;
 import java.sql.CallableStatement;
 import java.sql.Types;
@@ -268,48 +257,6 @@ public class ClientViewController {
 
         ViewService.preparingTableViewForClients(queryReceivedView, packagesShippedTable, idColS, sizeColS, shipmentDateColS, collectionDateColS, priceColS, senderColS, receiverColS, senderLockerColS, receiverLockerColS);
     }
-
-//    public void preparingTableView(String queryReceivedView, TableView<PackagesView> packagesTable, TableColumn<?, ?> idCol, TableColumn<?, ?> sizeCol, TableColumn<?, ?> shipmentDateCol, TableColumn<?, ?> collectionDateCol, TableColumn<?, ?> priceCol, TableColumn<?, ?> senderCol, TableColumn<?, ?> receiverCol, TableColumn<?, ?> senderLockerCol, TableColumn<?, ?> receiverLockerCol) {
-//        EntityManagerFactory emf = session.getEntityManagerFactory();
-//        EntityManager em = emf.createEntityManager();
-//
-//        Query query = em.createNativeQuery(queryReceivedView, PackagesView.class);
-//
-//        List<PackagesView> list = query.getResultList();
-//
-//        ObservableList<PackagesView> packagesList = FXCollections.observableArrayList(list);
-//
-//        packagesTable.setItems(packagesList);
-//
-//
-//        idCol.setCellValueFactory(
-//                new PropertyValueFactory<>("id")
-//        );
-//        sizeCol.setCellValueFactory(
-//                new PropertyValueFactory<>("size")
-//        );
-//        shipmentDateCol.setCellValueFactory(
-//                new PropertyValueFactory<>("shipmentDate")
-//        );
-//        collectionDateCol.setCellValueFactory(
-//                new PropertyValueFactory<>("collectionDate")
-//        );
-//        priceCol.setCellValueFactory(
-//                new PropertyValueFactory<>("price")
-//        );
-//        senderCol.setCellValueFactory(
-//                new PropertyValueFactory<>("sender")
-//        );
-//        receiverCol.setCellValueFactory(
-//                new PropertyValueFactory<>("receiver")
-//        );
-//        senderLockerCol.setCellValueFactory(
-//                new PropertyValueFactory<>("packageLockerAddressSender")
-//        );
-//        receiverLockerCol.setCellValueFactory(
-//                new PropertyValueFactory<>("packageLockerAddressReceiver")
-//        );
-//    }
 
     @FXML
     void onShowReceivedPackagesClicked(MouseEvent mouseEvent) {

@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewService {
@@ -38,15 +39,15 @@ public class ViewService {
         );
     }
 
-    public static void preparingTableViewForPackageLocker(String queryView, TableView<PackagesView> packagesTable, TableColumn<?, ?> idCol, TableColumn<?, ?> isEmpty) {
+    public static void preparingTableViewForPackageLocker(String queryView, TableView<PackageLockerView> packagesTable, TableColumn<?, ?> idCol, TableColumn<?, ?> isEmpty) {
         EntityManagerFactory emf = session.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
 
         Query query = em.createNativeQuery(queryView, PackageLockerView.class);
 
-        List<PackagesView> list = query.getResultList();
+        List<PackageLockerView> list = query.getResultList();
 
-        ObservableList<PackagesView> packagesList = FXCollections.observableArrayList(list);
+        ObservableList<PackageLockerView> packagesList = FXCollections.observableArrayList(list);
 
         packagesTable.setItems(packagesList);
 
@@ -56,6 +57,28 @@ public class ViewService {
 
         isEmpty.setCellValueFactory(
                 new PropertyValueFactory<>("isEmpty")
+        );
+    }
+
+    public static void preparingTableViewForAddressesOfPackageLockers(TableView<AddressesView> addressesTable, TableColumn<?, ?> idCol, TableColumn<?, ?> addressesCol){
+        EntityManagerFactory emf = session.getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+        String queryView = "SELECT * FROM AddressesView";
+
+        Query query = em.createNativeQuery(queryView, AddressesView.class);
+
+        List<AddressesView> list = query.getResultList();
+
+        ObservableList<AddressesView> packagesList = FXCollections.observableArrayList(list);
+
+        addressesTable.setItems(packagesList);
+
+        idCol.setCellValueFactory(
+                new PropertyValueFactory<>("idPackageLocker")
+        );
+
+        addressesCol.setCellValueFactory(
+                new PropertyValueFactory<>("addressPackageLocker")
         );
     }
 

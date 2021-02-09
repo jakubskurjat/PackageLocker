@@ -8,7 +8,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -51,8 +50,8 @@ public class SignInAsAClientController {
     @FXML
     private PasswordField upConfirmPasswordClientTxt;
 
-
     private  Alert alert;
+
     @FXML
     void onSignInClientClicked(ActionEvent event) throws IOException {
         if (UserService.isClientInDatabase(inEmailClientTxt, inPasswordClientTxt)) {
@@ -70,8 +69,10 @@ public class SignInAsAClientController {
             alert.setContentText("Please complete all fields.");
             alert.show();
         } else {
-            alert.setContentText("The user with the given e-mail \"" + inEmailClientTxt.getText() + "\" does not exist or the wrong password was given.");
-            alert.show();
+//            alert.setContentText("The user with the given e-mail \"" + inEmailClientTxt.getText() + "\" does not exist or the wrong password was given.");
+//            alert.show();
+
+            UserService.changeYourPassword(inEmailClientTxt, inPasswordClientTxt);
         }
     }
 
@@ -114,6 +115,5 @@ public class SignInAsAClientController {
         dialogPane.getStylesheets().add(
                 getClass().getResource("myDialog.css").toExternalForm());
         dialogPane.getStyleClass().add("myDialog");
-
     }
 }
