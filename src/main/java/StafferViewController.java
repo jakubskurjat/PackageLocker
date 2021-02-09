@@ -116,7 +116,7 @@ public class StafferViewController {
 
     @FXML
     void onShowStatsClicked(ActionEvent event) {
-        String queryLockers = "SELECT * FROM packageLockerView WHERE id_package_lockers = " + statsPackageLockerTxt.getText()
+        String queryLockers = "SELECT DISTINCT * FROM packageLockerView WHERE id_package_lockers = " + statsPackageLockerTxt.getText()
                 + " AND shipment_date = '" + statsDatePicker.getValue().toString() + "'";
 
         ViewService.preparingTableViewForPackageLocker(queryLockers, packageLockerView, idLockerCol, isEmptyLockerCol);

@@ -220,6 +220,8 @@ public class ClientViewController {
                     callableStatement.setInt(4, senderPackageLocker.get().getId());
                     callableStatement.setInt(5, (Integer) query1.getResultList().get(0));
                     callableStatement.execute();
+                } catch (Exception e){
+                    e.printStackTrace();
                 }
             });
         }

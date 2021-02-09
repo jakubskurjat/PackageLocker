@@ -46,8 +46,13 @@ public class ViewService {
         Query query = em.createNativeQuery(queryView, PackageLockerView.class);
 
         List<PackageLockerView> list = query.getResultList();
-
         ObservableList<PackageLockerView> packagesList = FXCollections.observableArrayList(list);
+
+        for (PackageLockerView p : packagesList){
+            if (p.getIsEmpty().equals("0")){
+                p.setIsEmpty("false");
+            }
+        }
 
         packagesTable.setItems(packagesList);
 

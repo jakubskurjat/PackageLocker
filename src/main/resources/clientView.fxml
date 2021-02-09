@@ -182,10 +182,10 @@
                         </VBox>
                     </content>
                 </Tab>
-                <Tab styleClass="tabs" text="Show packages received">
+                <Tab styleClass="tabs" text="Show packages received / to receive">
                     <content>
                         <VBox alignment="TOP_CENTER">
-                            <Button layoutX="237.0" layoutY="30.0" minWidth="200.0" mnemonicParsing="false" onMouseClicked="#onShowReceivedPackagesClicked" prefHeight="39.0" prefWidth="200.0" styleClass="showViewBtns" stylesheets="@styles.css" text="Show my received packages">
+                            <Button layoutX="237.0" layoutY="30.0" minWidth="280.0" mnemonicParsing="false" onMouseClicked="#onShowReceivedPackagesClicked" prefHeight="39.0" prefWidth="200.0" styleClass="showViewBtns" stylesheets="@styles.css" text="Show my received / to receive packages">
                                 <VBox.margin>
                                     <Insets bottom="15.0" top="15.0" />
                                 </VBox.margin>
