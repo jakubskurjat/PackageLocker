@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -70,7 +72,7 @@
                             </VBox>
                         </content>
                     </Tab>
-                    <Tab styleClass="tabs" text="Profit preview">
+                    <Tab styleClass="tabs" text="Profit preview per day">
                         <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                 <children>
@@ -133,6 +135,40 @@
 
                             </AnchorPane>
                         </content>
+                    </Tab>
+                    <Tab styleClass="tabs" text="Sum of profits for a period of time">
+                        <VBox alignment="TOP_CENTER">
+                            <MenuButton fx:id="menuBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="165" style="-fx-background-color: white;" text="Select the time period" textAlignment="CENTER">
+                                <items>
+                                    <MenuItem fx:id="monthMenuItem" mnemonicParsing="false" onAction="#onMonthClicked" text="Month" />
+                                    <MenuItem fx:id="firstHalfMenuItem" mnemonicParsing="false" onAction="#onFirstHalfClicked" text="First half of the year" />
+                                    <MenuItem fx:id="secondHalfMenuItem" mnemonicParsing="false" onAction="#onSecondHalfClicked" text="Second half of the year" />
+                                    <MenuItem fx:id="yearMenuItem" mnemonicParsing="false" onAction="#onYearClicked" text="Year" />
+                                </items>
+                        <VBox.margin>
+                           <Insets top="30.0" />
+                        </VBox.margin>
+                            </MenuButton>
+                            <Button onAction="#onShowProfitClicked2" styleClass="calcProfitBtn" text="Show profit">
+                                <font>
+                                    <Font size="22.0" />
+                                </font>
+                        <VBox.margin>
+                           <Insets top="30.0" />
+                        </VBox.margin>
+                            </Button>
+                     <TableView fx:id="listTable" maxWidth="278" minHeight="310.0" prefHeight="200.0">
+                       <columns>
+                           <TableColumn fx:id="listIdCol" prefWidth="25" text="ID" />
+                           <TableColumn fx:id="listAddressCol" prefWidth="200" text="Address" />
+                           <TableColumn fx:id="listProfitCol" prefWidth="50" text="Profit" />
+                       </columns>
+                        <VBox.margin>
+                           <Insets top="20.0" />
+                        </VBox.margin>
+                     </TableView>
+                            
+                        </VBox>
                     </Tab>
                 </tabs>
             </TabPane>

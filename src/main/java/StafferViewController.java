@@ -91,6 +91,34 @@ public class StafferViewController {
     private Alert alert;
 
     @FXML
+    private MenuButton menuBtn;
+
+    @FXML
+    private MenuItem monthMenuItem;
+
+    @FXML
+    private MenuItem firstHalfMenuItem;
+
+    @FXML
+    private MenuItem secondHalfMenuItem;
+
+    @FXML
+    private MenuItem yearMenuItem;
+
+    @FXML
+    private TableView<?> listTable;
+
+    @FXML
+    private TableColumn<?, ?> listIdCol;
+
+    @FXML
+    private TableColumn<?, ?> listAddressCol;
+
+    @FXML
+    private TableColumn<?, ?> listProfitCol;
+
+
+    @FXML
     void onShowProfitClicked(ActionEvent event) {
         try {
             Session session = SessionFactoryCreator.getFactory().openSession();
@@ -144,6 +172,26 @@ public class StafferViewController {
         stage1.close();
     }
 
+    public void onMonthClicked(ActionEvent actionEvent) {
+        menuBtn.setText(monthMenuItem.getText());
+    }
+
+    public void onFirstHalfClicked(ActionEvent actionEvent) {
+        menuBtn.setText(firstHalfMenuItem.getText());
+    }
+
+    public void onSecondHalfClicked(ActionEvent actionEvent) {
+        menuBtn.setText(secondHalfMenuItem.getText());
+    }
+
+    public void onYearClicked(ActionEvent actionEvent) {
+        menuBtn.setText(yearMenuItem.getText());
+    }
+
+    public void onShowProfitClicked2(ActionEvent actionEvent) {
+
+    }
+
     @FXML
     void initialize() {
         assert loggedAsStafferView != null : "fx:id=\"loggedAsStafferView\" was not injected: check your FXML file 'stafferView.fxml'.";
@@ -173,4 +221,5 @@ public class StafferViewController {
 
         ViewService.preparingTableViewForAddressesOfPackageLockers(addressesTable, idPackageLockerCol, addressPackageLockerCol);
     }
+
 }
