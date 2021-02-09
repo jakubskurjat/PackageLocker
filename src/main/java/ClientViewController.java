@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ClientViewController {
+
     @FXML
     private ResourceBundle resources;
 
@@ -156,7 +157,7 @@ public class ClientViewController {
 
     @FXML
     void onCalculatePackagePriceClicked(ActionEvent event) {
-       if (sizeOfPackage.getText().isEmpty()) {
+        if (sizeOfPackage.getText().isEmpty()) {
             alert.setContentText("Please select size of the package.");
             alert.show();
         } else {
@@ -192,21 +193,33 @@ public class ClientViewController {
         Optional<PackageLockers> receiverPackageLocker = session.createQuery(queryReceiver).uniqueResultOptional();
 
         if (clientFromDB.isEmpty()) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            UserService.preparingDialogPane("ERROR", alert);
             alert.setContentText("The client with the given data does not exist.");
             alert.show();
         } else if (senderPackageLocker.isEmpty()) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            UserService.preparingDialogPane("ERROR", alert);
             alert.setContentText("There is no sender's package locker with the given address.");
             alert.show();
         } else if (receiverPackageLocker.isEmpty()) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            UserService.preparingDialogPane("ERROR", alert);
             alert.setContentText("There is no receiver's package locker with the given address.");
             alert.show();
         } else if (sizeOfPackage.getText().isEmpty()) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            UserService.preparingDialogPane("ERROR", alert);
             alert.setContentText("Please select size of the package.");
             alert.show();
         } else if (senderPackageLocker.get().getAddressLocker().equals(receiverPackageLocker.get().getAddressLocker())) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            UserService.preparingDialogPane("ERROR", alert);
             alert.setContentText("Package locker addresses have to be different.");
             alert.show();
         } else if (activeClient.getId() == clientFromDB.get().getId()) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            UserService.preparingDialogPane("ERROR", alert);
             alert.setContentText("Unable to send the package to yourself.");
             alert.show();
         } else {
@@ -220,10 +233,14 @@ public class ClientViewController {
                     callableStatement.setInt(4, senderPackageLocker.get().getId());
                     callableStatement.setInt(5, (Integer) query1.getResultList().get(0));
                     callableStatement.execute();
-                } catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            UserService.preparingDialogPane("INFORMATION", alert);
+            alert.setContentText("Package sent successfully.");
+            alert.show();
         }
     }
 
@@ -235,6 +252,8 @@ public class ClientViewController {
         Optional<Shipment> receivePackage = session.createQuery(queryPackage).uniqueResultOptional();
 
         if (receivePackage.isEmpty()) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            UserService.preparingDialogPane("ERROR", alert);
             alert.setContentText("You do not have a package with this number to receive.");
             alert.show();
         } else {
@@ -249,6 +268,11 @@ public class ClientViewController {
                     callableStatement.execute();
                 }
             });
+
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            UserService.preparingDialogPane("INFORMATION", alert);
+            alert.setContentText("Package received successfully.");
+            alert.show();
         }
     }
 
@@ -274,14 +298,13 @@ public class ClientViewController {
     }
 
 
-    private List<String> getAddresses(){
+    private List<String> getAddresses() {
         Query query = session.createQuery("FROM PackageLockers");
 
         List<PackageLockers> lockers = query.getResultList();
         List<String> addresses = new ArrayList<>();
-        for (PackageLockers l : lockers){
+        for (PackageLockers l : lockers)
             addresses.add(l.getAddressLocker());
-        }
 
         return addresses;
     }
@@ -331,12 +354,5 @@ public class ClientViewController {
 
         TextFields.bindAutoCompletion(senderLockerAddressTxt, getAddresses());
         TextFields.bindAutoCompletion(receiverLockerAddressTxt, getAddresses());
-
-        alert = new Alert(Alert.AlertType.ERROR);
-        DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.setHeaderText("Error");
-        dialogPane.getStylesheets().add(
-                getClass().getResource("myDialog.css").toExternalForm());
-        dialogPane.getStyleClass().add("myDialog");
     }
 }

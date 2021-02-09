@@ -1,4 +1,6 @@
-import lombok.*;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -6,9 +8,6 @@ import javax.persistence.*;
 @Table(name = "package_lockers")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class PackageLockers {
 
     @Id
@@ -24,13 +23,4 @@ public class PackageLockers {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = TotalLockers.class)
     @JoinColumn(name = "id_locker_total_lockers")
     private TotalLockers totalLockers;
-
-//    @NonNull
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = FullLockers.class)
-//    @JoinColumn(name = "id_locker_full_lockers")
-//    private FullLockers fullLockers;
-
-//    @OneToMany
-//    @JoinColumn(name = "id_package_locker_lockers")
-//    private Set<Locker> lockers;
 }

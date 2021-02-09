@@ -1,4 +1,5 @@
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 
 import javax.persistence.Column;
@@ -11,9 +12,6 @@ import javax.persistence.Table;
 @Immutable
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class AddressesView {
 
     @Id

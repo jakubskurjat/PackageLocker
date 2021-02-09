@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ViewService {
@@ -48,8 +47,8 @@ public class ViewService {
         List<PackageLockerView> list = query.getResultList();
         ObservableList<PackageLockerView> packagesList = FXCollections.observableArrayList(list);
 
-        for (PackageLockerView p : packagesList){
-            if (p.getIsEmpty().equals("0")){
+        for (PackageLockerView p : packagesList) {
+            if (p.getIsEmpty().equals("0")) {
                 p.setIsEmpty("false");
             }
         }
@@ -65,7 +64,7 @@ public class ViewService {
         );
     }
 
-    public static void preparingTableViewForAddressesOfPackageLockers(TableView<AddressesView> addressesTable, TableColumn<?, ?> idCol, TableColumn<?, ?> addressesCol){
+    public static void preparingTableViewForAddressesOfPackageLockers(TableView<AddressesView> addressesTable, TableColumn<?, ?> idCol, TableColumn<?, ?> addressesCol) {
         EntityManagerFactory emf = session.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         String queryView = "SELECT * FROM AddressesView";

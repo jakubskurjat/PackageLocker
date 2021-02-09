@@ -1,4 +1,6 @@
-import lombok.*;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -6,9 +8,6 @@ import javax.persistence.*;
 @Table(name = "packages")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class Package {
 
     @Id
@@ -23,10 +22,6 @@ public class Package {
     @NonNull
     @Column(name = "price")
     private double price;
-
-//    @OneToOne
-//    @JoinColumn(name = "id_shipment")
-//    private Shipment shipment;
 
     @NonNull
     @OneToOne

@@ -1,4 +1,6 @@
-import lombok.*;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -7,9 +9,6 @@ import java.math.BigInteger;
 @Table(name = "staffers")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class Staffer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

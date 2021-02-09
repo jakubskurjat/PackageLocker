@@ -1,4 +1,6 @@
-import lombok.*;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -7,9 +9,6 @@ import java.time.LocalDate;
 @Table(name = "shipment")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class Shipment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

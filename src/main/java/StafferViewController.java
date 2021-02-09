@@ -92,10 +92,7 @@ public class StafferViewController {
 
     @FXML
     void onShowProfitClicked(ActionEvent event) {
-        if (profitDatePicker.getValue() == null) {
-            alert.setContentText("Please select a date.");
-            alert.show();
-        } else {
+        try {
             Session session = SessionFactoryCreator.getFactory().openSession();
 
             AtomicReference<Double> profit = new AtomicReference<>();
@@ -111,15 +108,27 @@ public class StafferViewController {
             });
 
             profitResultText.setText("Profit: " + profit + " $");
+        } catch (Exception e) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            UserService.preparingDialogPane("ERROR", alert);
+            alert.setContentText("Please select a date.");
+            alert.show();
         }
     }
 
     @FXML
     void onShowStatsClicked(ActionEvent event) {
-        String queryLockers = "SELECT DISTINCT * FROM packageLockerView WHERE id_package_lockers = " + statsPackageLockerTxt.getText()
-                + " AND shipment_date = '" + statsDatePicker.getValue().toString() + "'";
+        try {
+            String queryLockers = "SELECT DISTINCT * FROM packageLockerView WHERE id_package_lockers = " + statsPackageLockerTxt.getText()
+                    + " AND shipment_date = '" + statsDatePicker.getValue().toString() + "'";
 
-        ViewService.preparingTableViewForPackageLocker(queryLockers, packageLockerView, idLockerCol, isEmptyLockerCol);
+            ViewService.preparingTableViewForPackageLocker(queryLockers, packageLockerView, idLockerCol, isEmptyLockerCol);
+        } catch (Exception e) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            UserService.preparingDialogPane("ERROR", alert);
+            alert.setContentText("Please select a date or give correct id of package locker.");
+            alert.show();
+        }
     }
 
     @FXML
@@ -162,13 +171,6 @@ public class StafferViewController {
         loggedAsStafferView.setText("Signed in as: " + UserService.getActiveStaffer().getName() + " " +
                 UserService.getActiveStaffer().getLastName());
 
-        alert = new Alert(Alert.AlertType.ERROR);
-        DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.setHeaderText("Error");
-        dialogPane.getStylesheets().add(
-                getClass().getResource("myDialog.css").toExternalForm());
-        dialogPane.getStyleClass().add("myDialog");
-
-        ViewService.preparingTableViewForAddressesOfPackageLockers(addressesTable,idPackageLockerCol,addressPackageLockerCol);
+        ViewService.preparingTableViewForAddressesOfPackageLockers(addressesTable, idPackageLockerCol, addressPackageLockerCol);
     }
 }

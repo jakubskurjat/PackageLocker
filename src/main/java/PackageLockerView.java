@@ -1,4 +1,5 @@
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 
 import javax.persistence.Column;
@@ -12,9 +13,6 @@ import java.time.LocalDate;
 @Immutable
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class PackageLockerView {
 
     @Id

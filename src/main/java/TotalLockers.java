@@ -1,4 +1,6 @@
-import lombok.*;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -6,9 +8,6 @@ import javax.persistence.*;
 @Table(name = "total_lockers")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class TotalLockers {
 
     @Id

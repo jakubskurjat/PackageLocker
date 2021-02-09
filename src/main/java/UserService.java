@@ -129,16 +129,16 @@ public class UserService {
         Optional<Pair<String, String>> result = dialog.showAndWait();
 
         result.ifPresent(usernamePassword -> {
-            Optional<Client> userFromDB = session.createQuery("FROM Client WHERE email = '"  + inEmailClientTxt.getText() + "'").uniqueResultOptional();
+            Optional<Client> userFromDB = session.createQuery("FROM Client WHERE email = '" + inEmailClientTxt.getText() + "'").uniqueResultOptional();
 
-            if(userFromDB.isEmpty()){
+            if (userFromDB.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
 
                 preparingDialogPane("ERROR", alert);
 
                 alert.setContentText("The user with the given e-mail \"" + inEmailClientTxt.getText() + "\" does not exist or the wrong password was given.");
                 alert.show();
-            }else if(!password.getText().equals(confirmPassword.getText())){
+            } else if (!password.getText().equals(confirmPassword.getText())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
 
                 preparingDialogPane("ERROR", alert);
@@ -147,8 +147,7 @@ public class UserService {
                 alert.show();
 
                 alert.setOnHidden(dialogEvent -> changeYourPassword(inEmailClientTxt, inPasswordClientTxt));
-            }
-            else {
+            } else {
                 userFromDB.get().setPassword(password.getText());
                 session.beginTransaction().commit();
                 clearGivenData(inPasswordClientTxt);
@@ -162,12 +161,22 @@ public class UserService {
         });
     }
 
-    private static void preparingDialogPane(String headerText, Alert alert){
+    public static void preparingDialogPane(String headerText, Alert alert) {
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.setHeaderText(headerText);
         dialogPane.getStylesheets().add(
                 UserService.class.getResource("myDialog.css").toExternalForm());
         dialogPane.getStyleClass().add("myDialog");
+    }
+
+    public static boolean isNumber(TextField numbers) {
+        for (int i = 0; i < numbers.getLength(); i++) {
+            if (!(numbers.getText().charAt(i) >= '0' && numbers.getText().charAt(i) <= '9')) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static Client getActiveClient() {
