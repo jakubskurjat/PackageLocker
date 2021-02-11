@@ -172,26 +172,6 @@ public class StafferViewController {
         stage1.close();
     }
 
-    public void onMonthClicked(ActionEvent actionEvent) {
-        menuBtn.setText(monthMenuItem.getText());
-    }
-
-    public void onFirstHalfClicked(ActionEvent actionEvent) {
-        menuBtn.setText(firstHalfMenuItem.getText());
-    }
-
-    public void onSecondHalfClicked(ActionEvent actionEvent) {
-        menuBtn.setText(secondHalfMenuItem.getText());
-    }
-
-    public void onYearClicked(ActionEvent actionEvent) {
-        menuBtn.setText(yearMenuItem.getText());
-    }
-
-    public void onShowProfitClicked2(ActionEvent actionEvent) {
-
-    }
-
     @FXML
     void initialize() {
         assert loggedAsStafferView != null : "fx:id=\"loggedAsStafferView\" was not injected: check your FXML file 'stafferView.fxml'.";
