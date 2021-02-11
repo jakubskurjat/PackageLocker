@@ -11,12 +11,34 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This class represents all user related functionality.
+ */
 public class UserService {
 
+    /**
+     * This private static field represents active client.
+     */
     private static Client activeClient;
+
+    /**
+     * This private static fields represents active staffer.
+     */
     private static Staffer activeStaffer;
+
+    /**
+     * This private static field represents <code>Session</code>.
+     */
     private static Session session = LaunchWindowController.getFactory().openSession();
 
+    /**
+     * This method checks if the client with the given email and password exists.
+     * Returns true if the client exists, or false if client does not exist.
+     *
+     * @param givenEmail    represents email of the client.
+     * @param givenPassword represents password of the client.
+     * @return true or false.
+     */
     public static boolean isClientInDatabase(TextField givenEmail, TextField givenPassword) {
         String query = "FROM Client WHERE email = '" + givenEmail.getText() +
                 "' AND password = '" + givenPassword.getText() + "'";
@@ -26,6 +48,14 @@ public class UserService {
         return clientFromDB.isPresent();
     }
 
+    /**
+     * This method checks if the staffer with the given email and password exists.
+     * Returns true if the staffer exists, or false if staffer does not exist.
+     *
+     * @param givenEmail    represents email of the staffer.
+     * @param givenPassword represents password of the staffer.
+     * @return true or false.
+     */
     public static boolean isStafferInDatabase(TextField givenEmail, TextField givenPassword) {
         String query = "FROM Staffer WHERE email = '" + givenEmail.getText() +
                 "' AND password = '" + givenPassword.getText() + "'";
@@ -35,6 +65,16 @@ public class UserService {
         return stafferFromDB.isPresent();
     }
 
+    /**
+     * This method adds the client to the database.
+     *
+     * @param givenName        represents name of the client we want to create.
+     * @param givenLastName    represents last name of the client we want to create.
+     * @param givenEmail       represents email of the client we want to create.
+     * @param givenPhoneNumber represents phone number of the client we want to create.
+     * @param givenPassword    represents password of the client we want to create.
+     * @param confirmPassword  represents confirm password of the client we want to create.
+     */
     public static void addClient(TextField givenName, TextField givenLastName, TextField givenEmail,
                                  TextField givenPhoneNumber, TextField givenPassword, TextField confirmPassword) {
         session.beginTransaction();
@@ -54,6 +94,12 @@ public class UserService {
         clearGivenData(givenName, givenLastName, givenEmail, givenPhoneNumber, givenPassword, confirmPassword);
     }
 
+    /**
+     * This method sets active client.
+     *
+     * @param givenEmail    represents email of the active client.
+     * @param givenPassword represents password of the active client.
+     */
     public static void setActiveClient(TextField givenEmail, TextField givenPassword) {
         Query query = session.createQuery("SELECT id FROM Client WHERE email IN :clientEmail");
 
@@ -66,6 +112,12 @@ public class UserService {
         clearGivenData(givenEmail, givenPassword);
     }
 
+    /**
+     * This method sets active staffer.
+     *
+     * @param givenEmail    represents email of the active staffer.
+     * @param givenPassword represents password of the active staffer.
+     */
     public static void setActiveStaffer(TextField givenEmail, TextField givenPassword) {
         Query query = session.createQuery("SELECT id FROM Staffer WHERE email IN :stafferEmail");
 
@@ -78,11 +130,26 @@ public class UserService {
         clearGivenData(givenEmail, givenPassword);
     }
 
+    /**
+     * this method with a variable number of parameters clears all given data.
+     *
+     * @param givenData represents a variable number of parameters to be cleared.
+     */
     private static void clearGivenData(TextField... givenData) {
         for (TextField data : givenData)
             data.clear();
     }
 
+    /**
+     * This method creates a dialog that allows the user to change the password.
+     * If the client enters a changed password and confirms this password,
+     * then his password has been changed. If the confirmed password is different than the set password,
+     * an appropriate message is displayed. If the customer enters the correct password and confirms it correctly,
+     * but asks for a wrong email, he will be informed that there is no client with the given email.
+     *
+     * @param inEmailClientTxt    represents given email.
+     * @param inPasswordClientTxt represents given password.
+     */
     public static void changeYourPassword(TextField inEmailClientTxt, TextField inPasswordClientTxt) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Change password");
@@ -161,6 +228,12 @@ public class UserService {
         });
     }
 
+    /**
+     * This method prepares every dialog that the user sees.
+     *
+     * @param headerText represents header text of dialog.
+     * @param alert      represents alert that the user sees.
+     */
     public static void preparingDialogPane(String headerText, Alert alert) {
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.setHeaderText(headerText);
@@ -169,6 +242,14 @@ public class UserService {
         dialogPane.getStyleClass().add("myDialog");
     }
 
+    /**
+     * This method checks that the entered text is a number.
+     * Return true if the entered text is a number or false if
+     * the entered text is not a number.
+     *
+     * @param numbers represents a text field, whose content is being checked.
+     * @return true or false.
+     */
     public static boolean isNumber(TextField numbers) {
         for (int i = 0; i < numbers.getLength(); i++) {
             if (!(numbers.getText().charAt(i) >= '0' && numbers.getText().charAt(i) <= '9')) {
@@ -179,10 +260,20 @@ public class UserService {
         return true;
     }
 
+    /**
+     * This is the <code>activeClient</code> getter.
+     *
+     * @return <code>activeClient</code>.
+     */
     public static Client getActiveClient() {
         return activeClient;
     }
 
+    /**
+     * This is the <code>activeStaffer</code> getter.
+     *
+     * @return <code>activeStaffer</code>.
+     */
     public static Staffer getActiveStaffer() {
         return activeStaffer;
     }

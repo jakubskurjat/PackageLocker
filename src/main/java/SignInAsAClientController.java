@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This class represents controller for the sign in as a client window.
+ */
 public class SignInAsAClientController {
 
     @FXML
@@ -53,8 +56,19 @@ public class SignInAsAClientController {
     @FXML
     private PasswordField upConfirmPasswordClientTxt;
 
+    /**
+     * This private field represents <code>Alert</code>.
+     */
     private Alert alert;
 
+    /**
+     * This method allows you to sign in as a client if the user provides the appropriate information.
+     * However, if the user forgets the password, he has the option to change the password.
+     * If the user provides incorrect information or does not provide it at all, an appropriate alert pops up.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     * @throws IOException when FXMLLoader has a problem with load FXML File.
+     */
     @FXML
     void onSignInClientClicked(ActionEvent event) throws IOException {
         if (UserService.isClientInDatabase(inEmailClientTxt, inPasswordClientTxt)) {
@@ -78,6 +92,14 @@ public class SignInAsAClientController {
         }
     }
 
+    /**
+     * This method allows you to sign up as a client if the user provides the appropriate information,
+     * an appropriate alert pops up.
+     * If the user provides incorrect information or does not provide it at all, an appropriate alert is pops up.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     * @throws IOException when FXMLLoader has a problem with load FXML File.
+     */
     @FXML
     void onSignUpClientClicked(ActionEvent event) {
         if (UserService.isClientInDatabase(upEmailClientTxt, upPasswordClientTxt)) {
@@ -97,10 +119,10 @@ public class SignInAsAClientController {
             UserService.preparingDialogPane("ERROR", alert);
             alert.setContentText("The password and confirm password fields are not the same.");
             alert.show();
-        } else if (upPhoneNumberClientTxt.getText().length() > 9) {
+        } else if (upPhoneNumberClientTxt.getText().length() != 9) {
             alert = new Alert(Alert.AlertType.ERROR);
             UserService.preparingDialogPane("ERROR", alert);
-            alert.setContentText("Phone number has to be not longer than 9 numbers.");
+            alert.setContentText("Phone number must be 9 numbers.");
             alert.show();
         } else if (!UserService.isNumber(upPhoneNumberClientTxt)) {
             alert = new Alert(Alert.AlertType.ERROR);
@@ -116,6 +138,9 @@ public class SignInAsAClientController {
         }
     }
 
+    /**
+     * This method is called when creating the sign in as a client window.
+     */
     @FXML
     void initialize() {
         assert signInClientButton != null : "fx:id=\"signInClientButton\" was not injected: check your FXML file 'signInAsAClient.fxml'.";

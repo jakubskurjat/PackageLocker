@@ -13,22 +13,34 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This class represents controller for the launch window.
+ */
 public class LaunchWindowController {
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
+    @FXML
     private ResourceBundle resources;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
+    @FXML
     private URL location;
 
-    @FXML // fx:id="btnSignInAsAClient"
-    private Button btnSignInAsAClient; // Value injected by FXMLLoader
+    @FXML
+    private Button btnSignInAsAClient;
 
-    @FXML // fx:id="btnSignInAsAStaffer"
-    private Button btnSignInAsAStaffer; // Value injected by FXMLLoader
+    @FXML
+    private Button btnSignInAsAStaffer;
 
+    /**
+     * This private static field represents <code>SessionFactory</code>.
+     */
     private static SessionFactory factory = SessionFactoryCreator.getFactory();
 
+    /**
+     * This method allows you to sign in as a client.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     * @throws IOException when FXMLLoader has a problem with load FXML File.
+     */
     @FXML
     void btnSignInAsAClientAction(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("signInAsAClient.fxml"));
@@ -40,6 +52,12 @@ public class LaunchWindowController {
         stage.show();
     }
 
+    /**
+     * This method allows you to sign in as a staffer.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     * @throws IOException when FXMLLoader has a problem with load FXML File.
+     */
     @FXML
     void btnSignInAsAStafferAction(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("signInAsAStaffer.fxml"));
@@ -51,13 +69,20 @@ public class LaunchWindowController {
         stage.show();
     }
 
+    /**
+     * This method is called when creating the launch window view.
+     */
     @FXML
-        // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert btnSignInAsAClient != null : "fx:id=\"btnSignInAsAClient\" was not injected: check your FXML file 'launchWindow.fxml'.";
         assert btnSignInAsAStaffer != null : "fx:id=\"btnSignInAsAStaffer\" was not injected: check your FXML file 'launchWindow.fxml'.";
     }
 
+    /**
+     * This is <code>factory</code> getter.
+     *
+     * @return <code>factory</code>.
+     */
     public static SessionFactory getFactory() {
         return factory;
     }

@@ -5,19 +5,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 
-import java.net.URL;
 import java.sql.CallableStatement;
 import java.sql.Types;
-import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * This class represents the controller for the staffer view.
+ */
 public class StafferViewController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Text loggedAsStafferView;
@@ -88,36 +83,18 @@ public class StafferViewController {
     @FXML
     private TableColumn<?, ?> isEmptyLockerCol;
 
+    /**
+     * This private field represents <code>Alert</code>.
+     */
     private Alert alert;
 
-    @FXML
-    private MenuButton menuBtn;
-
-    @FXML
-    private MenuItem monthMenuItem;
-
-    @FXML
-    private MenuItem firstHalfMenuItem;
-
-    @FXML
-    private MenuItem secondHalfMenuItem;
-
-    @FXML
-    private MenuItem yearMenuItem;
-
-    @FXML
-    private TableView<?> listTable;
-
-    @FXML
-    private TableColumn<?, ?> listIdCol;
-
-    @FXML
-    private TableColumn<?, ?> listAddressCol;
-
-    @FXML
-    private TableColumn<?, ?> listProfitCol;
-
-
+    /**
+     * This method shows the staffer the profit on the selected day from all package lockers.
+     * It uses a method created in MySql. When the staffer does not give a date,
+     * an alert pops up.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     */
     @FXML
     void onShowProfitClicked(ActionEvent event) {
         try {
@@ -144,6 +121,12 @@ public class StafferViewController {
         }
     }
 
+    /**
+     * This method shows the staffer the status of the package lockers.
+     * When the staffer does not give a date or incorrect id an alert pops up.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     */
     @FXML
     void onShowStatsClicked(ActionEvent event) {
         try {
@@ -159,6 +142,11 @@ public class StafferViewController {
         }
     }
 
+    /**
+     * This method shows the staffer all packages that were and are from all package lockers.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     */
     @FXML
     void onShowAllPackagesClicked(ActionEvent event) {
         String queryAllPackageView = "SELECT * FROM CompanyView";
@@ -166,12 +154,22 @@ public class StafferViewController {
         ViewService.preparingTableViewForStaffers(queryAllPackageView, companyPackagesView, idColS, sizeColS, shipmentDateColS, collectionDateColS, priceColS, senderColS, receiverColS, senderLockerColS, receiverLockerColS, idLockerColS);
     }
 
+    /**
+     * This method allows the staffer to sign out.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     */
     @FXML
-    public void onSignOut(ActionEvent actionEvent) {
+    public void onSignOut(ActionEvent event) {
         Stage stage1 = (Stage) signOutStafferButton.getScene().getWindow();
         stage1.close();
     }
 
+    /**
+     * This method is called when creating the staffer view.
+     * It shows who is signed in.
+     * It creates a view of the addresses of all package lockers.
+     */
     @FXML
     void initialize() {
         assert loggedAsStafferView != null : "fx:id=\"loggedAsStafferView\" was not injected: check your FXML file 'stafferView.fxml'.";

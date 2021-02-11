@@ -18,6 +18,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * This class represents the controller for the client view.
+ */
 public class ClientViewController {
 
     @FXML
@@ -134,27 +137,58 @@ public class ClientViewController {
     @FXML
     private TableColumn<?, ?> receiverLockerColR;
 
+    /**
+     * This private field represents <code>Alert</code>.
+     */
     private Alert alert;
 
+    /**
+     * This private field represents <code>Session</code>.
+     */
     private Session session = LaunchWindowController.getFactory().openSession();
 
+    /**
+     * This private field represents active client.
+     */
     private Client activeClient = UserService.getActiveClient();
 
+    /**
+     * This method sets size of package as small.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     */
     @FXML
     void onSmallSizeClicked(ActionEvent event) {
         sizeOfPackage.setText(smallSize.getText());
     }
 
+    /**
+     * This method sets size of package as medium.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     */
     @FXML
     void onMediumSizeClicked(ActionEvent event) {
         sizeOfPackage.setText(mediumSize.getText());
     }
 
+    /**
+     * This method sets size of package as big.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     */
     @FXML
     void onBigSizeClicked(ActionEvent event) {
         sizeOfPackage.setText(bigSize.getText());
     }
 
+    /**
+     * This method calculates the shipping cost.
+     * It uses a method created in MySql.
+     * If the client has not selected a size, an appropriate alert pops up.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     */
     @FXML
     void onCalculatePackagePriceClicked(ActionEvent event) {
         if (sizeOfPackage.getText().isEmpty()) {
@@ -178,6 +212,14 @@ public class ClientViewController {
         }
     }
 
+    /**
+     * This method allows the user to send the package if the appropriate data is entered
+     * and an appropriate alert pops up. It uses a method created in MySql.
+     * If the user do not complete any information or provide incorrect information,
+     * an appropriate alert pops up.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     */
     @FXML
     void onSendPackageClicked(ActionEvent event) {
         String query = "FROM Client WHERE name = '" + receiverNameTxt.getText() +
@@ -244,8 +286,15 @@ public class ClientViewController {
         }
     }
 
+    /**
+     * This method allows the user to receive the package if the appropriate id of package is entered
+     * and appropriate alert pops up. It uses a method created in MySql.
+     * If the user provide incorrect information, an appropriate alert pops up.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     */
     @FXML
-    void onReceivePackageClicked(ActionEvent actionEvent) {
+    void onReceivePackageClicked(ActionEvent event) {
         String queryPackage = "FROM PackagesView WHERE id = '" + receiveNumberOfPackageTxt.getText()
                 + "' AND receiver = '" + activeClient.getName() + " " + activeClient.getLastName() + "'";
 
@@ -255,7 +304,6 @@ public class ClientViewController {
             alert = new Alert(Alert.AlertType.ERROR);
             UserService.preparingDialogPane("ERROR", alert);
             alert.setContentText("You do not have a package with this number to receive.");
-            alert.show();
         } else {
 
             Query query = session.createQuery("SELECT id FROM Client WHERE name = '" + activeClient.getName() + "'");
@@ -272,10 +320,15 @@ public class ClientViewController {
             alert = new Alert(Alert.AlertType.INFORMATION);
             UserService.preparingDialogPane("INFORMATION", alert);
             alert.setContentText("Package received successfully.");
-            alert.show();
         }
+        alert.show();
     }
 
+    /**
+     * This method shows all packages that the client has sent.
+     *
+     * @param mouseEvent represents <code>MouseEvent</code>.
+     */
     @FXML
     void onShowSendPackagesClicked(MouseEvent mouseEvent) {
         String queryReceivedView = "SELECT * FROM PackagesView WHERE sender = '" +
@@ -284,6 +337,11 @@ public class ClientViewController {
         ViewService.preparingTableViewForClients(queryReceivedView, packagesShippedTable, idColS, sizeColS, shipmentDateColS, collectionDateColS, priceColS, senderColS, receiverColS, senderLockerColS, receiverLockerColS);
     }
 
+    /**
+     * This method shows all packages that the client has received or has to receive.
+     *
+     * @param mouseEvent represents <code>MouseEvent</code>.
+     */
     @FXML
     void onShowReceivedPackagesClicked(MouseEvent mouseEvent) {
         String queryReceivedView = "SELECT * FROM PackagesView WHERE receiver = '" +
@@ -292,23 +350,38 @@ public class ClientViewController {
         ViewService.preparingTableViewForClients(queryReceivedView, packagesReceivedTable, idColR, sizeColR, shipmentDateColR, collectionDateColR, priceColR, senderColR, receiverColR, senderLockerColR, receiverLockerColR);
     }
 
-    public void signOutClick(ActionEvent actionEvent) {
+    /**
+     * This method allows the client to sign out.
+     *
+     * @param event represents <code>ActionEvent</code>.
+     */
+    public void signOutClick(ActionEvent event) {
         Stage stage1 = (Stage) signOutClientButton.getScene().getWindow();
         stage1.close();
     }
 
-
+    /**
+     * This method prepares a list of addresses of all package lockers.
+     *
+     * @return list of addresses of all package lockers.
+     */
     private List<String> getAddresses() {
         Query query = session.createQuery("FROM PackageLockers");
 
         List<PackageLockers> lockers = query.getResultList();
         List<String> addresses = new ArrayList<>();
+
         for (PackageLockers l : lockers)
             addresses.add(l.getAddressLocker());
 
         return addresses;
     }
 
+    /**
+     * This method is called when creating the client view.
+     * It shows, who is signed in.
+     * It creates auto completion binding for sender and receiver locker address.
+     */
     @FXML
     void initialize() {
         assert loggedAsView != null : "fx:id=\"loggedAsView\" was not injected: check your FXML file 'clientView.fxml'.";
